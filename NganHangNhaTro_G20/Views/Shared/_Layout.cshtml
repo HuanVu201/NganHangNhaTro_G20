@@ -7,28 +7,31 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/NganHangNhaTro_G20.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/CommonLayout.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NganHangNhaTro_G20</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Homee</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+        <div id="headerLayout" class="container">
+            <div id="logoBlock">
+                <a href="#"><img id="logoWeb" src="~/images/Ngân hàng nhà trọ.png" alt=""></a>
+            </div>
+            <div id="statusLogin">
+                <div id="unLoginedtatus">
+                    <ul class="statusLogin_ul">
+                        <li class="buttonStatus" id="login">Đăng nhập</li>
+                        <li class="buttonStatus" id="register">Đăng ký</li>
+                    </ul>
+                </div>
+                <div id="loginedStatus">
+                    <ul class="statusLogin_ul">
+                        <li class="buttonStatus">Xin chào <b>Người dùng</b></li>
+                        <li class="buttonStatus">Hồ sơ cá nhân</li>
+                        <li class="buttonStatus">Thoát</li>
                     </ul>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -36,14 +39,22 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - NganHangNhaTro_G20 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <div id="footerLayout">
+        <div class="container" id="footerBlock">
+            <img id="imgBoCongThuong" src="./assets/bo-cong-thuong.png" alt="">
+            <b>CÔNG TY CỔ PHẦN PROPERTYGURU VIỆT NAM</b>
+            <p>Địa chỉ: Số 96B phố Định Công, phường Định Công, quận Hoàng Mai, Hà Nội</p>
+            <p>Điện thoại: 0987654321 | Email: fakeEmail@gmail.com</p>
+            <p>
+                ® Nhóm WNC.G20 giữ bản quyền website này. Việc sao chép một phần hoặc toàn bộ mà không được sử đồng ý
+                bằng văn bản là vi phạm pháp luật.
+            </p>
         </div>
-    </footer>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/admin.js" asp-append-version="true"></script>
+    <script src="~/js/portal.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
