@@ -1,0 +1,83 @@
+﻿body {
+    margin: 0 auto;
+    /* font-size: 62.5%; */
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+#headerLayout {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    /* background-color: #ce7a58; */
+    padding: 10px 0;
+}
+
+#logoBlock {
+}
+
+#logoWeb {
+    height: 100px;
+    object-fit: cover;
+}
+
+ul {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+#statusLogin {
+    display: block;
+    margin: auto 0;
+}
+
+.buttonStatus {
+    display: inline-block;
+    gap: 10px;
+    border: 1px solid #ce7a58;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 18px;
+}
+
+
+
+#unLoginedtatus {
+    /* display: none; */
+}
+
+
+#loginedStatus {
+    display: none;
+}
+
+.statusLogin_ul {
+    display: flex;
+    justify-content: end;
+    gap: 15px;
+}
+
+#footerLayout {
+    text-align: center;
+    margin-top: 100%;
+    background-color: aquamarine;
+}
+
+#footerBlock {
+    padding: 25px 0;
+    position: relative;
+}
+
+#imgBoCongThuong {
+    position: absolute;
+    right: 130px;
+}
+
+#expandAction {
+}
