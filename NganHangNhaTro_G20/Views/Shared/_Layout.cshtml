@@ -12,22 +12,21 @@
 </head>
 <body>
     <header>
-        <div id="headerLayout" class="container">
-            <div id="logoBlock">
-                <a href="#"><img id="logoWeb" src="~/images/Ngân hàng nhà trọ.png" alt=""></a>
-            </div>
-            <div id="statusLogin">
-                <div id="unLoginedtatus">
-                    <ul class="statusLogin_ul">
-                        <li class="buttonStatus" id="login">Đăng nhập</li>
-                        <li class="buttonStatus" id="register">Đăng ký</li>
-                    </ul>
-                </div>
-                <div id="loginedStatus">
-                    <ul class="statusLogin_ul">
-                        <li class="buttonStatus">Xin chào <b>Người dùng</b></li>
-                        <li class="buttonStatus">Hồ sơ cá nhân</li>
-                        <li class="buttonStatus">Thoát</li>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NganHangNhaTro_G20</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
                     </ul>
                 </div>
             </div>
