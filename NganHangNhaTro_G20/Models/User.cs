@@ -21,9 +21,11 @@ namespace NganHangNhaTro_G20.Models
         public string? OwnershipHouse { get; set; }
         [Column(TypeName = "varchar(MAX)")]
         public string? BookingHouse { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public string RoleId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
-        public virtual Role Role { get; set; }
+        //public virtual Role Role { get; set; }
 
     }
 }
