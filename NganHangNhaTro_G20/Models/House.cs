@@ -18,19 +18,21 @@ namespace NganHangNhaTro_G20.Models
         public string Desciption { get; set; }
         [Column(TypeName = "float")]
         public float? Rate { get; set; }
-        //[Column(TypeName = "varchar(20)")]
-        //public string StatusId { get; set; }
-        //[Column(TypeName = "varchar(20)")]
-        //public string TypeId { get; set; }
-        //public Guid OwnerId { get; set; }
-        //public Guid? ImageCategoryId { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public string HouseStatusId { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public string HouseTypeId { get; set; }
+        public Guid OwnerId { get; set; }
+        public Guid PosterId { get; set; }
+
+        public Guid? ImageCategoryId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
-        public virtual HouseStatus HouseStatus { get; set; }
-        public virtual HouseType HouseType { get; set; }
-        public virtual User Owner { get; set; }
-        public virtual User UserPosted { get; set; }
-        public virtual ImageCategory ImageCategory { get; set; }
+        //public virtual HouseStatus HouseStatus { get; set; }
+        //public virtual HouseType HouseType { get; set; }
+        //public virtual User Owner { get; set; }
+        //public virtual User Poster { get; set; }
+        //public virtual ImageCategory ImageCategory { get; set; }
 
     }
 }
