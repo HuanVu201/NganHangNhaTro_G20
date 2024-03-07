@@ -1,16 +1,7 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    font-size: 14px;
-}
 
 .register-form {
     left: 35%;
-    position: fixed;
+    position: absolute;
     top: 10%;
     width: 25rem;
     box-shadow: 0px 5px 10px 5px rgb(246, 244, 244);
@@ -19,28 +10,46 @@ html {
     z-index: 11;
     background-color: white;
     display: none;
+    padding-bottom:3rem;
 }
 
-.title {
-    text-align: center;
-    color: #1579a8;
-    font-weight: bold;
-    font-size: 1.3rem;
-    padding-bottom: 1rem;
-}
+    .register-form .title {
+        text-align: center;
+        color: #1579a8;
+        font-weight: bold;
+        font-size: 1.3rem;
+        padding-bottom: 1rem;
+    }
 
 .register-form .row {
     display: flex;
     margin-top: 1rem;
 }
-
-.suggesstion {
+.error_name{
+    display:none;
+}
+.error_phone {
+    display: none;
+}
+.error_pass_one {
+    display: none;
+}
+.error_pass_two {
+    display: none;
+}
+.error_email {
     display: none;
 }
 
-.col1 {
-    width: 10rem;
+
+.input-form-register .suggesstion p {
+    color: red;
+    font-size: 0.9rem;
+    padding-top: 10px;
 }
+    .col1 {
+        width: 10rem;
+    }
 
 .col2 input[type="text"],
 input[type="password"] {
@@ -51,7 +60,7 @@ input[type="password"] {
     border: 1px solid black;
 }
 
-.notices {
+.register-form .notices {
     color: red;
     text-align: justify;
 }
@@ -64,7 +73,7 @@ input[type="password"] {
     margin-left: 8rem;
 }
 
-    .button-register span {
+    .button-register span, .button-register .register {
         padding: 0.5rem 1rem 0.5rem 1rem;
         margin-left: 1rem;
         background-color: #0099cc;
@@ -72,10 +81,14 @@ input[type="password"] {
         cursor: pointer;
         border-radius: 3px;
     }
-
-        .button-register span:hover {
-            background-color: #47b5da;
-        }
+    .button-register .register {
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        font-size: 1rem;
+        border: 1px solid;
+    }
+.button-register span:hover, .register:hover {
+    background-color: #47b5da;
+}
 
 .expand {
     display: none;

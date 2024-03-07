@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="~/css/styleRegister.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/NganHangNhaTro_G20.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/CommonLayout.css" asp-append-version="true" />
+   
 
 </head>
 <body>
@@ -43,146 +44,121 @@
         </main>
     </div>
     <div class="fly"></div>
-    <div id="login-form" class="login-form">
-        <div class="loading"></div>
-        <div class="title">Đăng nhập</div>
-        <div class="input-form">
-            <div class="row message"></div>
-            <div class="row">
-                <div class="col1">Tên truy cập</div>
-                <div class="col2">
-                    <input id="account" type="text" maxlength="50" />
+    <div id="login-form" class="login-form" method="post" onsubmit="">
+        <form>
+            <div class="loading"></div>
+            <div class="title">Đăng nhập</div>
+            <div class="input-form-login">
+                <div class="row message"></div>
+                <div class="row">
+                    <div class="col1">Tên truy cập</div>
+                    <div class="col2">
+                        <input id="account" type="text" maxlength="50" required />
+                    </div>
+                    <div class="clear"></div>
                 </div>
-                <div class="clear"></div>
-            </div>
-            <div class="row">
-                <div class="col1">Mật khẩu</div>
-                <div class="col2">
-                    <input id="password" type="password" maxlength="50" />
-                    <input id="remember" type="checkbox" /> Duy trì đăng nhập
+                <div class="row">
+                    <div class="col1">Mật khẩu</div>
+                    <div class="col2">
+                        <input id="password" type="password" maxlength="50" required />
+                        <input id="remember" type="checkbox" /> Duy trì đăng nhập
+                    </div>
+                    <div class="clear"></div>
                 </div>
-                <div class="clear"></div>
-            </div>
-            <div class="row">
-                <div class="col1"></div>
-                <div class="col2">
-                    <span style="color: red" class="show-recover-form">Quên mật khẩu ?</span>
-                    <span class="show-register-form">Đăng ký</span>
+                <div class="row">
+                    <div class="col1"></div>
+                    <div class="col2">
+                        <span style="color: red" class="show-recover-form">Quên mật khẩu ?</span>
+                        <span class="show-register-form">Đăng ký</span>
+                    </div>
+                    <div class="clear"></div>
                 </div>
-                <div class="clear"></div>
-            </div>
-            <div style="margin-top: 20px" class="row">
-                <div class="col2 row button-login">
-                    <span class="login">Đăng nhập</span>
-                    <span class="close" id="close-login">Thoát</span>
+                <div style="margin-top: 20px" class="row">
+                    <div class="col2 row button-login">
+                            <button class="login">Đăng nhập</button>
+                        <span class="close" id="close-login">Thoát</span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
+       
     </div>
-    <div id="register-form" class="register-form">
-        <div class="loading"></div>
-        <div class="title">
-            <span class="exit"></span>
-            Đăng ký thành viên
-        </div>
-        <div class="notices">
-            <ul>
-                <li>
-                    Lưu ý: Giả mạo thông tin của cá nhân, tổ chức để tham gia hoạt động
-                    thương mại điện tử nhằm gây ảnh hưởng đến uy tín, cuộc sống của cá
-                    nhân, tổ chức có thể bị phạt tới 30 triệu đồng.
-                </li>
-            </ul>
-        </div>
-        <div class="input-form">
-            <div class="row">
-                <div class="col1">Họ tên(<span class="note">*</span>)</div>
-                <div class="col2">
-                    <input id="username" type="text" maxlength="50" />
+    <div id="register-form" class="register-form"  method="post" onsubmit="return validateRegistrationForm()">
+        <form>
+            <div class="loading"></div>
+            <div class="title">
+                <span class="exit"></span>
+                Đăng ký thành viên
+            </div>
+            <div class="notices">
+                <ul>
+                    <li>
+                        Lưu ý: Giả mạo thông tin của cá nhân có thể bị phạt tới 30 triệu đồng.
+                    </li>
+                </ul>
+            </div>
+            <div class="input-form-register">
+                <div class="row">
+                    <div class="col1">Họ tên(<span class="note">*</span>)</div>
+                    <div class="col2">
+                        <input id="username" type="text" maxlength="50" required />
+                    </div>
                 </div>
                 <div class="suggesstion">
-                    <ul>
-                        <li>
-                            <span>
-                                Tên liên hệ khi khách hàng có nhu cầu cần mua/ cần thuê
-                                gọi.
-                            </span>
-                        </li>
-                        <li>
-                            <span>Tên liên hệ phải viết có dấu. Ví dụ: Nguyễn Văn A.</span>
-                        </li>
-                    </ul>
+                    <p class="error_name">Tên lớn hơn 14 kí tự !!!</p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
-                <div class="col2">
-                    <input id="password1" type="password" maxlength="50" />
+                <div class="row">
+                    <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
+                    <div class="col2">
+                        <input id="password-one" type="password" required />
+                    </div>
+                </div> 
+                <div class="suggesstion">
+                    <p class="error_pass_one">Mật khẩu tối thiểu trên 8 kí tự !!!</p>
+                </div>
+                <div class="row">
+                    <div class="col1">Nhập lại mật khẩu(<span class="note">*</span>)</div>
+                    <div class="col2">
+                        <input id="password-two" type="password" required />
+                    </div>
                 </div>
                 <div class="suggesstion">
-                    <ul>
-                        <li><span>Mật khẩu từ 6 đến 30 ký tự.</span></li>
-                    </ul>
+                    <p class="error_pass_two">Nhập lại mật khẩu ko trùng khớp !!!</p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col1">Nhập lại mật khẩu(<span class="note">*</span>)</div>
-                <div class="col2">
-                    <input id="password2" type="password" maxlength="50" />
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col1">Di động (<span class="note">*</span>)</div>
-                <div class="col2">
-                    <input id="phone1" type="text" maxlength="12" />
+                <div class="row">
+                    <div class="col1">Di động (<span class="note">*</span>)</div>
+                    <div class="col2">
+                        <input id="phone" type="text" maxlength="10" required />
+                    </div>
                 </div>
                 <div class="suggesstion">
-                    <ul>
-                        <li>
-                            <span>
-                                Số điện thoại liên hệ để khách hàng có nhu cầu cần mua/cần
-                                thuê gọi.
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                Số điện thoại này sẽ được hiển thị trong nội dung tin đăng,
-                                số điện thoại này không thể thay đổi khi đăng tin.
-                            </span>
-                        </li>
-                    </ul>
+                    <p class="error_phone">Số điện thoại ko đúng định dạng !!!</p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col1">
-                    Email liên hệ(<span class="note">*</span>)<br />
-                </div>
-                <div class="col2">
-                    <input id="email1" type="text" maxlength="50" />
-                </div>
-                <div class="suggesstion">
-                    <ul>
-                        <li>
-                            <span>
-                                Email dùng để nhận thông tin xác thực, phục hồi mật
-                                khẩu,...
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col button-register">
-                    <span class="register">Đăng ký</span>
-                    <span class="close" id="close-register">Thoát</span>
+                <div class="row">
+                    <div class="col1">
+                        Email liên hệ(<span class="note">*</span>)<br />
+                    </div>
+                    <div class="col2">
+                        <input  id="email" type="text" maxlength="50" required  />
+                    </div>
                 </div>
+                <div class="suggesstion">
+                    <p class="error_email">Email ko đúng định dạng !!!</p>
+
+                </div>
+
+                <div class="row">
+                    <div class="col button-register">
+                        <button type="submit" class="register">Đăng ký</button>
+                        <span class="close" id="close-register">Thoát</span>
+                    </div>
+                </div>
+                
             </div>
-            <div style="color: Red; margin-top: 1rem">
-                Hỗ trợ vay nợ Huấm<b><i>(0123) 3456 89</i></b>
-            </div>
-        </div>
+        </form>
+        
     </div>
     <div id="footerLayout">
         <div class="container" id="footerBlock">
@@ -197,9 +173,10 @@
         </div>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/admin.js" asp-append-version="true"></script>
-    <script src="~/js/portal.js" asp-append-version="true"></script>
+    <script src="~/js/register.js" asp-append-version="true"></script>
     <script>
         const login = document.querySelector('#login')
         const form_login = document.querySelector('.login-form')
@@ -219,6 +196,8 @@
         }
         action(login, close_login, form_login)
         action(register, close_register, form_register)
+
+
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
