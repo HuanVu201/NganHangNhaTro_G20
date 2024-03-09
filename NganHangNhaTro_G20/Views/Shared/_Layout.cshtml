@@ -44,8 +44,8 @@
         </main>
     </div>
     <div class="fly"></div>
-    <div id="login-form" class="login-form" method="post" onsubmit="">
-        <form>
+    <div id="login-form" class="login-form">
+        <form asp-controller="" asp-action="" method="post">
             <div class="loading"></div>
             <div class="title">Đăng nhập</div>
             <div class="input-form-login">
@@ -53,15 +53,15 @@
                 <div class="row">
                     <div class="col1">Tên truy cập</div>
                     <div class="col2">
-                        <input id="account" type="text" maxlength="50" required />
+                        <input id="account" name="username" type="text" maxlength="50" required />
                     </div>
                     <div class="clear"></div>
                 </div>
                 <div class="row">
                     <div class="col1">Mật khẩu</div>
                     <div class="col2">
-                        <input id="password" type="password" maxlength="50" required />
-                        <input id="remember" type="checkbox" /> Duy trì đăng nhập
+                        <input id="password" name="password" type="password" maxlength="50" required />
+                        <input id="remember" name="rememberMe" type="checkbox" /> Duy trì đăng nhập
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -69,22 +69,22 @@
                     <div class="col1"></div>
                     <div class="col2">
                         <span style="color: red" class="show-recover-form">Quên mật khẩu ?</span>
-                        <span class="show-register-form">Đăng ký</span>
+                        <a href="~/Account/Register" class="show-register-form">Đăng ký</a>
                     </div>
                     <div class="clear"></div>
                 </div>
                 <div style="margin-top: 20px" class="row">
                     <div class="col2 row button-login">
-                            <button class="login">Đăng nhập</button>
+                        <button type="submit" class="login">Đăng nhập</button>
                         <span class="close" id="close-login">Thoát</span>
                     </div>
                 </div>
             </div>
         </form>
-       
     </div>
-    <div id="register-form" class="register-form"  method="post" onsubmit="return validateRegistrationForm()">
-        <form>
+
+    <div id="register-form" class="register-form">
+        <form asp-controller="" asp-action="" method="post" onsubmit="return validateRegistrationForm()">
             <div class="loading"></div>
             <div class="title">
                 <span class="exit"></span>
@@ -93,7 +93,7 @@
             <div class="notices">
                 <ul>
                     <li>
-                        Lưu ý: Giả mạo thông tin của cá nhân có thể bị phạt tới 30 triệu đồng.
+                        Lưu ý: Giả mạo thông tin cá nhân có thể bị phạt tới 30 triệu đồng.
                     </li>
                 </ul>
             </div>
@@ -101,7 +101,7 @@
                 <div class="row">
                     <div class="col1">Họ tên(<span class="note">*</span>)</div>
                     <div class="col2">
-                        <input id="username" type="text" maxlength="50" required />
+                        <input id="username" name="username" type="text" maxlength="50" required />
                     </div>
                 </div>
                 <div class="suggesstion">
@@ -110,30 +110,30 @@
                 <div class="row">
                     <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
                     <div class="col2">
-                        <input id="password-one" type="password" required />
+                        <input id="password-one" name="password" type="password" required />
                     </div>
-                </div> 
+                </div>
                 <div class="suggesstion">
                     <p class="error_pass_one">Mật khẩu tối thiểu trên 8 kí tự !!!</p>
                 </div>
                 <div class="row">
                     <div class="col1">Nhập lại mật khẩu(<span class="note">*</span>)</div>
                     <div class="col2">
-                        <input id="password-two" type="password" required />
+                        <input id="password-two" name="confirmPassword" type="password" required />
                     </div>
                 </div>
                 <div class="suggesstion">
-                    <p class="error_pass_two">Nhập lại mật khẩu ko trùng khớp !!!</p>
+                    <p class="error_pass_two">Nhập lại mật khẩu không trùng khớp !!!</p>
                 </div>
 
                 <div class="row">
                     <div class="col1">Di động (<span class="note">*</span>)</div>
                     <div class="col2">
-                        <input id="phone" type="text" maxlength="10" required />
+                        <input id="phone" name="phone" type="text" maxlength="10" required />
                     </div>
                 </div>
                 <div class="suggesstion">
-                    <p class="error_phone">Số điện thoại ko đúng định dạng !!!</p>
+                    <p class="error_phone">Số điện thoại không đúng định dạng !!!</p>
                 </div>
 
                 <div class="row">
@@ -141,12 +141,11 @@
                         Email liên hệ(<span class="note">*</span>)<br />
                     </div>
                     <div class="col2">
-                        <input  id="email" type="text" maxlength="50" required  />
+                        <input id="email" name="email" type="text" maxlength="50" required />
                     </div>
                 </div>
                 <div class="suggesstion">
-                    <p class="error_email">Email ko đúng định dạng !!!</p>
-
+                    <p class="error_email">Email không đúng định dạng !!!</p>
                 </div>
 
                 <div class="row">
@@ -155,11 +154,10 @@
                         <span class="close" id="close-register">Thoát</span>
                     </div>
                 </div>
-                
             </div>
         </form>
-        
     </div>
+
     <div id="footerLayout">
         <div class="container" id="footerBlock">
             <img id="imgBoCongThuong" src="./assets/bo-cong-thuong.png" alt="">
