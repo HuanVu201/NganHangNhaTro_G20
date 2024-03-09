@@ -69,7 +69,7 @@
                     <div class="col1"></div>
                     <div class="col2">
                         <span style="color: red" class="show-recover-form">Quên mật khẩu ?</span>
-                        <a href="~/Account/Register" class="show-register-form">Đăng ký</a>
+                        <span class="show-register-form">Đăng ký</span>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -180,9 +180,10 @@
         const form_login = document.querySelector('.login-form')
         const close_login = document.querySelector('#close-login')
         const register = document.querySelector('#register')
+        const show_register_form = document.querySelector('.show-register-form')
         const form_register = document.querySelector('.register-form')
         const close_register = document.querySelector('#close-register')
-        function action(action, close_action, form) {
+        function action(action, close_action, form ) {
             action.addEventListener('click', () => {
                 form.style.display = 'block'
                 document.querySelector('.fly').style.display = 'block'
@@ -192,10 +193,14 @@
                 document.querySelector('.fly').style.display = 'none'
             })
         }
-        action(login, close_login, form_login)
+        action(login, close_login, form_login , )
         action(register, close_register, form_register)
 
-
+        show_register_form.addEventListener('click', () => {
+            form_login.style.display = 'none'
+            form_register.style.display = 'block'
+            document.querySelector('.fly').style.display = 'block'
+        })
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
