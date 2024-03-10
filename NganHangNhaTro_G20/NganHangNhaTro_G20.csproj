@@ -23,10 +23,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="wwwroot\images\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="wwwroot\css\CommonLayout.css" />
 	</ItemGroup>
 	<ItemGroup>
@@ -35,6 +31,6 @@
 	</ItemGroup>
 
 	<Target Name="Tailwind" BeforeTargets="Build">
-		<Exec Command="npm run css:build"/>
+		<Exec Command="npm run css:build" />
 	</Target>
 </Project>
