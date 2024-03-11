@@ -45,119 +45,8 @@
         </main>
     </div>
     <div class="fly"></div>
-    <div id="login-form" class="login-form">
-        <form asp-controller="" asp-action="" method="post">
-            <div class="loading"></div>
-            <div class="title">Đăng nhập</div>
-            <div class="input-form-login">
-                <div class="row message"></div>
-                <div class="row">
-                    <div class="col1">Tên truy cập</div>
-                    <div class="col2">
-                        <input id="account" name="username" type="text" maxlength="50" required />
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="row">
-                    <div class="col1">Mật khẩu</div>
-                    <div class="col2">
-                        <input id="password" name="password" type="password" maxlength="50" required />
-                        <input id="remember" name="rememberMe" type="checkbox" /> Duy trì đăng nhập
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="row">
-                    <div class="col1"></div>
-                    <div class="col2">
-                        <span style="color: red" class="show-recover-form">Quên mật khẩu ?</span>
-                        <span class="show-register-form">Đăng ký</span>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div style="margin-top: 20px" class="row">
-                    <div class="col2 row button-login">
-                        <button type="submit" class="login">Đăng nhập</button>
-                        <span class="close" id="close-login">Thoát</span>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div id="register-form" class="register-form">
-        <form asp-controller="" asp-action="" method="post" onsubmit="return validateRegistrationForm()">
-            <div class="loading"></div>
-            <div class="title">
-                <span class="exit"></span>
-                Đăng ký thành viên
-            </div>
-            <div class="notices">
-                <ul>
-                    <li>
-                        Lưu ý: Giả mạo thông tin cá nhân có thể bị phạt tới 30 triệu đồng.
-                    </li>
-                </ul>
-            </div>
-            <div class="input-form-register">
-                <div class="row">
-                    <div class="col1">Họ tên(<span class="note">*</span>)</div>
-                    <div class="col2">
-                        <input id="username" name="username" type="text" maxlength="50" required />
-                    </div>
-                </div>
-                <div class="suggesstion">
-                    <p class="error_name">Tên lớn hơn 14 kí tự !!!</p>
-                </div>
-                <div class="row">
-                    <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
-                    <div class="col2">
-                        <input id="password-one" name="password" type="password" required />
-                    </div>
-                </div>
-                <div class="suggesstion">
-                    <p class="error_pass_one">Mật khẩu tối thiểu trên 8 kí tự !!!</p>
-                </div>
-                <div class="row">
-                    <div class="col1">Nhập lại mật khẩu(<span class="note">*</span>)</div>
-                    <div class="col2">
-                        <input id="password-two" name="confirmPassword" type="password" required />
-                    </div>
-                </div>
-                <div class="suggesstion">
-                    <p class="error_pass_two">Nhập lại mật khẩu không trùng khớp !!!</p>
-                </div>
-
-                <div class="row">
-                    <div class="col1">Di động (<span class="note">*</span>)</div>
-                    <div class="col2">
-                        <input id="phone" name="phone" type="text" maxlength="10" required />
-                    </div>
-                </div>
-                <div class="suggesstion">
-                    <p class="error_phone">Số điện thoại không đúng định dạng !!!</p>
-                </div>
-
-                <div class="row">
-                    <div class="col1">
-                        Email liên hệ(<span class="note">*</span>)<br />
-                    </div>
-                    <div class="col2">
-                        <input id="email" name="email" type="text" maxlength="50" required />
-                    </div>
-                </div>
-                <div class="suggesstion">
-                    <p class="error_email">Email không đúng định dạng !!!</p>
-                </div>
-
-                <div class="row">
-                    <div class="col button-register">
-                        <button type="submit" class="register">Đăng ký</button>
-                        <span class="close" id="close-register">Thoát</span>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+    <div id="loginFormContainer"></div>
+    <div id="registerFormContainer"></div>
 
     <div id="footerLayout">
         <div class="container" id="footerBlock">
@@ -176,33 +65,29 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/admin.js" asp-append-version="true"></script>
     <script src="~/js/register.js" asp-append-version="true"></script>
-    <script>
-        const login = document.querySelector('#login')
-        const form_login = document.querySelector('.login-form')
-        const close_login = document.querySelector('#close-login')
-        const register = document.querySelector('#register')
-        const show_register_form = document.querySelector('.show-register-form')
-        const form_register = document.querySelector('.register-form')
-        const close_register = document.querySelector('#close-register')
-        function action(action, close_action, form ) {
-            action.addEventListener('click', () => {
-                form.style.display = 'block'
-                document.querySelector('.fly').style.display = 'block'
-            })
-            close_action.addEventListener('click', () => {
-                form.style.display = 'none'
-                document.querySelector('.fly').style.display = 'none'
-            })
-        }
-        action(login, close_login, form_login , )
-        action(register, close_register, form_register)
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script>
+        $(document).ready(function () {
+            $("#login").click(function () {
+                $.get("/Home/Login", function (data) {
+                    $("#loginFormContainer").html(data);
+                    $(".fly").show();
+                    $(".login-form").show();
+                });
+                return false;
+            });
 
-        show_register_form.addEventListener('click', () => {
-            form_login.style.display = 'none'
-            form_register.style.display = 'block'
-            document.querySelector('.fly').style.display = 'block'
-        })
-    </script>
+            $("#register").click(function () {
+                $.get("/Home/Register", function (data) {
+                    $("#registerFormContainer").html(data);
+                    $(".fly").show();
+                    $(".register-form").show();
+                });
+                return false;
+            });
+        });
+        </script>
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,86 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<div id="register-form" class="register-form">
+    <form asp-controller="" asp-action="" method="post" onsubmit="return validateRegistrationForm()">
+        <div class="loading"></div>
+        <div class="title">
+            <span class="exit"></span>
+            Đăng ký thành viên
+        </div>
+        <div class="notices">
+            <ul>
+                <li>
+                    Lưu ý: Giả mạo thông tin cá nhân có thể bị phạt tới 30 triệu đồng.
+                </li>
+            </ul>
+        </div>
+        <div class="input-form-register">
+            <div class="row">
+                <div class="col1">Họ tên(<span class="note">*</span>)</div>
+                <div class="col2">
+                    <input id="username" name="username" type="text" maxlength="50" required />
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_name">Tên lớn hơn 14 kí tự !!!</p>
+            </div>
+            <div class="row">
+                <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
+                <div class="col2">
+                    <input id="password-one" name="password" type="password" required />
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_pass_one">Mật khẩu tối thiểu trên 8 kí tự !!!</p>
+            </div>
+            <div class="row">
+                <div class="col1">Nhập lại mật khẩu(<span class="note">*</span>)</div>
+                <div class="col2">
+                    <input id="password-two" name="confirmPassword" type="password" required />
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_pass_two">Nhập lại mật khẩu không trùng khớp !!!</p>
+            </div>
+
+            <div class="row">
+                <div class="col1">Di động (<span class="note">*</span>)</div>
+                <div class="col2">
+                    <input id="phone" name="phone" type="text" maxlength="10" required />
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_phone">Số điện thoại không đúng định dạng !!!</p>
+            </div>
+
+            <div class="row">
+                <div class="col1">
+                    Email liên hệ(<span class="note">*</span>)<br />
+                </div>
+                <div class="col2">
+                    <input id="email" name="email" type="text" maxlength="50" required />
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_email">Email không đúng định dạng !!!</p>
+            </div>
+
+            <div class="row">
+                <div class="col button-register">
+                    <button type="submit" class="register">Đăng ký</button>
+                    <span class="close" id="close-register">Thoát</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $("#close-register").click(function () {
+        $(".fly").hide();
+        $(".register-form").hide();
+    });
+</script>
