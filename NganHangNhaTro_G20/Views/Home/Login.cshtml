@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+
+<div id="login-form" class="login-form">
+    <form asp-controller="" asp-action="" method="post">
+        <div class="loading"></div>
+        <div class="title">Đăng nhập</div>
+        <div class="input-form-login">
+            <div class="row message"></div>
+            <div class="row">
+                <div class="col1">Tên truy cập.</div>
+                <div class="col2">
+                    <input id="account" name="username" type="text" maxlength="50" required />
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="row">
+                <div class="col1">Mật khẩu</div>
+                <div class="col2">
+                    <input id="password" name="password" type="password" maxlength="50" required />
+                    <input id="remember" name="rememberMe" type="checkbox" /> Duy trì đăng nhập
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="row">
+                <div class="col1"></div>
+                <div class="col2">
+                    <span style="color: red" class="show-recover-form">Quên mật khẩu ?</span>
+                    <span class="show-register-form">Đăng ký</span>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div style="margin-top: 20px" class="row">
+                <div class="col2 row button-login">
+                    <button type="submit" class="login">Đăng nhập</button>
+                    <span class="close" id="close-login">Thoát</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $("#close-login").click(function () {
+        $(".fly").hide();
+        $(".login-form").hide();
+    });
+</script>

@@ -10,6 +10,17 @@ html {
 a {
     text-decoration: none;
 }
+#loginFormContainer {
+    position: fixed;
+    z-index: 11;
+}
+
+#registerFormContainer {
+    position: absolute;
+    left: 35%;
+    top: 10%;
+    z-index: 12;
+}
 .fly {
     position: fixed;
     background-color: #000000;
