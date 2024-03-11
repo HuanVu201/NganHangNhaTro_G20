@@ -15,7 +15,6 @@ namespace NganHangNhaTro_G20.Controllers
         [Route("Home")]
         public IActionResult Index()
         {
-            var db = new ProjectDbContext();
             return View();
         }
         public IActionResult Login()
