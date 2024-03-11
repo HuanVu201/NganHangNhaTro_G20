@@ -4,8 +4,8 @@
             <div class="dropdown">
                 <button style="width: 200px; height: 40px;" onclick="toggleDropdown()" class="dropbtn" id="menuButton">Menu</button>
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="#" onclick="changeMenuText('Quản lý người dùng')">Quản lý người dùng</a>
                     <a href="#" onclick="changeMenuText('Quản lý phòng trọ')">Quản lý phòng trọ</a>
+                    <a href="#" onclick="changeMenuText('Quản lý người dùng')">Quản lý người dùng</a>
                     <a href="#" onclick="changeMenuText('Quản lý lịch xem phòng')">Quản lý lịch xem phòng</a>
                 </div>
             </div>
@@ -26,14 +26,71 @@
                 </div>
             </div>
             <div>
-                <h3>List Phòng</h3>
+                <h3>Danh sách phòng</h3>
+            </div>
+            <div class="admin-list-houses">
+                <ul>
+                    <div class="admin-district-item">
+                        <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                        <li class="house-group" onclick="toggleHouseList(event)">
+                            Quận Hoàng Mai
+                            <ul>
+                            <li class="house" onclick="toggleRoomList(event)">
+                                <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                                    Phường Mai Động
+                                    <ul>
+                                        <li class="room">- 102 Mai Động, Hoàng Mai, Hà Nội</li>
+                                        <li class="room">- 222 Mai Động, Hoàng Mai, Hà Nội</li>
+                                    </ul>
+                                </li>
+                            <li class="house" onclick="toggleRoomList(event)">
+                                    <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                                    Phường Đại Kim
+                                    <ul>
+                                        <li class="room">- Ocean Park 33 Đại Kim, Hoàng Mai, Hà Nội</li>
+                                        <li class="room">- CT1 Đại Kim, Thanh Xuân, Hà Nội</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                    <div class="admin-district-item">
+                        <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                        <li class="house-group" onclick="toggleHouseList(event)">
+                            Quận Thanh Xuân
+                            <ul>
+                        <div class="admin-district-item"></div>
+                                <li class="house" onclick="toggleRoomList(event)">
+                                    <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                                    Phường Định Công
+                                    <ul>
+                                        <li class="room">- 96 Định Công, Thanh Xuân, Hà Nội</li>
+                                        <li class="room">- 56 Định Công, Thanh Xuân, Hà Nội</li>
+                                    </ul>
+                                </li>
+                        <li class="house" onclick="toggleRoomList(event)">
+                                    <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                                    Phương Liệt
+                                    <ul>
+                                        <li class="room">- 30 Phương Liệt, Thanh Xuân, Hà Nội</li>
+                                        <li class="room">- 78 Phương Liệt, Thanh Xuân, Hà Nội</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </ul>
             </div>
         </div>
         <div class="admin-house-detail">
             <div class="admin-house-detail-checklist">
                 <p>Thông tin phòng</p>
             </div>
+            <div style="height: 10px"></div>
+            <div class="admin-house-detail-bottom">
+            </div>
         </div>
+
     </div>
     <script>
         function toggleDropdown() {
@@ -47,7 +104,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            changeMenuText("Quản lý người dùng");
+            changeMenuText("Quản lý phòng trọ");
         });
 
         window.onclick = function (event) {
@@ -60,6 +117,27 @@
                     }
                 }
             }
+        }
+        function toggleHouseList(event) {
+            event.stopPropagation();
+
+            var houseList = event.currentTarget.querySelector("ul");
+            var houses = houseList.querySelectorAll(".house");
+
+            houses.forEach(function (house) {
+                house.classList.toggle("show");
+            });
+        }
+
+        function toggleRoomList(event) {
+            event.stopPropagation();
+
+            var roomList = event.currentTarget.querySelector("ul");
+            var rooms = roomList.querySelectorAll(".room");
+
+            rooms.forEach(function (room) {
+                room.classList.toggle("show");
+            });
         }
     </script>
     <style>
@@ -98,11 +176,64 @@
             border-radius: 5px;
         }
 
+        .admin-list-houses {
+            width: 250px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #000000;
+        }
+
+            .admin-list-houses ul {
+                list-style: none;
+                padding-left: 5px;
+            }
+
+            .admin-list-houses li {
+                cursor: pointer;
+            }
+
+            .admin-list-houses .house-group {
+                font-weight: bold;
+            }
+
+            .admin-list-houses .house {
+                display: none;
+                margin-left: 5px;
+            }
+
+                .admin-list-houses .house.show {
+                    display: block;
+                }
+
+            .admin-list-houses .room {
+                display: none;
+                margin-left: 5px;
+            }
+
+                .admin-list-houses .room.show {
+                    display: block;
+                }
+
+        .admin-district-item {
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+        }
+
         .admin-house-detail {
             width: 700px;
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .admin-house-detail-bottom {
+            width: 650px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #000000;
         }
 
         .admin-house-detail-checklist {
