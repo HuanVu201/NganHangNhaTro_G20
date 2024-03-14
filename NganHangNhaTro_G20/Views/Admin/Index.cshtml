@@ -1,0 +1,297 @@
+﻿@{
+    <div class="container-admin">
+        <div class="admin-manager-list">
+            <div class="dropdown">
+                <button style="width: 200px; height: 40px;" onclick="toggleDropdown()" class="dropbtn" id="menuButton">Menu</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#" onclick="changeMenuText('Quản lý phòng trọ')">Quản lý phòng trọ</a>
+                    <a href="#" onclick="changeMenuText('Quản lý người dùng')">Quản lý người dùng</a>
+                    <a href="#" onclick="changeMenuText('Quản lý lịch xem phòng')">Quản lý lịch xem phòng</a>
+                </div>
+            </div>
+        </div>
+        <div class="admin-manager-list">
+            <div class="room-by-location">
+                <div>
+                    <p>Phòng theo khu vực</p>
+                </div>
+                <div>
+                    <img src="~/images/reload.svg" alt="Reload" width="30" height="30" />
+                </div>
+            </div>
+            <div class="admin-search">
+                <input style="width: 210px;" type="text" placeholder="Nhập địa chỉ" />
+                <div class="icon-search-admin">
+                    <img src="~/images/search-alt-2-svgrepo-com.svg" alt="Reload" width="25" height="25" />
+                </div>
+            </div>
+            <div>
+                <h3>Danh sách phòng</h3>
+            </div>
+            <div class="admin-list-houses">
+                <ul>
+                    <div class="admin-district-item">
+                        <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                        <li class="house-group" onclick="toggleHouseList(event)">
+                            Quận Hoàng Mai
+                            <ul>
+                            <li class="house" onclick="toggleRoomList(event)">
+                                <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                                    Phường Mai Động
+                                    <ul>
+                                        <li class="room">- 102 Mai Động, Hoàng Mai, Hà Nội</li>
+                                        <li class="room">- 222 Mai Động, Hoàng Mai, Hà Nội</li>
+                                    </ul>
+                                </li>
+                            <li class="house" onclick="toggleRoomList(event)">
+                                    <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                                    Phường Đại Kim
+                                    <ul>
+                                        <li class="room">- Ocean Park 33 Đại Kim, Hoàng Mai, Hà Nội</li>
+                                        <li class="room">- CT1 Đại Kim, Thanh Xuân, Hà Nội</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                    <div class="admin-district-item">
+                        <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                        <li class="house-group" onclick="toggleHouseList(event)">
+                            Quận Thanh Xuân
+                            <ul>
+                        <div class="admin-district-item"></div>
+                                <li class="house" onclick="toggleRoomList(event)">
+                                    <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                                    Phường Định Công
+                                    <ul>
+                                        <li class="room">- 96 Định Công, Thanh Xuân, Hà Nội</li>
+                                        <li class="room">- 56 Định Công, Thanh Xuân, Hà Nội</li>
+                                    </ul>
+                                </li>
+                        <li class="house" onclick="toggleRoomList(event)">
+                                    <img src="~/images/plus-circle-svgrepo-com.svg" style="margin-right: 5px;" alt="Reload" width="15" height="15" />
+                                    Phương Liệt
+                                    <ul>
+                                        <li class="room">- 30 Phương Liệt, Thanh Xuân, Hà Nội</li>
+                                        <li class="room">- 78 Phương Liệt, Thanh Xuân, Hà Nội</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="admin-house-detail">
+            <div class="admin-house-detail-checklist">
+                <p>Thông tin phòng</p>
+            </div>
+            <div style="height: 10px"></div>
+            <div class="admin-house-detail-bottom">
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function toggleDropdown() {
+            var dropdown = document.getElementById("myDropdown");
+            dropdown.classList.toggle("show");
+        }
+
+        function changeMenuText(text, imageSrc) {
+            var menuButton = document.getElementById("menuButton");
+            menuButton.innerHTML = text;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            changeMenuText("Quản lý phòng trọ");
+        });
+
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        function toggleHouseList(event) {
+            event.stopPropagation();
+
+            var houseList = event.currentTarget.querySelector("ul");
+            var houses = houseList.querySelectorAll(".house");
+
+            houses.forEach(function (house) {
+                house.classList.toggle("show");
+            });
+        }
+
+        function toggleRoomList(event) {
+            event.stopPropagation();
+
+            var roomList = event.currentTarget.querySelector("ul");
+            var rooms = roomList.querySelectorAll(".room");
+
+            rooms.forEach(function (room) {
+                room.classList.toggle("show");
+            });
+        }
+    </script>
+    <style>
+        .container-admin {
+            width: 1200px;
+            height: 600px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .admin-manager-list {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .admin-search {
+            width: 250px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .icon-search-admin {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000000;
+            border-radius: 5px;
+        }
+
+        .admin-list-houses {
+            width: 250px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #000000;
+        }
+
+            .admin-list-houses ul {
+                list-style: none;
+                padding-left: 5px;
+            }
+
+            .admin-list-houses li {
+                cursor: pointer;
+            }
+
+            .admin-list-houses .house-group {
+                font-weight: bold;
+            }
+
+            .admin-list-houses .house {
+                display: none;
+                margin-left: 5px;
+            }
+
+                .admin-list-houses .house.show {
+                    display: block;
+                }
+
+            .admin-list-houses .room {
+                display: none;
+                margin-left: 5px;
+            }
+
+                .admin-list-houses .room.show {
+                    display: block;
+                }
+
+        .admin-district-item {
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+        }
+
+        .admin-house-detail {
+            width: 700px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .admin-house-detail-bottom {
+            width: 650px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #000000;
+        }
+
+        .admin-house-detail-checklist {
+            width: 650px;
+            height: 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000000;
+        }
+
+        .room-by-location {
+            width: 250px;
+            height: 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1;
+                }
+
+        .show {
+            display: block;
+        }
+    </style>
+}

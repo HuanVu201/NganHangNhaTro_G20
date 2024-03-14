@@ -1,0 +1,127 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+#detailProduct {
+    margin-top:2rem;
+    max-width: 1000px;
+}
+
+#titleDetail {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+}
+
+#description p{
+    margin-top:1rem;
+}
+
+#title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #36b0d9;
+}
+
+#ngayDang {
+    display: flex;
+    justify-content: end;
+    color: rgb(211, 83, 83);
+}
+
+#description {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.mailDetail {
+    font-size: 20px;
+}
+
+.highLight {
+    color: red;
+}
+
+#price {
+    font-size: 18px;
+}
+
+#acreage {
+    font-size: 18px;
+}
+
+#address {
+    font-size: 18px;
+}
+
+#detailAddress {
+    color: #06c;
+    font-weight: 600;
+}
+
+#imageRoomBlock {
+    width: 100%;
+    height: 35rem;
+    margin-top: 1rem;
+    background-color: #EFEFEF;
+}
+.imageDetail:not(.imageDetailActive){
+    display:none;
+}
+
+#imageRoomBlock img {
+    width: 85%;
+    height: 95%;
+    margin-top: 1rem;
+    padding-left: 15%;
+}
+
+#imageRoomBlockSmall {
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    height: 7rem;
+    text-align: center;
+}
+.imageDetailSmallActive{
+    border:2px solid red
+}
+#imageRoomBlockSmall img {
+    margin-top: 5px;
+    width: 6rem;
+    height: 6rem;
+    margin-right: 0.5rem;
+    box-shadow: 0 1px 4px 1px black;
+    outline: 3px solid rgb(255, 255, 255);
+}
+
+        #imageRoomBlockSmall img:hover {
+            box-shadow: none;
+            cursor: pointer;
+            outline: 3px solid rgb(238, 236, 236);
+        }
+
+#book_room {
+    padding: 0.7rem 1rem 0.7rem 1rem;
+    background-color: #0090B5;
+    color: white;
+    margin-top: 5px;
+    border-radius: 3px;
+    border: 1px solid #e0e0e0;
+    margin-left: 87%;
+}
+
+    #book_room:hover {
+        cursor: pointer;
+        background-color: #0481a0;
+    }
+
+.imageDetail {
+}
+
+#note {
+    color: red
+}
+#go_home{
+    margin-top:1rem;
+}

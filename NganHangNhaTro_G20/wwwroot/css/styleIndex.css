@@ -10,6 +10,17 @@ html {
 a {
     text-decoration: none;
 }
+#loginFormContainer {
+    position: fixed;
+    z-index: 11;
+}
+
+#registerFormContainer {
+    position: absolute;
+    left: 35%;
+    top: 10%;
+    z-index: 12;
+}
 .fly {
     position: fixed;
     background-color: #000000;
@@ -62,6 +73,7 @@ ul {
     font-size: 1.5rem;
     color: #1579a8;
     font-weight: bold;
+
 }
 
 .content-body {

@@ -2,109 +2,85 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Layout = null;
 }
-<div id="register-form" class="register-form" >
-    <div class="loading"></div>
-    <div class="title">
-        <span class="exit"></span>
-        Đăng ký thành viên
-    </div>
-    <div class="notices">
-        <ul>
-            <li>
-                Lưu ý: Giả mạo thông tin của cá nhân, tổ chức để tham gia hoạt động
-                thương mại điện tử nhằm gây ảnh hưởng đến uy tín, cuộc sống của cá
-                nhân, tổ chức có thể bị phạt tới 30 triệu đồng.
-            </li>
-        </ul>
-    </div>
-    <div class="input-form">
-        <div class="row">
-            <div class="col1">Họ tên(<span class="note">*</span>)</div>
-            <div class="col2">
-                <input id="username" type="text" maxlength="50" />
+<div id="register-form" class="register-form">
+    <form asp-controller="" asp-action="" method="post" onsubmit="return validateRegistrationForm()">
+        <div class="loading"></div>
+        <div class="title">
+            <span class="exit"></span>
+            Đăng ký thành viên
+        </div>
+        <div class="notices">
+            <ul>
+                <li>
+                    Lưu ý: Giả mạo thông tin cá nhân có thể bị phạt tới 30 triệu đồng.
+                </li>
+            </ul>
+        </div>
+        <div class="input-form-register">
+            <div class="row">
+                <div class="col1">Họ tên.(<span class="note">*</span>)</div>
+                <div class="col2">
+                    <input id="username" name="username" type="text" maxlength="50" required />
+                </div>
             </div>
             <div class="suggesstion">
-                <ul>
-                    <li>
-                        <span>
-                            Tên liên hệ khi khách hàng có nhu cầu cần mua/ cần thuê
-                            gọi.
-                        </span>
-                    </li>
-                    <li>
-                        <span>Tên liên hệ phải viết có dấu. Ví dụ: Nguyễn Văn A.</span>
-                    </li>
-                </ul>
+                <p class="error_name">Tên lớn hơn 14 kí tự !!!</p>
             </div>
-        </div>
-        <div class="row">
-            <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
-            <div class="col2">
-                <input id="password1" type="password" maxlength="50" />
+            <div class="row">
+                <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
+                <div class="col2">
+                    <input id="password-one" name="password" type="password" required />
+                </div>
             </div>
             <div class="suggesstion">
-                <ul>
-                    <li><span>Mật khẩu từ 6 đến 30 ký tự.</span></li>
-                </ul>
+                <p class="error_pass_one">Mật khẩu tối thiểu trên 8 kí tự !!!</p>
             </div>
-        </div>
-        <div class="row">
-            <div class="col1">Nhập lại mật khẩu(<span class="note">*</span>)</div>
-            <div class="col2">
-                <input id="password2" type="password" maxlength="50" />
+            <div class="row">
+                <div class="col1">Nhập lại mật khẩu(<span class="note">*</span>)</div>
+                <div class="col2">
+                    <input id="password-two" name="confirmPassword" type="password" required />
+                </div>
             </div>
-        </div>
+            <div class="suggesstion">
+                <p class="error_pass_two">Nhập lại mật khẩu không trùng khớp !!!</p>
+            </div>
 
-        <div class="row">
-            <div class="col1">Di động (<span class="note">*</span>)</div>
-            <div class="col2">
-                <input id="phone1" type="text" maxlength="12" />
+            <div class="row">
+                <div class="col1">Di động (<span class="note">*</span>)</div>
+                <div class="col2">
+                    <input id="phone" name="phone" type="text" maxlength="10" required />
+                </div>
             </div>
             <div class="suggesstion">
-                <ul>
-                    <li>
-                        <span>
-                            Số điện thoại liên hệ để khách hàng có nhu cầu cần mua/cần
-                            thuê gọi.
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            Số điện thoại này sẽ được hiển thị trong nội dung tin đăng,
-                            số điện thoại này không thể thay đổi khi đăng tin.
-                        </span>
-                    </li>
-                </ul>
+                <p class="error_phone">Số điện thoại không đúng định dạng !!!</p>
             </div>
-        </div>
-        <div class="row">
-            <div class="col1">
-                Email liên hệ(<span class="note">*</span>)<br />
-            </div>
-            <div class="col2">
-                <input id="email1" type="text" maxlength="50" />
-            </div>
-            <div class="suggesstion">
-                <ul>
-                    <li>
-                        <span>
-                            Email dùng để nhận thông tin xác thực, phục hồi mật
-                            khẩu,...
-                        </span>
-                    </li>
-                </ul>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col button-register">
-                <span class="register">Đăng ký</span>
-                <span class="close">Thoát</span>
+            <div class="row">
+                <div class="col1">
+                    Email liên hệ(<span class="note">*</span>)<br />
+                </div>
+                <div class="col2">
+                    <input id="email" name="email" type="text" maxlength="50" required />
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_email">Email không đúng định dạng !!!</p>
+            </div>
+
+            <div class="row">
+                <div class="col button-register">
+                    <button type="submit" class="register">Đăng ký</button>
+                    <span class="close" id="close-register">Thoát</span>
+                </div>
             </div>
         </div>
-        <div style="color: Red; margin-top: 1rem">
-            Hỗ trợ vay nợ Huấm<b><i>(0123) 3456 89</i></b>
-        </div>
-    </div>
+    </form>
 </div>
+<script>
+    $("#close-register").click(function () {
+        $(".fly").hide();
+        $(".register-form").hide();
+    });
+</script>
