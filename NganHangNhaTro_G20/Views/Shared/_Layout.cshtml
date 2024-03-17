@@ -12,6 +12,34 @@
     <link rel="stylesheet" href="~/css/styleRegister.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/NganHangNhaTro_G20.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/CommonLayout.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProjectQuanLy.styles.css" asp-append-version="true" />*@
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+
+    @*jQuery*@
+    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="~/js/phanquyen.js"></script>
+
+    @*DataTables*@
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+    <script language="JavaScript" type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+    @*jsTree*@
+    <link href="~/css/jstree.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+    @*Bootstrap modal*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    @*Assets Project*@
+     <link href="~/css/indexAdmin.css" rel="stylesheet" />
+    @*<link href="~/css/phanquyen.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="~/css/fontawesome-free-6.3.0-web/css/all.min.css"> 
 </head>
 <body>
     <header>
@@ -57,9 +85,8 @@
             </p>
         </div>
     </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/admin.js" asp-append-version="true"></script>
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
     <script src="~/js/register.js" asp-append-version="true"></script>
     <script>
         $(document).ready(function () {
@@ -92,5 +119,6 @@
             });
         });
     </script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

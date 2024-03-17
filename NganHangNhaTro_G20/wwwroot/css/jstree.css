@@ -1,0 +1,46 @@
+﻿body {
+}
+
+.loadingP {
+    /*background-image: url('image\loading.gif');*/
+    width: 15px;
+    display: inline-block;
+}
+
+.collapse {
+    /*background-image: url('../image/plusicon.png');*/
+    width: 15px;
+    background-repeat: no-repeat;
+    /*background-position: -36px -17px;*/
+    display: inline-block;
+    cursor: pointer;
+}
+
+.expand {
+    /*background-image: url('../image/minusicon.png');*/
+    width: 15px;
+    background-repeat: no-repeat;
+    /*background-position: -50px -17px;*/
+    display: inline-block;
+    cursor: pointer;
+   
+}
+
+.treeview ul {
+    font: 14px Arial, Sans-Serif;
+    margin: 0px;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.treeview > li > a {
+    font-weight: bold;
+}
+
+.treeview li a {
+    padding: 4px;
+    font-size: 12px;
+    display: inline-block;
+    text-decoration: none;
+    width: auto;
+}
