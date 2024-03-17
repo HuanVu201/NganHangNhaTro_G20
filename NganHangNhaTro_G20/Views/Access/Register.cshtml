@@ -4,8 +4,11 @@
 @{
     Layout = null;
 }
+@model User
 <div id="register-form" class="register-form">
-    <form asp-controller="" asp-action="" method="post" onsubmit="return validateRegistrationForm()">
+    @*<form>*@
+    @using (Html.BeginForm("Register", "Access", FormMethod.Post))
+    {
         <div class="loading"></div>
         <div class="title">
             <span class="exit"></span>
@@ -22,8 +25,12 @@
             <div class="row">
                 <div class="col1">Họ tên.(<span class="note">*</span>)</div>
                 <div class="col2">
-                    <input id="username" name="username" type="text" maxlength="50" required />
+                    @Html.TextBoxFor(x => x.Name)
+                    @*<input id="username" name="username" type="text" maxlength="50" required />*@
                 </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_email">Email không đúng định dạng !!!</p>
             </div>
             <div class="suggesstion">
                 <p class="error_name">Tên lớn hơn 14 kí tự !!!</p>
@@ -31,7 +38,8 @@
             <div class="row">
                 <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
                 <div class="col2">
-                    <input id="password-one" name="password" type="password" required />
+                    @Html.TextBoxFor(x => x.Password)
+                    @*<input id="password-one" name="password" type="password" required />*@
                 </div>
             </div>
             <div class="suggesstion">
@@ -50,7 +58,8 @@
             <div class="row">
                 <div class="col1">Di động (<span class="note">*</span>)</div>
                 <div class="col2">
-                    <input id="phone" name="phone" type="text" maxlength="10" required />
+                    @Html.TextBoxFor(x => x.PhoneNumber)
+                    @*<input id="phone" name="phone" type="text" maxlength="10" required />*@
                 </div>
             </div>
             <div class="suggesstion">
@@ -62,7 +71,8 @@
                     Email liên hệ(<span class="note">*</span>)<br />
                 </div>
                 <div class="col2">
-                    <input id="email" name="email" type="text" maxlength="50" required />
+                    @Html.TextBoxFor(x => x.Email)
+                    @*<input id="email" name="email" type="text" maxlength="50" required />*@
                 </div>
             </div>
             <div class="suggesstion">
@@ -70,13 +80,14 @@
             </div>
 
             <div class="row">
-                <div class=" button-register">
+                <div class="col button-register">
                     <button type="submit" class="register">Đăng ký</button>
-                    <span  id="close-register">Thoát</span>
+                    <span class="close" id="close-register">Thoát</span>
                 </div>
             </div>
         </div>
-    </form>
+    }
+    @*</form>*@
 </div>
 <script>
     $("#close-register").click(function () {

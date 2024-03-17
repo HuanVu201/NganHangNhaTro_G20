@@ -9,6 +9,8 @@ builder.Services.AddDbContext<ProjectDbContext>(x => x.UseSqlServer(builder.Conf
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +28,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseSession();
+
 //app.UseEndpoints(endpoints =>
 //{
 //    endpoints.MapControllerRoute(
@@ -41,7 +45,7 @@ app.UseEndpoints(endpoints =>
       name: "default",
       pattern: "{controller=Home}/{action=Index}/{id?}"
     );
-}); 
+});
 
 
 

@@ -4,9 +4,11 @@
 @{
     Layout = null;
 }
-
+@model User
 <div id="login-form" class="login-form">
-    <form asp-controller="" asp-action="" method="post">
+    @*<form>*@
+    @using (Html.BeginForm("Login", "Access", FormMethod.Post))
+    {
         <div class="loading"></div>
         <div class="title">Đăng nhập</div>
         <div class="input-form-login">
@@ -14,14 +16,16 @@
             <div class="row">
                 <div class="col1">Tên truy cập.</div>
                 <div class="col2">
-                    <input id="account" name="username" type="text" maxlength="50" required />
+                    @Html.TextBoxFor(x => x.Email)
+                    @*<input id="account" name="username" type="text" maxlength="50" required />*@
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="col1">Mật khẩu</div>
                 <div class="col2">
-                    <input id="password" name="password" type="password" maxlength="50" required /> <br/>
+                    @Html.TextBoxFor(x => x.Password)
+                    @*<input id="password" name="password" type="password" maxlength="50" required />*@
                     <input id="remember" name="rememberMe" type="checkbox" /> Duy trì đăng nhập
                 </div>
                 <div class="clear"></div>
@@ -35,18 +39,18 @@
                 <div class="clear"></div>
             </div>
             <div style="margin-top: 20px" class="row">
-                <div class="button-login">
+                <div class="col2 row button-login">
                     <button type="submit" class="login">Đăng nhập</button>
-                    <span id="close-login">Thoát</span>
+                    <span class="close" id="close-login">Thoát</span>
                 </div>
             </div>
         </div>
-    </form>
+    }
+    @*</form>*@
 </div>
 <script>
     $("#close-login").click(function () {
         $(".fly").hide();
         $(".login-form").hide();
     });
-   
 </script>
