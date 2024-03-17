@@ -11,6 +11,8 @@ namespace NganHangNhaTro_G20.Models
         public Guid Id { get; set; }
         [Column(TypeName = "nvarchar(1000)")]
         public string Address { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public string OfLocationId { get; set; }
         public int Acreage { get; set; }
         [Column(TypeName = "float")]
         public float Price { get; set; }
@@ -18,11 +20,13 @@ namespace NganHangNhaTro_G20.Models
         public string Desciption { get; set; }
         [Column(TypeName = "float")]
         public float? Rate { get; set; }
-        [Column(TypeName = "varchar(20)")]
-        public string HouseStatusId { get; set; }
-        [Column(TypeName = "varchar(20)")]
-        public string HouseTypeId { get; set; }
+        [Column(TypeName = "nvarchar(100)")]
+        public string HouseStatus { get; set; }
+        [Column(TypeName = "nvarchar(100)")]
+        public string HouseType { get; set; }
         public Guid OwnerId { get; set; }
+        [Column(TypeName = "nvarchar(100)")]
+        public string OwnerName { get; set; }
         public Guid PosterId { get; set; }
 
         public Guid? ImageCategoryId { get; set; }

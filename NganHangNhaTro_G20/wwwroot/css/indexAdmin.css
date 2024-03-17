@@ -1,0 +1,286 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+    a:hover {
+        color: #999;
+        text-decoration: none;
+    }
+
+h3 {
+    margin: 0;
+}
+
+.containerProject {
+    background-color: rgb(193, 224, 225);
+    padding: 15px;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+        "navbar contentBlock";
+    display: grid;
+    grid-column-gap: 15px;
+    min-height: 100vh;
+}
+
+.navbarProject {
+    grid-area: navbar;
+    background-color: aliceblue;
+    padding: 20px;
+}
+
+.navbar__heading {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #999;
+    padding: 20px 0;
+}
+
+.navbar__search {
+    margin: 20px 0;
+}
+
+    .navbar__search input {
+        outline: none;
+        /* border: none; */
+        font-size: 16px;
+        padding: 5px 10px;
+        width: 80%;
+    }
+
+/* ===================================================== */
+.contentBlock {
+    grid-area: contentBlock;
+    background-color: aliceblue;
+    padding: 20px;
+    font-size: 16px;
+}
+
+.contentBlock__heading {
+    display: flex;
+    /* border-bottom: 1px solid #999; */
+    padding: 20px 0;
+}
+
+    .contentBlock__heading a {
+        margin-right: 30px;
+    }
+
+        .contentBlock__heading a:first-child {
+            color: #049363;
+            font-weight: 600;
+            border-bottom: 3px solid #049363;
+        }
+
+.contentBlock__container {
+    padding: 20px;
+    min-height: 100vh;
+    border: 1px solid #049363;
+}
+
+.contentBlock__options-item {
+    display: inline-block;
+    background-color: aqua;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+    .contentBlock__options-item + .contentBlock__options-item {
+        margin-left: 5px;
+    }
+
+.btnThemMoi {
+    background-color: rgb(79, 79, 249);
+    color: #fff;
+}
+
+.btnCapQuyen {
+    background-color: rgb(241, 174, 48);
+    color: #fff;
+}
+
+.btnXuatData {
+    background-color: #049363;
+    color: #fff;
+}
+
+.contentBlock__content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.contentBlock__content--search {
+    margin: 20px 0 10px 0;
+    display: block;
+    text-align: right;
+}
+
+.contentBlock__content--input {
+    outline: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    width: 200px;
+}
+
+.button {
+    font-size: 14px;
+    padding: 6px 10px;
+}
+
+
+table, th, td {
+    border: 1px solid #333;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 16px;
+}
+
+
+
+th {
+    background-color: wheat;
+}
+
+tr {
+    height: 40px;
+}
+
+.checkbox {
+    width: 5%;
+}
+
+.stt {
+    width: 10%;
+}
+
+.chucVu {
+    width: 25%;
+}
+
+.hoTen {
+    width: 25%;
+}
+
+.taiKhoan {
+    width: 20%;
+}
+
+.thaoTac {
+    width: 15%;
+}
+
+    .thaoTac a {
+        margin: 0 8px;
+    }
+
+    .thaoTac i {
+        font-size: 12px;
+    }
+
+.checkbox input {
+    height: 15px;
+    width: 15px;
+}
+
+.dataRow {
+    cursor: pointer;
+}
+/* ================================================ */
+h2 {
+    width: 500px;
+    text-align: center;
+}
+
+.inputBlock {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+    .inputBlock label {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+.inputContent {
+    outline: none;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.selectContent {
+    width: 542px;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.submitForm {
+    padding: 5px 10px;
+    width: 150px;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.BackToList {
+    background-color: #dad8d8;
+    font-size: 18px;
+    width: 100px;
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 2px;
+    margin-bottom: 100px;
+}
+
+    .BackToList:hover {
+        border: 1px solid #888;
+        padding: 4px 9px;
+    }
+
+
+.tblDetail {
+    width: 550px;
+    margin: 50px auto 0 auto;
+}
+
+.col-1 {
+    width: 150px;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.col-2 {
+    padding: 0 20px;
+}
+
+.selectContent {
+    width: 468.4px;
+    padding: 0 20px;
+}
+
+
+
+/*Phụ*/
+.navbar-nav:last-child {
+    float: right;
+}
+
+.container {
+    padding: 0;
+    margin: 0 auto;
+}
+
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}

@@ -12,7 +12,7 @@ namespace NganHangNhaTro_G20.Controllers
         {
             _logger = logger;
         }
-        [Route("Home")]
+
         public IActionResult Index()
         {
             return View();

@@ -1,0 +1,181 @@
+﻿
+<div class="containerProject">
+        <div class="navbarProject">
+            <div class="navbar__heading">
+                <h3>Nhóm phòng trọ</h3>
+                <div>
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </div>
+            <div class="navbar__search">
+                <input type="text" name="" id="" placeholder="Tìm kiếm">
+            </div>
+            <div class="navbar__diagram">
+                <div class="treeview">
+                    @*Tree View*@
+                </div>
+            </div>
+        </div>
+        <div class="contentBlock">
+            <div class="contentBlock__heading">
+                <a>
+                    <i class="fa-solid fa-list"></i>
+                    Danh sách người dùng
+                </a>
+                <a>
+                    <i class="fa-solid fa-gear"></i>
+                    Thông tin
+                </a>
+            </div>
+            <div class="contentBlock__container">
+                <div class="contentBlock__options">
+                    <a data-toggle="modal" class="contentBlock__options-item btnThemMoi" style="text-decoration: none; color: #fff;">
+                        <i class="fa-solid fa-plus"></i>
+                        Thêm mới 
+                    </a>
+                    <a class="contentBlock__options-item btnCapQuyen" style="text-decoration: none; color: #fff;">
+                        <i class="fa-solid fa-star"></i>
+                        Cấp quyền
+                    </a>
+                    <a class="contentBlock__options-item btnXuatData" style="text-decoration: none; color: #fff;">
+                        <i class="fa-solid fa-print"></i>
+                        Xuất excel
+                    </a>
+                </div>
+                <div class="contentBlock__content">
+                    @*Container content*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal CRUD-->
+    <div class="modal fade" id="myModalCRUD" role="dialog">
+        <div class="modal-dialog">
+            
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form">
+                        <div class="form-group inputBlock">
+                            <label for="maTaiKhoan">Mã tài khoản</label>
+                            <input type="text" class="form-control inputContent" id="maTaiKhoan" name="maTaiKhoan" placeholder="" />
+                        </div>
+                        <div class="form-group inputBlock">
+                            <label for="ten">Họ và tên</label>
+                            <input type="text" class="form-control inputContent" id="ten" name="ten" placeholder="" />
+                        </div>
+                        <div class="form-group inputBlock">
+                            <label for="ngaySinh">Ngày sinh</label>
+                            <input type="date" class="form-control inputContent" id="ngaySinh" name="ngaySinh" placeholder="" />
+                        </div>
+                        <div class="form-group inputBlock">
+                            <label for="gioiTinh">Giới tính</label>
+                            <select name="" id="gioiTinh" class="form-control selectContent">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-group inputBlock">
+                            <label for="soDienThoai">Số điện thoại</label>
+                            <input type="text" class="form-control inputContent" id="soDienThoai" placeholder="" />
+                        </div>
+                        <div class="form-group inputBlock">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control inputContent" id="email" placeholder="" />
+                        </div>
+                        <div class="form-group inputBlock">
+                            <label for="chucVu">Chức vụ</label>
+                            <input type="text" class="form-control inputContent" id="chucVu" placeholder="" />
+                        </div>
+                        <div class="form-group inputBlock">
+                            <label for="maCoQuan">Mã cơ quan làm việc</label>
+                            <input type="text" class="form-control inputContent" id="maCoQuan" placeholder="" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnAdd" style="display: none">Thêm mới</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate" style="display: none">Cập nhật</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- The end: Modal CRUD -->
+
+
+
+    <!-- Modal Phân Quyền -->
+    <!-- Modal -->
+    @* <div class="modalPhanQuyen">
+        <div class="modal fade" id="myModalPhanQuyen" role="dialog">
+            <div class="modal-dialog">
+
+               
+                <div class="modal-contentPhanQuyen">
+                    <div class="modal-header">
+                        <div class="notification">
+                            <h3>LƯU Ý: SAU KHI CHỈNH SỬA QUYỀN, TỐI ĐA 5 PHÚT SAU HỆ THỐNG MỚI CẬP NHẬT CHO TÀI KHOẢN NGƯỜI DÙNG</h3>
+                        </div>
+                        <div class="infoCanBo">
+                            <i class="fa-solid fa-user"></i>
+                            <span id="tenCanBo">Nguyễn Văn A</span>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form">
+                            <div class="containerContent">
+                                <div class="navbarPQ">
+                                    <div class="navbarProject__heading">
+                                        <span>Danh sách chức năng</span>
+                                    </div>
+                                    <div class="navbarProject__content">
+
+                                    </div>
+                                </div>
+                                <div class="contentBlockPQ">
+                                    <div class="contentBlock__headingPQ">
+                                        <div class="contentBlock__heading--vaiTro">
+                                            <i class="fa-solid fa-star"></i>
+                                            <span>Vai trò</span>
+                                        </div>
+                                        <div class="contentBlock__heading--quyen">
+                                            <i class="fa-sharp fa-solid fa-award"></i>
+                                            <span>Quyền</span>
+                                        </div>
+                                    </div>
+                                    <div class="contentBlock__body">
+                                            <span class="contentBlock__body--title">Title</span>
+                                        <div id="listVaiTroBlock">
+
+                                        </div>
+                                        <div id="listQuyenBlock">
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnUpdatePhanQuyen">Cập nhật</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div> *@
+  
+    <!-- The end: Modal Phân Quyền -->
+<script src="~/js/admin.js"></script>
+
+
