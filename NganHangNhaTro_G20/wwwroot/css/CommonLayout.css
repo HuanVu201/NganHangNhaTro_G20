@@ -56,7 +56,7 @@ a#login {
 
 
 #loginedStatus {
-    display: none;
+    display: block;
 }
 
 .statusLogin_ul {
@@ -64,10 +64,22 @@ a#login {
     justify-content: end;
     gap: 15px;
 }
+#loginedStatus{
+    margin-top:1.2rem;
+    position:relative;
+}
+#loginedStatus img {
+    position:absolute;
+    left:15%;
+    top:-4.3rem;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%
+}
 
 #footerLayout {
     text-align: center;
-    margin-top:2rem;
+    margin-top: 2rem;
     background-color: aquamarine;
 }
 
