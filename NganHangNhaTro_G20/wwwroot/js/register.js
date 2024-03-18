@@ -1,49 +1,72 @@
-﻿function validateRegistrationForm() {
-    //check usename
-    var username = document.getElementById('username');
-    if (username.value.trim().length <= 14) {
-        document.querySelector('.error_name').style.display = 'block';
-        return false;
-    } else {
-        document.querySelector('.error_name').style.display = 'none';
-    }
+﻿$(document).ready(function () {
+    $('#Name').focus();
+    $('form').submit(function (event) {
+        event.preventDefault();
 
-    // Check password
-    var password1 = document.getElementById('password-one');
-    if (password1.value.trim().length < 8) {
-        document.querySelector('.error_pass_one').style.display = 'block';
-        return false;
-    } else {
-        document.querySelector('.error_pass_one').style.display = 'none';
-    }
+        var name = $('#Name').val();
+        var password = $('#Password').val();
+        var confirmPassword = $('#password-two').val();
+        var phoneNumber = $('#PhoneNumber').val();
+        var email = $('#Email').val();
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Check password confirmation
-    var password2 = document.getElementById('password-two');
-    if (password1.value !== password2.value) {
-        document.querySelector('.error_pass_two').style.display = 'block';
-        return false;
-    } else {
-        document.querySelector('.error_pass_two').style.display = 'none';
-    }
+        // Check if any field is empty
+        if (name.trim() === '' || password.trim() === '' || confirmPassword.trim() === '' || phoneNumber.trim() === '' || email.trim() === '') {
+            $('#Name').focus();
+            $('.error_null').show();
+            return;
+        } else {
+            $('.error_null').hide();
+        }
 
-    // Check phone number format
-    var phone = document.getElementById('phone');
-    if (!/^\d{10,12}$/.test(phone.value)) {
-        document.querySelector('.error_phone').style.display = 'block';
-        return false;
-    } else {
-        document.querySelector('.error_phone').style.display = 'none';
-    }
+        if (!emailPattern.test(name)) {
+            $('#Name').focus();
+            $('.error_email_name').show();
+            return;
+        } else {
+            $('.error_email_name').hide();
+        }
 
-    // Check email format
-    var email = document.getElementById('email');
-    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // Check password length
+        if (password.trim().length < 8) {
+            $('.error_pass_one').show();
+            $('#Password').focus();
+            return;
+        } else {
+            $('.error_pass_one').hide();
+        }
 
-    if (!emailPattern.test(email.value)) {
-        document.querySelector('.error_email').style.display = 'block';
-        return false;
-    } else {
-        document.querySelector('.error_email').style.display = 'none';
-    }
-    return true;
-}
+        // Check password confirmation
+        if (password !== confirmPassword) {
+            $('.error_pass_two').show();
+            $('#password-two').focus();
+            return;
+        } else {
+            $('.error_pass_two').hide();
+        }
+
+        // Check phone number format
+        if (!/^\d{10,12}$/.test(phoneNumber)) {
+            $('.error_phone').show();
+            $('#PhoneNumber').focus();
+            return;
+        } else {
+            $('.error_phone').hide();
+        }
+
+        // Check email format
+        if (!emailPattern.test(email)) {
+            $('.error_email').show();
+            $('#Email').focus();
+            return;
+        } else {
+            $('.error_email').hide();
+        }
+
+        $('form').unbind('submit').submit();
+    });
+});
+$("#close-register").click(function () {
+    $(".fly").hide();
+    $(".register-form").hide();
+});
