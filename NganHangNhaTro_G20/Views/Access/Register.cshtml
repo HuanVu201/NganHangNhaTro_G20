@@ -81,6 +81,8 @@
                     @Html.TextBoxFor(x => x.Email)
                 </div>
             </div>
+            <p style="color:red"> @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })</p>
+
             <div class="suggesstion">
                 <p class="error_null">Không được để trống !!!</p>
             </div>

@@ -45,12 +45,14 @@ p {
     padding: 8px 12px;
     font-size: 18px;
 }
-    
 
+a#login {
+    padding: 8px 15px;
+}
 
-    #unLoginedtatus {
-        /* display: none; */
-    }
+#unLoginedtatus {
+    /* display: none; */
+}
 
 
 #loginedStatus {
