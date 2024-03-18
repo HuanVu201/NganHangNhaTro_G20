@@ -50,8 +50,8 @@
             <div id="statusLogin">
                 <div id="unLoginedtatus">
                     <ul class="statusLogin_ul">
-                        <li class="buttonStatus" id="login">Đăng nhập</li>
-                        <li class="buttonStatus" id="register">Đăng ký</li>
+                        <li class="buttonStatus" id="login"> <a class="" style="text-decoration:none" asp-area="" asp-controller="Access" asp-action="Login">Login</a></li>
+                        <li class="buttonStatus" id="register"> <a class="" style="text-decoration:none" asp-area="" asp-controller="Access" asp-action="Register">Đăng Ký</a></li>
                     </ul>
                 </div>
                 <div id="loginedStatus">
@@ -88,7 +88,7 @@
     @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
     @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
     <script src="~/js/register.js" asp-append-version="true"></script>
-    <script>
+    @* <script>
         $(document).ready(function () {
             $("#login").click(function () {
                 $.get("/Home/Login", function (data) {
@@ -118,7 +118,7 @@
                 $(".register-form").hide();
             });
         });
-    </script>
+    </script> *@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

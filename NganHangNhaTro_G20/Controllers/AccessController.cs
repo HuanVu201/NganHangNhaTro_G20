@@ -20,6 +20,11 @@ namespace NganHangNhaTro_G20.Controllers
                 Console.WriteLine("Session Username: " + HttpContext.Session.GetString("Username"));
                 return RedirectToAction("Index", "Home");
             }
+            else
+            {
+                var error = "Tên Đăng Nhập or Mật Khẩu không chính xác !!!";
+                ViewBag.error = error;
+            }
             return View();
         }
         [HttpGet]

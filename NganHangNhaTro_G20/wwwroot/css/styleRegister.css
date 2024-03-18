@@ -5,7 +5,9 @@
     padding: 1.5rem;
     z-index: 100;
     background-color: white;
-    display: none;
+    display: block;
+    margin-left:32%;
+    margin-top:2rem;
     padding-bottom:3rem;
 }
 
@@ -21,8 +23,8 @@
     display: flex;
     margin-top: 1rem;
 }
-.error_name{
-    display:none;
+.error_null {
+    display: none;
 }
 .error_phone {
     display: none;
@@ -36,7 +38,9 @@
 .error_email {
     display: none;
 }
-
+.error_email_name {
+    display: none;
+}
 
 .input-form-register .suggesstion p {
     color: red;
@@ -82,7 +86,7 @@ input[type="password"] {
         border: 1px solid;
     }
     .button-register span {
-        padding: 0.75rem 1rem 0.75rem 1rem;
+        padding: 0.55rem 1rem 0.55rem 1rem;
     }
     .button-register span:hover, .register:hover {
         background-color: #47b5da;

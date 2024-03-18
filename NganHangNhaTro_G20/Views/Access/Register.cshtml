@@ -1,12 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+<link rel="stylesheet" href="~/css/styleRegister.css" asp-append-version="true" />
 @{
     Layout = null;
 }
 @model User
 <div id="register-form" class="register-form">
-    @*<form>*@
     @using (Html.BeginForm("Register", "Access", FormMethod.Post))
     {
         <div class="loading"></div>
@@ -26,30 +26,35 @@
                 <div class="col1">Họ tên.(<span class="note">*</span>)</div>
                 <div class="col2">
                     @Html.TextBoxFor(x => x.Name)
-                    @*<input id="username" name="username" type="text" maxlength="50" required />*@
                 </div>
             </div>
             <div class="suggesstion">
-                <p class="error_email">Email không đúng định dạng !!!</p>
+                <p class="error_email_name">Email không đúng định dạng !!!</p>
             </div>
             <div class="suggesstion">
-                <p class="error_name">Tên lớn hơn 14 kí tự !!!</p>
+                <p class="error_null">Không được để trống !!!</p>
             </div>
             <div class="row">
                 <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
                 <div class="col2">
                     @Html.TextBoxFor(x => x.Password)
-                    @*<input id="password-one" name="password" type="password" required />*@
+
                 </div>
             </div>
             <div class="suggesstion">
                 <p class="error_pass_one">Mật khẩu tối thiểu trên 8 kí tự !!!</p>
             </div>
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !!!</p>
+            </div>
             <div class="row">
                 <div class="col1">Nhập lại mật khẩu(<span class="note">*</span>)</div>
                 <div class="col2">
-                    <input id="password-two" name="confirmPassword" type="password" required />
+                    <input id="password-two" name="confirmPassword" type="password"  />
                 </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !!!</p>
             </div>
             <div class="suggesstion">
                 <p class="error_pass_two">Nhập lại mật khẩu không trùng khớp !!!</p>
@@ -59,8 +64,10 @@
                 <div class="col1">Di động (<span class="note">*</span>)</div>
                 <div class="col2">
                     @Html.TextBoxFor(x => x.PhoneNumber)
-                    @*<input id="phone" name="phone" type="text" maxlength="10" required />*@
                 </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !!!</p>
             </div>
             <div class="suggesstion">
                 <p class="error_phone">Số điện thoại không đúng định dạng !!!</p>
@@ -72,26 +79,25 @@
                 </div>
                 <div class="col2">
                     @Html.TextBoxFor(x => x.Email)
-                    @*<input id="email" name="email" type="text" maxlength="50" required />*@
                 </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !!!</p>
             </div>
             <div class="suggesstion">
                 <p class="error_email">Email không đúng định dạng !!!</p>
             </div>
 
             <div class="row">
-                <div class="col button-register">
+                <div class="row button-register">
+                    <p class="buttonStatus" id="register"> <a class="" style="text-decoration:none" asp-area="" asp-controller="Access" asp-action="Login">Đăng Nhập</a></p>
                     <button type="submit" class="register">Đăng ký</button>
-                    <span class="close" id="close-register">Thoát</span>
                 </div>
             </div>
         </div>
     }
-    @*</form>*@
 </div>
-<script>
-    $("#close-register").click(function () {
-        $(".fly").hide();
-        $(".register-form").hide();
-    });
-</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/register.js" asp-append-version="true"></script>
+
