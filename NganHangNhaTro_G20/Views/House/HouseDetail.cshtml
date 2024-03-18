@@ -1,0 +1,81 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model HouseDetailViewModel
+
+}
+
+<div id="detailProduct" class="container">
+    <div id="titleDetail">
+        <div id="title">Tiêu đề</div>
+        <div id="ngayDang"><i> Ngày đăng: @Model.House.CreatedAt </i></div>
+    </div>
+    <div id="description">
+        <div>
+            <p style="margin-bottom:1rem"><b>Phòng mới, đẹp, khép kín, không chung chủ.</b></p>
+            <p>
+                - @Model.House.Desciption
+            </p>
+            <p>- Giá @string.Format("{0:#,#} đồng/tháng", @Model.House.Price) đồng/ tháng.</p>
+            <p>- Địa chỉ: @Model.House.Address</p>
+        </div>
+        <div style="display: flex; margin-bottom: 1rem; margin-top:1rem;">
+            <span id="price" style="flex: 1">
+                Giá: <span class="highLight">@string.Format("{0:#,#} đồng/tháng", @Model.House.Price)</span>
+            </span>
+            <span id="acreage" style="flex: 1">
+                Diện tích: <span class="highLight">@Model.House.Acreage m2</span>
+            </span>
+        </div>
+        <span class="mainDetail" id="address">
+            Địa chỉ:
+            <span id="detailAddress">@Model.House.Address</span>
+        </span>
+        <div id="imageRoomBlock">
+            <img class="imageDetail imageDetailActive"
+                 src="@Model.Images[0].Url"
+                 alt="" />
+            <img class="imageDetail"
+                 src="@Model.Images[1].Url"
+                 alt="" />
+        </div>
+        <div id="imageRoomBlockSmall">
+            <img class="imageDetailSmall imageDetailSmallActive"
+                 src="@Model.Images[0].Url"
+                 alt="" />
+            <img class="imageDetailSmall"
+                 src="@Model.Images[1].Url"
+                 alt="" />
+        </div>
+        <!-- <div class="id">Google Map</div> -->
+
+        <button id="book_room">Đặt xem phòng</button>
+        <div id="note">
+            <h4>Lưu ý:</h4>
+            <p>
+                Nếu có thắc mắc/phản ánh thông tin phòng trọ, vui lòng liên hệ với
+                đội ngũ hỗ trợ khách hàng của chúng tôi qua:
+            </p>
+            <p>- Đường dây nóng: 0987654321</p>
+            <p>- Email: fakeEmail@gmail.com</p>
+        </div>
+        <div id="go_home">
+            <a href=""> <i>Quay về trang chính</i></a>
+        </div>
+    </div>
+</div>
+<script>
+    const imgSmalls = document.querySelectorAll('.imageDetailSmall')
+    const imgBigs = document.querySelectorAll('.imageDetail')
+    console.log(imgBigs)
+    imgSmalls.forEach((item, index) => {
+        item.onclick = function () {
+            document.querySelector('.imageDetail.imageDetailActive').classList.remove('imageDetailActive')
+            document.querySelector('.imageDetailSmall.imageDetailSmallActive').classList.remove('imageDetailSmallActive')
+            imgBigs[index].classList.add('imageDetailActive')
+            item.classList.add('imageDetailSmallActive')
+        }
+    })
+
+</script>
