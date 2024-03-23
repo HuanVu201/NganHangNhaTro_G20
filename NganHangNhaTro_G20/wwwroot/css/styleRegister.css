@@ -6,9 +6,9 @@
     z-index: 100;
     background-color: white;
     display: block;
-    margin-left:32%;
-    margin-top:2rem;
-    padding-bottom:3rem;
+    margin-left: 32%;
+    margin-top: 2rem;
+    padding-bottom: 3rem;
 }
 
     .register-form .title {
@@ -19,25 +19,33 @@
         padding-bottom: 1rem;
     }
 
-.register-form .row {
-    display: flex;
-    margin-top: 1rem;
-}
+    .register-form .row {
+        display: flex;
+        margin-top: 1rem;
+    }
+
 .error_null {
     display: none;
 }
+
 .error_phone {
     display: none;
 }
+
 .error_pass_one {
+    display: none;
+}
+.error_name_lenght {
     display: none;
 }
 .error_pass_two {
     display: none;
 }
+
 .error_email {
     display: none;
 }
+
 .error_email_name {
     display: none;
 }
@@ -47,9 +55,10 @@
     font-size: 0.9rem;
     padding-top: 10px;
 }
-    .col1 {
-        width: 10rem;
-    }
+
+.col1 {
+    width: 10rem;
+}
 
 .col2 input[type="text"],
 input[type="password"] {
@@ -80,17 +89,20 @@ input[type="password"] {
         cursor: pointer;
         border-radius: 3px;
     }
+
     .button-register .register {
         padding: 0.5rem 1rem 0.5rem 1rem;
         font-size: 1rem;
         border: 1px solid;
     }
+
     .button-register span {
         padding: 0.55rem 1rem 0.55rem 1rem;
     }
-    .button-register span:hover, .register:hover {
-        background-color: #47b5da;
-    }
+
+        .button-register span:hover, .register:hover {
+            background-color: #47b5da;
+        }
 
 .expand {
     display: none;

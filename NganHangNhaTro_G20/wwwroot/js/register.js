@@ -11,7 +11,7 @@
         var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         // Check if any field is empty
-        if (name.trim() === '' || password.trim() === '' || confirmPassword.trim() === '' || phoneNumber.trim() === '' || email.trim() === '') {
+        if (name.trim() === '' && password.trim() === '' && confirmPassword.trim() === '' && phoneNumber.trim() === '' && email.trim() === '') {
             $('#Name').focus();
             $('.error_null').show();
             return;
@@ -19,14 +19,22 @@
             $('.error_null').hide();
         }
 
-        if (!emailPattern.test(name)) {
-            $('#Name').focus();
-            $('.error_email_name').show();
+        if (name.length < 8 && !name.includes('@')) {
+            $('.error_name_lenght').show();
             return;
         } else {
-            $('.error_email_name').hide();
+            $('.error_name_lenght').hide();
         }
 
+        if (name.includes('@')) {
+            if (!emailPattern.test(name)) {
+                $('#Name').focus();
+                $('.error_email_name').show();
+                return;
+            } else {
+                $('.error_email_name').hide();
+            }
+        }
         // Check password length
         if (password.trim().length < 8) {
             $('.error_pass_one').show();
