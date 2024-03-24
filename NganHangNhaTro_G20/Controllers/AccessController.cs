@@ -17,7 +17,9 @@ namespace NganHangNhaTro_G20.Controllers
             if (user != null)
             {
                 HttpContext.Session.SetString("Username", model.Email.ToString());
+                HttpContext.Session.SetString("NameLogined", user.Name);
                 Console.WriteLine("Session Username: " + HttpContext.Session.GetString("Username"));
+                Console.WriteLine("Name: " +  user.Name);
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -32,6 +34,14 @@ namespace NganHangNhaTro_G20.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Access");
+        }
+
         [HttpPost]
         public IActionResult Register(User model)
         {
