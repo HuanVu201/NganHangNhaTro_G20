@@ -36,9 +36,9 @@
 
 
     @*Assets Project*@
-     <link href="~/css/indexAdmin.css" rel="stylesheet" />
+    <link href="~/css/indexAdmin.css" rel="stylesheet" />
     @*<link href="~/css/phanquyen.css" rel="stylesheet" />*@
-    <link rel="stylesheet" href="~/css/fontawesome-free-6.3.0-web/css/all.min.css"> 
+    <link rel="stylesheet" href="~/css/fontawesome-free-6.3.0-web/css/all.min.css">
 </head>
 <body>
     <header>
@@ -47,20 +47,26 @@
                 <a href="#"><img id="logoWeb" src="~/images/Ngân hàng nhà trọ.png" alt=""></a>
             </div>
             <div id="statusLogin">
-                <div id="unLoginedtatus">
-                    <ul class="statusLogin_ul">
-                        <li class="buttonStatus" > <a id="login" class="" style="text-decoration:none" asp-area="" asp-controller="Access" asp-action="Login">Login</a></li>
-                        <li class="buttonStatus" > <a id="register"class="" style="text-decoration:none" asp-area="" asp-controller="Access" asp-action="Register">Đăng Ký</a></li>
-                    </ul>
-                </div>
-                <div id="loginedStatus">
-                    <img src="~/images/anhhalinh.jpg" />
-                    <ul class="statusLogin_ul">
-                        <li class="buttonStatus">Xin chào <b>Người dùng</b></li>
-                        <li class="buttonStatus">Hồ sơ cá nhân</li>
-                        <li class="buttonStatus">Thoát</li>
-                    </ul>
-                </div>
+                @if (Context.Session.GetString("Username") == null)
+                {
+                    <div id="unLoginedtatus">
+                        <ul class="statusLogin_ul">
+                            <li class="buttonStatus"> <a id="login" class="" style="text-decoration:none" asp-area="" asp-controller="Access" asp-action="Login">Login</a></li>
+                            <li class="buttonStatus"> <a id="register" class="" style="text-decoration:none" asp-area="" asp-controller="Access" asp-action="Register">Đăng Ký</a></li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div id="loginedStatus">
+                        <img src="~/images/anhhalinh.jpg" />
+                        <ul class="statusLogin_ul">
+                            <li class="buttonStatus">Xin chào <b>@Context.Session.GetString("NameLogined")</b></li>
+                            <li class="buttonStatus">Hồ sơ cá nhân</li>
+                            <li id="logoutButton" class="buttonStatus">Thoát</li>
+                        </ul>
+                    </div>
+                }
             </div>
         </div>
     </header>
@@ -89,36 +95,48 @@
     @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
     <script src="~/js/register.js" asp-append-version="true"></script>
     @* <script>
-        $(document).ready(function () {
-            $("#login").click(function () {
-                $.get("/Home/Login", function (data) {
-                    $("#loginFormContainer").html(data);
-                    $(".fly").show();
-                    $(".login-form").show();
-                });
-                return false;
-            });
+    $(document).ready(function () {
+    $("#login").click(function () {
+    $.get("/Home/Login", function (data) {
+    $("#loginFormContainer").html(data);
+    $(".fly").show();
+    $(".login-form").show();
+    });
+    return false;
+    });
 
-            $("#register").click(function () {
-                $.get("/Home/Register", function (data) {
-                    $("#registerFormContainer").html(data);
-                    $(".fly").show();
-                    $(".register-form").show();
-                });
-                return false;
-            });
+    $("#register").click(function () {
+    $.get("/Home/Register", function (data) {
+    $("#registerFormContainer").html(data);
+    $(".fly").show();
+    $(".register-form").show();
+    });
+    return false;
+    });
 
-            $("#close-login").click(function () {
-                $(".fly").hide();
-                $(".login-form").hide();
-            });
+    $("#close-login").click(function () {
+    $(".fly").hide();
+    $(".login-form").hide();
+    });
 
-            $("#close-register").click(function () {
-                $(".fly").hide();
-                $(".register-form").hide();
-            });
-        });
+    $("#close-register").click(function () {
+    $(".fly").hide();
+    $(".register-form").hide();
+    });
+    });
     </script> *@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<script>
+    $(document).ready(function () {
+        // Gắn sự kiện click vào nút "Thoát"
+        $('#logoutButton').click(function () {
+            // Gửi yêu cầu POST đến action "Logout"
+            $.post('/Access/Logout', function () {
+                // Chuyển hướng đến trang đăng nhập sau khi logout thành công
+                window.location.href = '/Access/Login';
+            });
+        });
+    });
+</script>
