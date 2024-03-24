@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('#Name').focus();
+    $('#Email').focus();
     $('form').submit(function (event) {
         event.preventDefault();
 
@@ -18,23 +18,33 @@
         } else {
             $('.error_null').hide();
         }
-
-        if (name.length < 8 && !name.includes('@')) {
-            $('.error_name_lenght').show();
+        // Check email format
+        if (!emailPattern.test(email)) {
+            $('.error_email').show();
+            $('#Email').focus();
             return;
         } else {
-            $('.error_name_lenght').hide();
+            $('.error_email').hide();
         }
 
-        if (name.includes('@')) {
-            if (!emailPattern.test(name)) {
-                $('#Name').focus();
-                $('.error_email_name').show();
-                return;
-            } else {
-                $('.error_email_name').hide();
-            }
-        }
+
+       // if (name.length < 8 && !name.includes('@')) {
+         //   $('.error_name_lenght').show();
+         //   return;
+       // } else {
+           // $('.error_name_lenght').hide();
+       // }
+
+       // if (name.includes('@')) {
+        //    if (!emailPattern.test(name)) {
+        //        $('#Name').focus();
+        //        $('.error_email_name').show();
+       //         return;
+        //    } else {
+        //        $('.error_email_name').hide();
+        //    }
+       // }
+        
         // Check password length
         if (password.trim().length < 8) {
             $('.error_pass_one').show();
@@ -62,15 +72,7 @@
             $('.error_phone').hide();
         }
 
-        // Check email format
-        if (!emailPattern.test(email)) {
-            $('.error_email').show();
-            $('#Email').focus();
-            return;
-        } else {
-            $('.error_email').hide();
-        }
-
+        
         $('form').unbind('submit').submit();
     });
 });

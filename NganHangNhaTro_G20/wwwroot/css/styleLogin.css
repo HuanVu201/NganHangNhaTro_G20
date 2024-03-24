@@ -29,7 +29,7 @@
 }
 
 .col1 {
-    flex: 1.2;
+    flex: 1;
     font-weight: bold;
 }
 
@@ -50,7 +50,8 @@ input[type="password"] {
 .button-login {
     margin-left: 8rem;
 }
-    .button-login span,.button-login .login {
+
+    .button-login span, .button-login .login {
         cursor: pointer;
         margin: 0 10px;
         border-radius: 5px;
@@ -58,17 +59,20 @@ input[type="password"] {
         color: #fff;
         transition: background-color 0.3s ease;
     }
+
     .button-login .login {
         border: 1px solid;
         padding: 8.5px 30px;
         font-size: 1rem;
     }
+
     .button-login span {
         padding: 12px 30px;
     }
-    .button-login span:hover, .button-login .login:hover{
-        background-color: #0056b3;
-    }
+
+        .button-login span:hover, .button-login .login:hover {
+            background-color: #0056b3;
+        }
 
 .clear {
     clear: both;

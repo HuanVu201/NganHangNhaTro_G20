@@ -15,16 +15,16 @@
         <div class="input-form-login">
             <div class="row message"></div>
             <div class="row">
-                <div class="col1">Tên truy cập.</div>
+                <div class="col1">Tên truy cập</div>
                 <div class="col2">
                     @Html.TextBoxFor(x => x.Email)
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="row">
-                <div class="col1">Mật khẩu</div>
+                <div class="col1" style="padding-bottom:1rem">Mật khẩu</div>
                 <div class="col2">
-                    @Html.TextBoxFor(x => x.Password) <br />
+                    @Html.TextBoxFor(x => x.Password, new { autocomplete = "off" }) <br />
                     <input id="remember" name="rememberMe" type="checkbox" /> Duy trì đăng nhập
                 </div>
                 <div class="clear"></div>
@@ -49,9 +49,3 @@
     }
     @*</form>*@
 </div>
-<script>
-    $("#close-login").click(function () {
-        $(".fly").hide();
-        $(".login-form").hide();
-    });
-</script>
