@@ -22,63 +22,11 @@
             </ul>
         </div>
         <div class="input-form-register">
-            <div class="row">
-                <div class="col1">Họ tên.(<span class="note">*</span>)</div>
-                <div class="col2">
-                    @Html.TextBoxFor(x => x.Name)
-                </div>
-            </div>
-            <div class="suggesstion">
-                <p class="error_email_name">Email không đúng định dạng !!!</p>
-            </div>
-            <div class="suggesstion">
-                <p class="error_name_lenght">Yêu cầu độ dài lớn hơn 8 kí tự !!!</p>
-            </div>
-            <div class="suggesstion">
-                <p class="error_null">Không được để trống !!!</p>
-            </div>
-            <div class="row">
-                <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
-                <div class="col2">
-                    @Html.TextBoxFor(x => x.Password)
 
-                </div>
-            </div>
-            <div class="suggesstion">
-                <p class="error_pass_one">Mật khẩu tối thiểu trên 8 kí tự !!!</p>
-            </div>
-            <div class="suggesstion">
-                <p class="error_null">Không được để trống !!!</p>
-            </div>
-            <div class="row">
-                <div class="col1">Nhập lại mật khẩu(<span class="note">*</span>)</div>
-                <div class="col2">
-                    <input id="password-two" name="confirmPassword" type="password"  />
-                </div>
-            </div>
-            <div class="suggesstion">
-                <p class="error_null">Không được để trống !!!</p>
-            </div>
-            <div class="suggesstion">
-                <p class="error_pass_two">Nhập lại mật khẩu không trùng khớp !!!</p>
-            </div>
-
-            <div class="row">
-                <div class="col1">Di động (<span class="note">*</span>)</div>
-                <div class="col2">
-                    @Html.TextBoxFor(x => x.PhoneNumber)
-                </div>
-            </div>
-            <div class="suggesstion">
-                <p class="error_null">Không được để trống !!!</p>
-            </div>
-            <div class="suggesstion">
-                <p class="error_phone">Số điện thoại không đúng định dạng !!!</p>
-            </div>
-
+            @*email*@
             <div class="row">
                 <div class="col1">
-                    Email liên hệ(<span class="note">*</span>)<br />
+                    Email (<span class="note">*</span>)<br />
                 </div>
                 <div class="col2">
                     @Html.TextBoxFor(x => x.Email)
@@ -92,6 +40,69 @@
             <div class="suggesstion">
                 <p class="error_email">Email không đúng định dạng !!!</p>
             </div>
+
+            @*pass*@
+            <div class="row">
+                <div class="col1">Mật khẩu(<span class="note">*</span>)</div>
+                <div class="col2">
+                    @Html.TextBoxFor(x => x.Password)
+
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_pass_one">Mật khẩu tối thiểu trên 8 kí tự !!!</p>
+            </div>
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !!!</p>
+            </div>
+
+            @*pass again*@
+            <div class="row">
+                <div class="col1">Nhập lại mật khẩu(<span class="note">*</span>)</div>
+                <div class="col2">
+                    <input id="password-two" name="confirmPassword" type="password" />
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !!!</p>
+            </div>
+            <div class="suggesstion">
+                <p class="error_pass_two">Nhập lại mật khẩu không trùng khớp !!!</p>
+            </div>
+
+            @*name*@
+            <div class="row">
+                <div class="col1">Họ tên.(<span class="note">*</span>)</div>
+                <div class="col2">
+                    @Html.TextBoxFor(x => x.Name)
+                </div>
+            </div>
+            @*
+            <div class="suggesstion">
+            <p class="error_email_name">Email không đúng định dạng !!!</p>
+            </div>
+            <div class="suggesstion">
+            <p class="error_name_lenght">Yêu cầu độ dài lớn hơn 8 kí tự !!!</p>
+            </div>*@
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !!!</p>
+            </div>
+
+            @*phone*@
+            <div class="row">
+                <div class="col1">Di động (<span class="note">*</span>)</div>
+                <div class="col2">
+                    @Html.TextBoxFor(x => x.PhoneNumber)
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !!!</p>
+            </div>
+            <div class="suggesstion">
+                <p class="error_phone">Số điện thoại không đúng định dạng !!!</p>
+            </div>
+
+
 
             <div class="row">
                 <div class="row button-register">
