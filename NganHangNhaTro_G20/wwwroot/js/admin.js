@@ -12,7 +12,7 @@
                 $ul.append(
                     $("<li></li>").append(
                         "<span class='collapse collapsible' data-loaded='false' pid='" + ele.id + "'  style='display: inline;'>+   </span>"
-                        + "<span idLocation='" + ele.id + "'  id='LocationName' style='cursor: pointer;'><i class='fa - solid fa - sitemap'></i>" + ele.name + "</span>"
+                        + "<span idLocation='" + ele.id + "'  id='LocationName' style='cursor: pointer;'>" + ele.name + "</span>"
                     )
                 )
             });
@@ -56,7 +56,7 @@
                             $ul.append(
                                 $("<li></li>").append(
                                     "<span class='collapse collapsible' data-loaded='false' pid='" + value.id + "' style='display: inline;'>+   </span>"
-                                    + "<span idLocation='" + value.id + "' id='LocationName' style='cursor: pointer;'><i class='fa - solid fa - sitemap''></i>  " + value.name + "</span>"
+                                    + "<span idLocation='" + value.id + "' id='LocationName' style='cursor: pointer;'> " + value.name + "</span>"
                                 )
                             )
                         });
@@ -175,9 +175,9 @@
                 },
                 {
                     data: null, render: function (data, type, row, meta) {
-                        return "<a href='' id='btnEdit' idHouse='" + data.Id + "' style='margin: 10px;cursor: pointer;'><i class='fa-solid fa-pen-to-square'></i></a>"
-                            + "<a href='' id='btnDelete' idHouse='" + data.Id + "' ten='" + data.HoTen + "' style='margin: 10px;cursor: pointer;'><i class='fa-solid fa-trash'></i></a>"
-                            + "<a href='' id='btnDetail' idHouse='" + data.Id + "'  style='margin: 10px;cursor: pointer;'><i class='fa-solid fa-ellipsis'></i></a>";
+                        return "<a href='' id='btnEdit' idHouse='" + data.Id + "' style='margin: 10px;cursor: pointer;'><i class='fas fa-edit'></i></a>"
+                            + "<a href='' id='btnDelete' idHouse='" + data.Id + "' ten='" + data.HoTen + "' style='margin: 10px;cursor: pointer;'><i class='fas fa-trash'></i></a>"
+                            + "<a href='' id='btnDetail' idHouse='" + data.Id + "'  style='margin: 10px;cursor: pointer;'><i class='fas fa-info-circle'></i></a>";
                     }
                 },
 
