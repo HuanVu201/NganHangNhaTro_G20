@@ -8,11 +8,10 @@
             contentItems.empty();
             $.each(data, function (index, ele) {
                 var houseHtml = `
-                    <div pid=${ele.id}   class="content-item">
+                    <div pid=${ele.id} class="content-item">
                         <div class="row">
                              <div class="ct-title">
-
-                              <a asp-controller="House" asp-action="HouseDetail" asp-route-id="${ele.address}">
+                             <a href="House/HouseDetail?id=${ele.id}">
                                  3 phòng đủ tiện nghi ở ${ele.address} cho thuê , Diện
                                  tích :  ${ele.acreage}m2</a
                                >
@@ -28,7 +27,7 @@
                              <div class="text">
                                <div class="ct-brief">
                                  ${ele.desciption}
-                                 <span><a href="">...xem chi tiết</a> </span>
+                                 <span><a href="House/HouseDetail?id=${ele.id}">...xem chi tiết</a> </span>
                                </div>
                                <div class="square-direct row">
                                  <div class="ct-kt text-bold">
@@ -85,7 +84,7 @@
                 );
             });
 
-            $('.district').empty().append($addressul); 
+            $('.district').empty().append($addressul);
 
             var $priceUl = $("<ul></ul>");
             $.each(data.houses, function (i, house) {
@@ -93,7 +92,7 @@
             });
             $('.price').empty().append($priceUl);
 
-            
+
 
             var $acreageUl = $("<ul></ul>");
             $.each(data.houses, function (i, house) {

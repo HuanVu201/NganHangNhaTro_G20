@@ -10,8 +10,13 @@ namespace NganHangNhaTro_G20.Controllers
         {
             _dbContext = dbContext;
         }
+ 
         public IActionResult HouseDetail(Guid id)
         {
+            if (HttpContext.Session.GetString("Username") == null)
+            {
+                return RedirectToAction("Login", "Access"); 
+            }
             var ids = new List<Guid>
                 {
                     new Guid("06C7A0DA-856A-4D3D-8531-771E11225EFF"),
