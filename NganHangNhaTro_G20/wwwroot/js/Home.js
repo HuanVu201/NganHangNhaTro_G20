@@ -11,7 +11,8 @@
                     <div pid=${ele.id}   class="content-item">
                         <div class="row">
                              <div class="ct-title">
-                              <a href="House/HouseDetail?id=${ele.id}">
+
+                              <a asp-controller="House" asp-action="HouseDetail" asp-route-id="${ele.address}">
                                  3 phòng đủ tiện nghi ở ${ele.address} cho thuê , Diện
                                  tích :  ${ele.acreage}m2</a
                                >
