@@ -12,7 +12,6 @@ namespace NganHangNhaTro_G20.Controllers
         }
         public IActionResult HouseDetail(Guid id)
         {
-            id = new Guid("06C7A0DA-856A-4D3D-8531-771E11225EFF");
             var ids = new List<Guid>
                 {
                     new Guid("06C7A0DA-856A-4D3D-8531-771E11225EFF"),
