@@ -120,7 +120,11 @@ ul {
 
 .thumbnail {
     width: 20%;
-    height: 8rem;
+    height: 10rem;
+}
+.thumbnail img{
+    width:100%;
+    height:98%;
 }
 
 .text {
@@ -130,6 +134,7 @@ ul {
 
 .ct-brief {
     padding: 0.5rem;
+    height:4rem;
     border-radius: 5px;
 }
 
@@ -277,6 +282,7 @@ ul {
         border: 1px solid #cfcece;
         padding-left: 2rem;
         padding-top: 0.5rem;
+        overflow-x:hidden;
     }
 
 .square-container .view {
@@ -308,10 +314,14 @@ ul {
 .district ul, .square-container ul, .price-container ul, .direct-container ul {
     margin-top: 0.5rem;
     margin-right: 1rem;
+    display: flex;
+    flex-wrap: wrap;
 }
 
     .district ul li, .square-container ul li, .price-container ul li, .direct-container ul li {
         padding: 0.2rem;
+        width:6.5rem;
+        margin-right:1rem;
     }
 
         .district ul li:hover, .square-container ul li:hover, .price-container ul li:hover, .direct-container ul li:hover {
