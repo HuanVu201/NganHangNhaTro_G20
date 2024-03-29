@@ -13,6 +13,7 @@ namespace NganHangNhaTro_G20.Controllers
         [HttpPost]
         public IActionResult Login(User model)
         {
+           
             var user = _dbContext.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
             if (user != null)
             {
@@ -32,6 +33,10 @@ namespace NganHangNhaTro_G20.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            if (HttpContext.Session.GetString("Username") != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
