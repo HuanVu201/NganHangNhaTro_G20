@@ -255,7 +255,7 @@ ul {
     right: 10px;
 }
 
-.button-search {
+#button-search {
     padding: 0.5rem 1rem;
     color: #fff;
     font-weight: bold;
@@ -263,7 +263,7 @@ ul {
     background-color: #f65c5c;
 }
 
-    .button-search:hover {
+    #button-search:hover {
         background-color: #df2a2a;
     }
 

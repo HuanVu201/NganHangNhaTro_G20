@@ -5,6 +5,7 @@ using NganHangNhaTro_G20.Models;
 using NganHangNhaTro_G20.ViewModels;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NganHangNhaTro_G20.Controllers
 {
@@ -26,6 +27,18 @@ namespace NganHangNhaTro_G20.Controllers
             List<House> houses = new List<House>();
             houses = _context.Houses.ToList();
             return Json(houses);
+        }
+        public JsonResult Search(string keyword)
+        {
+            var housesSearch = _context.Houses.Where(p => p.Address.Contains(keyword)).ToList();
+            if (housesSearch.Count == 0)
+            {
+                return Json(new { error = "Không tìm thấy dữ liệu!" });
+            }
+            else
+            {
+                return Json(housesSearch);
+            }
         }
         public JsonResult GetLocations()
         {
