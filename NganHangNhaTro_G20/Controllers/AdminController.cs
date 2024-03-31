@@ -58,5 +58,33 @@ namespace NganHangNhaTro_G20.Controllers
             var value = JsonConvert.SerializeObject(new { data = listHouse });
             return value;
         }
+
+
+        //Thêm mới=======================================================================================
+        public class HouseAndImageCategory
+        {
+            public House HouseObject { get; set; }
+            public ImageCategory ImageCategoryObject { get; set; }
+        }
+
+        [HttpPost]
+        public async Task<int> ThemMoi([FromBody] HouseAndImageCategory HouseAndImageCategory)
+        {
+            var result = -1;
+            try
+            {
+                _context.Houses.Add(HouseAndImageCategory.HouseObject);
+                _context.ImageCategories.Add(HouseAndImageCategory.ImageCategoryObject);
+                await _context.SaveChangesAsync();
+                result = 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                result = 0;
+            }
+            return result;
+
+        }
     }
 }

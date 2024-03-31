@@ -7,8 +7,10 @@ namespace NganHangNhaTro_G20.Models
     {
         [Key]
         public Guid Id { get; set; }
-        [Column(TypeName = "varchar(MAX)")]
+        [Column(TypeName = "nvarchar(MAX)")]
         public string? Url { get; set; }
+        [Column(TypeName = "varchar(50)")]
+        public string HouseId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
     }

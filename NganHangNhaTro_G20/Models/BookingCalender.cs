@@ -9,7 +9,6 @@ namespace NganHangNhaTro_G20.Models
         public Guid Id { get; set; }
         public Guid CustomerId { get; set; }
         public Guid HouseId { get; set; }
-        public Guid? SupervisorId { get; set; }
 
         [Column(TypeName = "nvarchar(2000)")]
         public string? Note { get; set; }
