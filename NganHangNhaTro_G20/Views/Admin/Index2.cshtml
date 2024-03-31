@@ -1,123 +1,135 @@
 ﻿
 <div class="containerProject">
-        <div class="navbarProject">
-            <div class="navbar__heading">
-                <h3>Nhóm phòng trọ</h3>
-                <div>
-                    <i class="fa-solid fa-ellipsis"></i>
-                </div>
-            </div>
-            <div class="navbar__search">
-                <input type="text" name="" id="" placeholder="Tìm kiếm">
-            </div>
-            <div class="navbar__diagram">
-                <div class="treeview">
-                    @*Tree View*@
-                </div>
+    <div class="navbarProject">
+        <div class="navbar__heading">
+            <h3>Nhóm phòng trọ</h3>
+            <div>
+                <i class="fa-solid fa-ellipsis"></i>
             </div>
         </div>
-        <div class="contentBlock">
-            <div class="contentBlock__heading">
-                <a>
-                    <i class="fa fa-list"></i>
-                    Danh sách người dùng
-                </a>
-                <a>
-                    <i class="fa fa-gear"></i>
-                    Thông tin
-                </a>
-            </div>
-            <div class="contentBlock__container">
-                <div class="contentBlock__options">
-                    <a data-toggle="modal" class="contentBlock__options-item btnThemMoi" style="text-decoration: none; color: #fff;">
-                        <i class="fa fa-plus"></i>
-                        Thêm mới 
-                    </a>
-                    <a class="contentBlock__options-item btnCapQuyen" style="text-decoration: none; color: #fff;">
-                        <i class="fa fa-star"></i>
-                        Cấp quyền
-                    </a>
-                    <a class="contentBlock__options-item btnXuatData" style="text-decoration: none; color: #fff;">
-                        <i class="fa fa-print"></i>
-                        Xuất excel
-                    </a>
-                </div>
-                <div class="contentBlock__content">
-                    @*Container content*@
-                </div>
+        <div class="navbar__search">
+            <input type="text" name="" id="" placeholder="Tìm kiếm">
+        </div>
+        <div class="navbar__diagram">
+            <div class="treeview">
+                @*Tree View*@
             </div>
         </div>
     </div>
-
-
-    <!-- Modal CRUD-->
-    <div class="modal fade" id="myModalCRUD" role="dialog">
-        <div class="modal-dialog">
-            
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="form">
-                        <div class="form-group inputBlock">
-                            <label for="maTaiKhoan">Mã tài khoản</label>
-                            <input type="text" class="form-control inputContent" id="maTaiKhoan" name="maTaiKhoan" placeholder="" />
-                        </div>
-                        <div class="form-group inputBlock">
-                            <label for="ten">Họ và tên</label>
-                            <input type="text" class="form-control inputContent" id="ten" name="ten" placeholder="" />
-                        </div>
-                        <div class="form-group inputBlock">
-                            <label for="ngaySinh">Ngày sinh</label>
-                            <input type="date" class="form-control inputContent" id="ngaySinh" name="ngaySinh" placeholder="" />
-                        </div>
-                        <div class="form-group inputBlock">
-                            <label for="gioiTinh">Giới tính</label>
-                            <select name="" id="gioiTinh" class="form-control selectContent">
-                                <option value="Nam">Nam</option>
-                                <option value="Nữ">Nữ</option>
-                            </select>
-                        </div>
-                        <div class="form-group inputBlock">
-                            <label for="soDienThoai">Số điện thoại</label>
-                            <input type="text" class="form-control inputContent" id="soDienThoai" placeholder="" />
-                        </div>
-                        <div class="form-group inputBlock">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control inputContent" id="email" placeholder="" />
-                        </div>
-                        <div class="form-group inputBlock">
-                            <label for="chucVu">Chức vụ</label>
-                            <input type="text" class="form-control inputContent" id="chucVu" placeholder="" />
-                        </div>
-                        <div class="form-group inputBlock">
-                            <label for="maCoQuan">Mã cơ quan làm việc</label>
-                            <input type="text" class="form-control inputContent" id="maCoQuan" placeholder="" />
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btnAdd" style="display: none">Thêm mới</button>
-                    <button type="button" class="btn btn-primary" id="btnUpdate" style="display: none">Cập nhật</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                </div>
+    <div class="contentBlock">
+        <div class="contentBlock__heading">
+            <a>
+                <i class="fa fa-list"></i>
+                Danh sách phòng
+            </a>
+            <a>
+                <i class="fa fa-star"></i>
+                Phòng đang chờ được xem
+            </a>
+        </div>
+        <div class="contentBlock__container">
+            <div class="contentBlock__options">
+                <a data-toggle="modal" class="contentBlock__options-item btnThemMoi" style="text-decoration: none; color: #fff;">
+                    <i class="fa fa-plus"></i>
+                    Thêm mới
+                </a>
             </div>
-
+            <div class="contentBlock__content">
+                @*Container content*@
+            </div>
         </div>
     </div>
-    <!-- The end: Modal CRUD -->
+</div>
 
 
+<!-- Modal CRUD-->
+<div class="modal fade" id="myModalCRUD" role="dialog">
+    <div class="modal-dialog">
 
-    <!-- Modal Phân Quyền -->
-    <!-- Modal -->
-    @* <div class="modalPhanQuyen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <div class="form-group inputBlock">
+                        <label for="HouseTitle">Tiêu đề</label>
+                        <input type="text" class="form-control inputContent" id="HouseTitle" name="HouseTitle" placeholder="" />
+                    </div>
+                    <div class="form-group inputBlock">
+                        <label for="OfLocationId">Mã nhóm địa bàn</label>
+                        <input type="text" class="form-control inputContent" id="OfLocationId" name="OfLocationId" placeholder="" />
+                    </div>
+                    <div class="form-group inputBlock">
+                        <label for="Address">Địa chỉ chi tiết:</label>
+                        <input type="text" class="form-control inputContent" id="Address" name="Address" placeholder="" />
+                    </div>
+                    <div class="form-group inputBlock">
+                        <label for="Acreage">Diện ích</label>
+                        <input type="number" class="form-control inputContent" id="Acreage" name="Acreage" placeholder="" />
+                    </div>
+                    <div class="form-group inputBlock">
+                        <label for="Price">Giá</label>
+                        <input type="text" class="form-control inputContent" id="Price" name="Price" placeholder="" />
+                    </div>
+                    <div class="form-group inputBlock">
+                        <label for="Desciption">Mô tả</label>
+                        <input type="text" class="form-control inputContent" id="Desciption" name="Desciption" placeholder="" />
+                    </div>
+                  @*   <div class="form-group inputBlock">
+                        <label for="rate">Đánh giá</label>
+                        <input type="text" class="form-control inputContent" id="rate" name="rate" placeholder="" />
+                    </div> *@
+                    <div class="form-group inputBlock">
+                        <label for="HouseType">Loại phòng</label>
+                        <select name="HouseType" id="HouseType" class="form-control selectContent">
+                            <option value="nhaDanSinh">Nhà dân sinh</option>
+                            <option value="ccmn">CCMN</option>
+                            <option value="khuTapThe">Nhà khu tập thể</option>
+                            <option value="kyTucXa">Ký túc xã</option>
+                        </select>
+                    </div>
+                    <div class="form-group inputBlock">
+                        <label for="HouseStatus">Trạng thái</label>
+                        <select name="HouseStatus" id="HouseStatus" class="form-control selectContent">
+                            <option value="conPhong">Còn phòng</option>
+                            <option value="dangChoThue">Đang cho thuê</option>
+                        </select>
+                    </div>
+                    <div class="form-group inputBlock">
+                        <label for="OwnerName">Tên chủ sở hữu</label>
+                        <input type="text" class="form-control inputContent" id="OwnerName" name="OwnerName" placeholder="" />
+                    </div>
+                    <div class="form-group inputBlock">
+                        <label for="OwnerPhone">Số điện thoại</label>
+                        <input type="text" class="form-control inputContent" id="OwnerPhone" name="OwnerPhone" placeholder="" />
+                    </div>
+                    <div class="form-group inputBlock">
+                        <label for="ImageCategory">Đường dẫn ảnh: </label>
+                        <input type="text" class="form-control inputContent" id="ImageCategory" name="ImageCategory" placeholder="" />
+                    </div>
+                    
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd" style="display: none">Thêm mới</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display: none">Cập nhật</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- The end: Modal CRUD -->
+<!-- Modal Phân Quyền -->
+<!-- Modal -->
+@* <div class="modalPhanQuyen">
         <div class="modal fade" id="myModalPhanQuyen" role="dialog">
             <div class="modal-dialog">
 
-               
+
                 <div class="modal-contentPhanQuyen">
                     <div class="modal-header">
                         <div class="notification">
@@ -157,7 +169,7 @@
                                         </div>
                                         <div id="listQuyenBlock">
                                         </div>
-                                        
+
                                     </div>
                                 </div>
 
@@ -174,8 +186,8 @@
         </div>
 
     </div> *@
-  
-    <!-- The end: Modal Phân Quyền -->
+
+<!-- The end: Modal Phân Quyền -->
 <script src="~/js/admin.js"></script>
 
 
