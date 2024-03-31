@@ -9,6 +9,7 @@ a {
     color: #333;
 }
 
+
     a:hover {
         color: #999;
         text-decoration: none;
@@ -19,6 +20,7 @@ h3 {
 }
 
 .containerProject {
+    margin-top:1.5rem;
     background-color: rgb(193, 224, 225);
     padding: 15px;
     grid-template-columns: 1fr 3fr;
