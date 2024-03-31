@@ -37,6 +37,7 @@ namespace NganHangNhaTro_G20.Controllers
             //    Images = images
             //};
             //return View(viewModel);
+            return null;
         }
     }
 }
