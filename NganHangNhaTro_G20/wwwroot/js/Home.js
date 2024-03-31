@@ -88,15 +88,17 @@
 
             var $priceUl = $("<ul></ul>");
             $.each(data.houses, function (i, house) {
-                $priceUl.append($("<li></li>").text(house.price));
+                var $li = $("<li></li>").text(house.price);
+                var $span = $("<span></span>").text(" triệu");
+                $priceUl.append($li.append($span));
             });
             $('.price').empty().append($priceUl);
 
-
-
             var $acreageUl = $("<ul></ul>");
             $.each(data.houses, function (i, house) {
-                $acreageUl.append($("<li></li>").text(house.acreage));
+                var $li = $("<li></li>").text(house.acreage);
+                var $span = $("<span></span>").text(" m2");
+                $acreageUl.append($li.append($span));
             });
             $('.square').empty().append($acreageUl);
             a();
@@ -106,9 +108,10 @@
             console.log(err.responseText);
         }
     });
+    let count = 0;
+    let textSearch = '';
     function a() {
         const text_names = document.querySelectorAll(".text-name");
-        console.log(text_names)
         const view_districts = document.querySelectorAll(".district li");
         const view_prices = document.querySelectorAll(".price li");
         const view_squares = document.querySelectorAll(".square li");
@@ -127,44 +130,53 @@
                 views[index].classList.remove("active-view");
                 array_views[index].forEach((item) => {
                     item.onclick = function () {
+                        
+                        textSearch += item.innerText + "," ;
                         texts[index].innerText = item.innerText;
                         views[index].classList.add("active-view");
+                       
                     };
+                    
                 });
+                
             };
             icloses[index].onclick = function () {
                 views[index].classList.add("active-view");
             };
+            
         });
+       
     }
+   
     $("#button-search").click(function () {
-        var keyword = $('.location').val();
-        $.ajax({
-            url: "/Home/Search",
-            type: "POST",
-            data: { keyword: keyword },
-            success: function (data) {
-                var contentItems = $('.content-items');
-                var textSeach = 'Kết quả tìm kiếm : ' + keyword;
-                $('.property-type-article').css('border', 'none');
-                $('.property-type-article').empty();
-                contentItems.empty();
+            var keyword = textSearch + $('.location').val() ;
+            $.ajax({
+                
+                url: "/Home/Search",
+                type: "POST",
+                data: { keyword: keyword },
+                success: function (data) {
+                    var contentItems = $('.content-items');
+                    var textSeach = 'Kết quả tìm kiếm : ' + keyword;
+                    $('.property-type-article').css('border', 'none');
+                    $('.property-type-article').empty();
+                    contentItems.empty();
 
-                if (data.error) {
-                    $('.body .title p').first().text(data.error);
-                    $('.body .title p').eq(1).text(textSeach);
-                    var imgElement = $("<img>");
-                    imgElement.attr("src", "/images/imageSearchErrorr.png");
-                    imgElement.css({
-                        "width": "99%",
-                        "height": "90%",
-                    });
-                    contentItems.append(imgElement);
-                } else {
-                    $('.body .title p').first().text(textSeach);
-                    $('.body .title p').eq(1).text('Danh sách kết quả tìm kiếm :');
-                    $.each(data, function (index, ele) {
-                        var houseHtml = `
+                    if (data.error) {
+                        $('.body .title p').first().text(data.error);
+                        $('.body .title p').eq(1).text(textSeach);
+                        var imgElement = $("<img>");
+                        imgElement.attr("src", "/images/imageSearchErrorr.png");
+                        imgElement.css({
+                            "width": "99%",
+                            "height": "90%",
+                        });
+                        contentItems.append(imgElement);
+                    } else {
+                        $('.body .title p').first().text(textSeach);
+                        $('.body .title p').eq(1).text('Danh sách kết quả tìm kiếm :');
+                        $.each(data, function (index, ele) {
+                            var houseHtml = `
                         <div pid="${ele.id}" class="content-item">
                             <div class="row">
                                 <div class="ct-title">
@@ -215,15 +227,13 @@
                             </div>
                         </div>
                     `;
-                        contentItems.append(houseHtml);
-                    });
+                            contentItems.append(houseHtml);
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
                 }
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-            }
-        });
+            });
     });
-
-
 });
