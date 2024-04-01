@@ -73,7 +73,12 @@ namespace NganHangNhaTro_G20.Controllers
                 (string.IsNullOrEmpty(address) || p.Address.Contains(address.Trim())) &&
                 (string.IsNullOrEmpty(acreage) || p.Acreage == int.Parse(acreage))
             ).ToList();
-
+            var images = _context.ImageCategories.ToList();
+            var viewHouseModel = new HouseViewModel
+            {
+                Houses = housesSearch,
+                Images = images
+            };
             // Trả về kết quả
             if (housesSearch.Count == 0)
             {
@@ -81,7 +86,7 @@ namespace NganHangNhaTro_G20.Controllers
             }
             else
             {
-                return Json(housesSearch);
+                return Json(viewHouseModel);
             }
         }
 
