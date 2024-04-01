@@ -24,9 +24,15 @@ namespace NganHangNhaTro_G20.Controllers
         }
         public JsonResult GetHouseData()
         {
-            List<House> houses = new List<House>();
-            houses = _context.Houses.ToList();
-            return Json(houses);
+            var images = _context.ImageCategories.ToList();
+            var houses = _context.Houses.ToList();
+            var viewHouseModel = new HouseViewModel
+            {
+                Houses = houses,
+                Images = images
+            };
+            
+            return Json(viewHouseModel);
         }
         public JsonResult Search(string keyword)
         {
