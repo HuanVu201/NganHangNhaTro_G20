@@ -6,10 +6,10 @@
 
 }
 
-     
+
 <div id="detailProduct" class="container">
     <div id="titleDetail">
-        <div id="title">Tiêu đề</div>
+        <div id="title"> @Model.House.HouseTitle</div>
         <div id="ngayDang"><i> Ngày đăng: @Model.House.CreatedAt </i></div>
     </div>
     <div id="description">
@@ -33,22 +33,22 @@
             Địa chỉ:
             <span id="detailAddress">@Model.House.Address</span>
         </span>
-       @* <div id="imageRoomBlock">
-            <img class="imageDetail imageDetailActive"
-                 src="@Model.Images[0].Url"
-                 alt="" />
-            <img class="imageDetail"
-                 src="@Model.Images[1].Url"
-                 alt="" />
+        <div id="imageRoomBlock">
+            @foreach (var image in Model.Images)
+            {
+                <img class="imageDetail @(image == Model.Images[0] ? "imageDetailActive" : "")"
+                     src="@image.Url"
+                     alt="" />
+            }
         </div>
         <div id="imageRoomBlockSmall">
-            <img class="imageDetailSmall imageDetailSmallActive"
-                 src="@Model.Images[0].Url"
-                 alt="" />
-            <img class="imageDetailSmall"
-                 src="@Model.Images[1].Url"
-                 alt="" />
-        </div>*@
+            @foreach (var image in Model.Images)
+            {
+                <img class="imageDetailSmall @(image == Model.Images[0] ? "imageDetailSmallActive" : "")"
+                     src="@image.Url"
+                     alt="" />
+            }
+        </div>
         <!-- <div class="id">Google Map</div> -->
 
         <button id="book_room">Đặt xem phòng</button>
