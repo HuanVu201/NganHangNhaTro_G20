@@ -1,4 +1,20 @@
 ﻿$(document).ready(function () {
+    function getImg(images, house) {
+        $.each(images, function (index, image) {
+            console.log(image.houseId)
+            console.log(house.id)
+            let idhouse = house.id;
+            let idimage = image.houseId;
+
+            if (idhouse.toLowerCase() === idimage.toLowerCase()) {
+                var imgHtml = `<img src="${image.url}" alt="Thumbnail Image">`;
+                $(`.content-item[pid="${house.id}"] .thumbnail`).append(imgHtml);
+                return false;
+            } else {
+                console.log('id ko băng nhau')
+            }
+        });
+    }
     $.ajax({
         url: '/Home/GetHouseData',
         type: 'GET',
@@ -13,70 +29,56 @@
                 var formattedDate = createdAtDate.toLocaleDateString('vi-VN');
 
                 var houseHtml = `
-                <div pid=${house.id} class="content-item">
-                    <div class="row">
-                        <div class="ct-title">
-                            <a href="House/HouseDetail?id=${house.id}">
-                                ${house.houseTitle} cho thuê, Diện tích: ${house.acreage}m<sup>2</sup>
-                            </a>
-                        </div>
-                        <div class="ct-date">
-                            <a href="House/HouseDetail?id=${house.id}">${formattedDate}</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="thumbnail">
-                            <!-- Đây là nơi để append thẻ img -->
-                        </div>
-                        <div class="text">
-                            <div class="ct-brief">
-                                ${house.desciption}
-                                <span><a href="House/HouseDetail?id=${house.id}">...xem chi tiết</a></span>
-                            </div>
-                            <div class="square-direct row">
-                                <div class="ct-kt text-bold">
-                                    Diện tích:
-                                    <span style="font-weight: 100">${house.acreage}m<sup>2</sup></span>
+                        <div pid=${house.id} class="content-item">
+                            <div class="row">
+                                <div class="ct-title">
+                                    <a href="House/HouseDetail?id=${house.id}">
+                                        ${house.houseTitle} cho thuê, Diện tích: ${house.acreage}m<sup>2</sup>
+                                    </a>
                                 </div>
-                                <div class="ct-kt text-bold">KT: <span>---</span></div>
-                                <div class="ct-direct text-bold">Hướng: <span>_</span></div>
-                            </div>
-                            <div class="price-dis row">
-                                <div class="ct-price">
-                                    <p class="text-bold">
-                                        Giá: <span style="color: red">${house.price} triệu / tháng</span>
-                                    </p>
-                                </div>
-                                <div class="ct-dis">
-                                    <a href="">${house.address},</a>
-                                    <a href=""> Phường Ô Chợ Dừa,</a>
-                                    <a href=""> Quận Đống Đa,</a>
-                                    <a href=""> Hà Nội</a>
+                                <div class="ct-date">
+                                    <a href="House/HouseDetail?id=${house.id}">${formattedDate}</a>
                                 </div>
                             </div>
-                            <div class="distance">
-                                <i>Cách Học viện Ngân Hàng khoảng 594m</i>
+                            <div class="row">
+                                <div class="thumbnail">
+                                    <!-- Đây là nơi để append thẻ img -->
+                                </div>
+                                <div class="text">
+                                    <div class="ct-brief">
+                                        ${house.desciption}
+                                        <span><a href="House/HouseDetail?id=${house.id}">...xem chi tiết</a></span>
+                                    </div>
+                                    <div class="square-direct row">
+                                        <div class="ct-kt text-bold">
+                                            Diện tích:
+                                            <span style="font-weight: 100">${house.acreage}m<sup>2</sup></span>
+                                        </div>
+                                        <div class="ct-kt text-bold">KT: <span>---</span></div>
+                                        <div class="ct-direct text-bold">Hướng: <span>_</span></div>
+                                    </div>
+                                    <div class="price-dis row">
+                                        <div class="ct-price">
+                                            <p class="text-bold">
+                                                Giá: <span style="color: red">${house.price} triệu / tháng</span>
+                                            </p>
+                                        </div>
+                                        <div class="ct-dis">
+                                            <a href="">${house.address},</a>
+                                            <a href=""> Phường Ô Chợ Dừa,</a>
+                                            <a href=""> Quận Đống Đa,</a>
+                                            <a href=""> Hà Nội</a>
+                                        </div>
+                                    </div>
+                                    <div class="distance">
+                                        <i>Cách Học viện Ngân Hàng khoảng 594m</i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            `;
+                    `;
                 contentItems.append(houseHtml);
-                
-                $.each(data.images, function (index, image) {
-                    console.log(image.houseId)
-                    console.log(house.id)
-                    let idhouse = house.id;
-                    let idimage = image.houseId;
-
-                    if (idhouse.toLowerCase() === idimage.toLowerCase()) {
-                        var imgHtml = `<img src="${image.url}" alt="Thumbnail Image">`;
-                        $(`.content-item[pid="${house.id}"] .thumbnail`).append(imgHtml);
-                        return false;
-                    } else {
-                        console.log('id ko băng nhau')
-                    }
-                });
+                getImg(data.images, house)
             });
         },
         error: function (err) {
@@ -177,7 +179,7 @@
         });
 
     }
-
+   
     $("#button-search").click(function () {
         var keyword = textSearch + $('.location').val();
         console.log(keyword)
@@ -206,61 +208,62 @@
                 } else {
                     $('.body .title p').first().text(textSeach);
                     $('.body .title p').eq(1).text('Danh sách kết quả tìm kiếm :');
-                    $.each(data, function (index, ele) {
-                        var createdAtDate = new Date(ele.createdAt);
+                    $.each(data.houses, function (index, house) {
+                        // Chuyển đổi ngày tạo ra đối tượng ngày và định dạng ngày
+                        var createdAtDate = new Date(house.createdAt);
                         var formattedDate = createdAtDate.toLocaleDateString('vi-VN');
+
                         var houseHtml = `
-                        <div pid="${ele.id}" class="content-item">
-                            <div class="row">
-                                <div class="ct-title">
-                                    <a href="House/HouseDetail?id=${ele.id}">
-                                        ${ele.houseTitle} cho thuê , Diện tích: ${ele.acreage}m<sup>2</sup>
-                                    </a>
+                            <div pid=${house.id} class="content-item">
+                                <div class="row">
+                                    <div class="ct-title">
+                                        <a href="House/HouseDetail?id=${house.id}">
+                                            ${house.houseTitle} cho thuê, Diện tích: ${house.acreage}m<sup>2</sup>
+                                        </a>
+                                    </div>
+                                    <div class="ct-date">
+                                        <a href="House/HouseDetail?id=${house.id}">${formattedDate}</a>
+                                    </div>
                                 </div>
-                                 <div class="ct-date">
-                                    <a href="House/HouseDetail?id=${ele.id}">${formattedDate}</a>
+                                <div class="row">
+                                    <div class="thumbnail">
+                                        <!-- Đây là nơi để append thẻ img -->
+                                    </div>
+                                    <div class="text">
+                                        <div class="ct-brief">
+                                            ${house.desciption}
+                                            <span><a href="House/HouseDetail?id=${house.id}">...xem chi tiết</a></span>
+                                        </div>
+                                        <div class="square-direct row">
+                                            <div class="ct-kt text-bold">
+                                                Diện tích:
+                                                <span style="font-weight: 100">${house.acreage}m<sup>2</sup></span>
+                                            </div>
+                                            <div class="ct-kt text-bold">KT: <span>---</span></div>
+                                            <div class="ct-direct text-bold">Hướng: <span>_</span></div>
+                                        </div>
+                                        <div class="price-dis row">
+                                            <div class="ct-price">
+                                                <p class="text-bold">
+                                                    Giá: <span style="color: red">${house.price} triệu / tháng</span>
+                                                </p>
+                                            </div>
+                                            <div class="ct-dis">
+                                                <a href="">${house.address},</a>
+                                                <a href=""> Phường Ô Chợ Dừa,</a>
+                                                <a href=""> Quận Đống Đa,</a>
+                                                <a href=""> Hà Nội</a>
+                                            </div>
+                                        </div>
+                                        <div class="distance">
+                                            <i>Cách Học viện Ngân Hàng khoảng 594m</i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="thumbnail">
-                                    <img src="/images/anhhalinh.jpg" alt="" />
-                                </div>
-                                <div class="text">
-                                    <div class="ct-brief">
-                                        ${ele.desciption}
-                                        <span>
-                                            <a href="House/HouseDetail?id=${ele.id}">...xem chi tiết</a>
-                                        </span>
-                                    </div>
-                                    <div class="square-direct row">
-                                        <div class="ct-kt text-bold">
-                                            Diện tích:
-                                            <span style="font-weight: 100">${ele.acreage}m<sup>2</sup></span>
-                                        </div>
-                                        <div class="ct-kt text-bold">KT: <span>---</span></div>
-                                        <div class="ct-direct text-bold">Hướng: <span>_</span></div>
-                                    </div>
-                                    <div class="price-dis row">
-                                        <div class="ct-price">
-                                            <p class="text-bold">
-                                                Giá: <span style="color: red">${ele.price} triệu / tháng</span>
-                                            </p>
-                                        </div>
-                                        <div class="ct-dis">
-                                            <a href="">${ele.address},</a>
-                                            <a href=""> Phường Ô Chợ Dừa,</a>
-                                            <a href=""> Quận Đống Đa,</a>
-                                            <a href=""> Hà Nội</a>
-                                        </div>
-                                    </div>
-                                    <div class="distance">
-                                        <i>Cách Học viện Ngân Hàng khoảng 594m</i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                        `;
                         contentItems.append(houseHtml);
+                        getImg(data.images, house)
                     });
                 }
             },
