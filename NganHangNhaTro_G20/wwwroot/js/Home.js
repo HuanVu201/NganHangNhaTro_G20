@@ -12,7 +12,7 @@
                         <div class="row">
                              <div class="ct-title">
                              <a href="House/HouseDetail?id=${ele.id}">
-                                 3 phòng đủ tiện nghi ở ${ele.address} cho thuê , Diện
+                                 ${ele.houseTitle} cho thuê , Diện
                                  tích :  ${ele.acreage}m2</a
                                >
                              </div>
@@ -87,18 +87,31 @@
             $('.district').empty().append($addressul);
 
             var $priceUl = $("<ul></ul>");
+            var pricesAdded = []; 
             $.each(data.houses, function (i, house) {
-                var $li = $("<li></li>").text(house.price);
-                var $span = $("<span></span>").text(" triệu");
-                $priceUl.append($li.append($span));
+                var price = house.price;
+
+                if (!pricesAdded.includes(price)) {
+                    var $li = $("<li></li>").text(price);
+                    var $span = $("<span></span>").text(" triệu");
+                    $priceUl.append($li.append($span));
+                    pricesAdded.push(price);
+                }
             });
+
             $('.price').empty().append($priceUl);
 
+
             var $acreageUl = $("<ul></ul>");
+            var acreageAdded = [];
             $.each(data.houses, function (i, house) {
-                var $li = $("<li></li>").text(house.acreage);
-                var $span = $("<span></span>").text(" m2");
-                $acreageUl.append($li.append($span));
+                var acreage = house.acreage
+                if (!acreageAdded.includes(acreage)){
+                    var $li = $("<li></li>").text(house.acreage);
+                    var $span = $("<span></span>").text(" m2");
+                    $acreageUl.append($li.append($span));
+                    acreageAdded.push(acreage)
+                }
             });
             $('.square').empty().append($acreageUl);
             a();
@@ -131,7 +144,8 @@
                 array_views[index].forEach((item) => {
                     item.onclick = function () {
                         
-                        textSearch += item.innerText + "," ;
+                        textSearch += item.innerText + ",";
+                        console.log(textSearch)
                         texts[index].innerText = item.innerText;
                         views[index].classList.add("active-view");
                        
@@ -149,7 +163,8 @@
     }
    
     $("#button-search").click(function () {
-            var keyword = textSearch + $('.location').val() ;
+        var keyword = textSearch + $('.location').val();
+        console.log(keyword)
             $.ajax({
                 
                 url: "/Home/Search",
@@ -181,7 +196,7 @@
                             <div class="row">
                                 <div class="ct-title">
                                     <a href="House/HouseDetail?id=${ele.id}">
-                                        3 phòng đủ tiện nghi ở ${ele.address} cho thuê, Diện tích: ${ele.acreage}m<sup>2</sup>
+                                        ${ele.houseTitle} cho thuê , Diện tích: ${ele.acreage}m<sup>2</sup>
                                     </a>
                                 </div>
                                 <div class="ct-date">
