@@ -50,8 +50,21 @@
             }
         </div>
         <!-- <div class="id">Google Map</div> -->
-
-        <button id="book_room">Đặt xem phòng</button>
+        <div>
+            @using (Html.BeginForm("AddNoteBookingCalender", "House", FormMethod.Post))
+            {
+                <input type="hidden" name="id" value="@Model.House.Id">
+                <div class="row">
+                    <div class="col1">
+                        Note (<span class="note">*</span>)<br />
+                    </div>
+                    <div class="col2">
+                        @Html.TextBoxFor(x => x.BookingCalender.Note)
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Đặt lịch</button>
+            }
+        </div>
         <div id="note">
             <h4>Lưu ý:</h4>
             <p>
@@ -80,3 +93,5 @@
     })
 
 </script>
+
+<script src="~/js/admin.js"></script>
