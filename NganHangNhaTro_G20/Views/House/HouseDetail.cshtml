@@ -49,21 +49,32 @@
             }
         </div>
         <!-- <div class="id">Google Map</div> -->
-        <div>
-            @using (Html.BeginForm("AddNoteBookingCalender", "House", FormMethod.Post))
-            {
-                <input type="hidden" name="id" value="@Model.House.Id">
-                <div class="row">
-                    <div class="col1">
-                        Note (<span class="note">*</span>)<br />
+        @if (Context.Session.GetString("Username") == null)
+        {
+            <div id="unLoginedtatus">
+                <ul class="statusLogin_ul">
+                    <li class="buttonStatus"> <a id="login" class="" style="text-decoration:none" asp-area="" asp-controller="Access" asp-action="Login">Đăng nhập ngay để đặt phòng</a></li>
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div>
+                @using (Html.BeginForm("AddNoteBookingCalender", "House", FormMethod.Post))
+                {
+                    <input type="hidden" name="HouseId" id="houseId" value="@Model.House.Id">
+                    <div class="row">
+                        <div class="col1">
+                            Note (<span class="note">*</span>)<br />
+                        </div>
+                        <div class="col2">
+                            <input type="text" id="note" name="note">
+                        </div>
                     </div>
-                    <div class="col2">
-                        @Html.TextBoxFor(x => x.BookingCalender.Note)
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Đặt lịch</button>
-            }
-        </div>
+                    <button type="submit" class="btn btn-primary">Đặt lịch</button>
+                }
+            </div>
+        }
         <div id="note">
             <h4>Lưu ý:</h4>
             <p>
@@ -142,5 +153,3 @@
 
 
 </script>
-
-<script src="~/js/admin.js"></script>

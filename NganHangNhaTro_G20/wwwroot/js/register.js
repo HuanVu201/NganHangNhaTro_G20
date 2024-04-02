@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿/*
+$(document).ready(function () {
     $('#Email').focus();
     $('form').submit(function (event) {
         event.preventDefault();

@@ -13,9 +13,9 @@ namespace NganHangNhaTro_G20.Controllers
 
         public IActionResult HouseDetail(Guid id)
         {
-           // if (HttpContext.Session.GetString("Username") == null)
+            // if (HttpContext.Session.GetString("Username") == null)
             //{
-             //   return RedirectToAction("Login", "Access");
+            //   return RedirectToAction("Login", "Access");
             //}
 
             var house = _dbContext.Houses.FirstOrDefault(h => h.Id == id);
@@ -37,19 +37,40 @@ namespace NganHangNhaTro_G20.Controllers
 
             return View(viewModel);
         }
-        [HttpPost]
-        public IActionResult AddNoteBookingCalender(Guid id, string note)
-        {
-            var bookingCalender = new BookingCalender
-            {
-                HouseId = id,
-                Note = note,
-                CreatedAt = DateTime.Now
-            };
-            _dbContext.BookingCalenders.Add(bookingCalender);
-            _dbContext.SaveChanges();
-            return RedirectToAction("HouseDetail", "House", new { id });
-        }
 
+        [HttpPost]
+        public ActionResult AddNoteBookingCalender(Guid HouseId, string note)
+        {
+            Console.WriteLine("Guid HouseId: " + HouseId);
+
+            if (HttpContext.Session.GetString("Username") != null)
+            {
+                var email = HttpContext.Session.GetString("Username");
+                var user = _dbContext.Users.FirstOrDefault(u => u.Email == email);
+
+                if (user != null)
+                {
+                    var customerId = user.Id;
+
+                    var bookingCalender = new BookingCalender
+                    {
+                        HouseId = HouseId,
+                        Note = note,
+                        CreatedAt = DateTime.Now,
+                        CustomerId = customerId
+                    };
+
+                    _dbContext.BookingCalenders.Add(bookingCalender);
+                    _dbContext.SaveChanges();
+
+                    return RedirectToAction("HouseDetail", "House", new { id = HouseId });
+                }
+                else
+                {
+                    return RedirectToAction("HouseDetail", "House", new { id = HouseId });
+                }
+            }
+            return RedirectToAction("HouseDetail", "House", new { id = HouseId });
+        }
     }
 }
