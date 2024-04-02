@@ -31,10 +31,24 @@ namespace NganHangNhaTro_G20.Controllers
             var viewModel = new HouseDetailViewModel
             {
                 House = house,
-                Images = images
+                Images = images,
+                BookingCalender = new BookingCalender() // Khởi tạo BookingCalender mới
             };
 
             return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult AddNoteBookingCalender(Guid id, string note)
+        {
+            var bookingCalender = new BookingCalender
+            {
+                HouseId = id,
+                Note = note,
+                CreatedAt = DateTime.Now
+            };
+            _dbContext.BookingCalenders.Add(bookingCalender);
+            _dbContext.SaveChanges();
+            return RedirectToAction("HouseDetail", "House", new { id });
         }
 
     }

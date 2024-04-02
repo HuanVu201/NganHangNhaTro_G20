@@ -58,8 +58,23 @@ namespace NganHangNhaTro_G20.Controllers
             }
             _dbContext.Users.Add(model);
             _dbContext.SaveChanges();
+            LoginUser(model.Email, model.Password);
+
             return RedirectToAction("Index", "Home");
         }
+
+        private void LoginUser(string email, string password)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            if (user != null)
+            {
+                HttpContext.Session.SetString("Username", email);
+                HttpContext.Session.SetString("NameLogined", user.Name);
+                Console.WriteLine("Session Username: " + HttpContext.Session.GetString("Username"));
+                Console.WriteLine("Name: " + user.Name);
+            }
+        }
+
         [HttpGet]
         public IActionResult Register()
         {
