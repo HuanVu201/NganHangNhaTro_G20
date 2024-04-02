@@ -13,8 +13,35 @@
     padding: 10px;
 }
 
-#description p{
-    margin-top:1rem;
+.color-changing{
+    color:white
+}
+#book_login {
+    width: 25rem;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 74%;
+    padding: 0.7rem 0rem 0.7rem 0rem;
+    background-color: #0090B5;
+    margin-top: 5px;
+    border-radius: 3px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    position: relative;
+    animation: shake 0.5s infinite alternate;
+}
+
+@keyframes shake {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(5px);
+    }
+}
+#description p {
+    margin-top: 1rem;
 }
 
 #title {

@@ -6,6 +6,7 @@
 
 }
 
+
 <div id="detailProduct" class="container">
     <div id="titleDetail">
         <div id="title"> @Model.House.HouseTitle</div>
@@ -48,31 +49,64 @@
                      alt="" />
             }
         </div>
+       
         <!-- <div class="id">Google Map</div> -->
         @if (Context.Session.GetString("Username") == null)
         {
-            <div id="unLoginedtatus">
-                <ul class="statusLogin_ul">
-                    <li class="buttonStatus"> <a id="login" class="" style="text-decoration:none" asp-area="" asp-controller="Access" asp-action="Login">Đăng nhập ngay để đặt phòng</a></li>
-                </ul>
+            <div >
+                <div id="book_login" ><a id="houseDetail_login" class="" asp-area="" asp-controller="Access" asp-action="Login">Đăng nhập ngay để đặt phòng</a></div>
             </div>
         }
         else
         {
             <div>
-                @using (Html.BeginForm("AddNoteBookingCalender", "House", FormMethod.Post))
-                {
-                    <input type="hidden" name="HouseId" id="houseId" value="@Model.House.Id">
-                    <div class="row">
-                        <div class="col1">
-                            Note (<span class="note">*</span>)<br />
+                <div style="text-align:center" id="book_room">Đặt Phòng</div>
+            </div>
+        }
+        @using (Html.BeginForm("AddNoteBookingCalender", "House", FormMethod.Post))
+        {
+            <input type="hidden" name="HouseId" id="houseId" value="@Model.House.Id">
+            <div id="bookingModal" style="font-size:1.5rem" class="modal fade" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" style="font-size:2rem; text-align:center ; color:#0481A0;font-weight:bold">Đặt Phòng</h5>
+                            <button type="button" style="font-size:2rem" class="close" data-dismiss="modal">&times;</button>
                         </div>
-                        <div class="col2">
-                            <input type="text" id="note" name="note">
+                        <div class="modal-body">
+                            <h6 style="font-size:2rem ;font-weight:bold">Thông Tin Phòng:</h6>
+                            <p><strong>Tên:</strong> @Model.House.HouseTitle</p>
+                            <p><strong>Loại:</strong> @Model.House.HouseType</p>
+                            <p><strong>Mô Tả:</strong> @Model.House.Desciption</p>
+
+                            <h6 style="font-size:1.5rem">Ngày & Giờ:</h6>
+                            <p><strong>Time:</strong> @Model.House.CreatedAt</p>
+
+
+                            <h6 style="font-size:2rem ;font-weight:bold">Thông Tin Khách Hàng:</h6>
+                            <div class="form-group">
+                                <label for="name">Tên:</label>
+                                <input disabled type="text" value="@Context.Session.GetString("NameLogined")" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input disabled type="email" value="@Context.Session.GetString("Username")" class="form-control" id="email">
+                            </div>
+
+                            <h6 style="color:#0481A0">Note:</h6>
+                            <textarea id="node" name="note" class="form-control" rows="3"></textarea>
+                            <div style="color:red">
+                                <h6>Tổng Chi Phí:</h6>
+                                <p><strong>@string.Format("{0:#,#} triệu đồng / tháng", @Model.House.Price) </strong></p>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" id="Xacnhandatphong" class="btn btn-primary">Xác Nhận Đặt Phòng</button>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Đặt lịch</button>
-                }
+                </div>
             </div>
         }
         <div id="note">
@@ -89,67 +123,5 @@
         </div>
     </div>
 </div>
-<div id="bookingModal" style="font-size:1.5rem" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" style="font-size:2rem; text-align:center ; color:#0481A0;font-weight:bold">Đặt Phòng</h5>
-                <button type="button" style="font-size:2rem" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <h6 style="font-size:2rem ;font-weight:bold">Thông Tin Phòng:</h6>
-                <p><strong>Tên:</strong> @Model.House.HouseTitle</p>
-                <p><strong>Loại:</strong> @Model.House.HouseType</p>
-                <p><strong>Mô Tả:</strong> @Model.House.Desciption</p>
 
-                <h6 style="font-size:1.5rem">Ngày & Giờ:</h6>
-                <p><strong>Time:</strong> @Model.House.CreatedAt</p>
-
-
-                <h6 style="font-size:2rem ;font-weight:bold">Thông Tin Khách Hàng:</h6>
-                <div class="form-group">
-                    <label for="name">Tên:</label>
-                    <input type="text" class="form-control" id="name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email">
-                </div>
-
-                <h6 style="color:#0481A0">Note:</h6>
-                <textarea class="form-control" rows="3"></textarea>
-                <div style="color:red">
-                    <h6>Tổng Chi Phí:</h6>
-                    <p><strong>@string.Format("{0:#,#} triệu đồng / tháng", @Model.House.Price) </strong></p>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                <button type="button" id="Xacnhandatphong" class="btn btn-primary">Xác Nhận Đặt Phòng</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    const imgSmalls = document.querySelectorAll('.imageDetailSmall')
-    const imgBigs = document.querySelectorAll('.imageDetail')
-    console.log(imgBigs)
-    imgSmalls.forEach((item, index) => {
-        item.onclick = function () {
-            document.querySelector('.imageDetail.imageDetailActive').classList.remove('imageDetailActive')
-            document.querySelector('.imageDetailSmall.imageDetailSmallActive').classList.remove('imageDetailSmallActive')
-            imgBigs[index].classList.add('imageDetailActive')
-            item.classList.add('imageDetailSmallActive')
-        }
-    })
-    $(document).ready(function () {
-        $("#book_room").click(function () {
-            $("#bookingModal").modal('show');
-        });
-        $("#Xacnhandatphong").click(function () {
-            $("#bookingModal").modal('hide');
-        });
-
-
-</script>
+<script src ="~/js/HouseDetail.js"></script>
