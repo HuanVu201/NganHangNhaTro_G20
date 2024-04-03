@@ -1,8 +1,9 @@
-﻿/*
+﻿
 $(document).ready(function () {
     $('#Email').focus();
     $('form').submit(function (event) {
         event.preventDefault();
+        console.log('1')
 
         var name = $('#Name').val();
         var password = $('#Password').val();
