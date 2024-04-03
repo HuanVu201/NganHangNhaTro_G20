@@ -63,6 +63,7 @@
                 <div style="text-align:center" id="book_room">Đặt Phòng</div>
             </div>
         }
+
         @using (Html.BeginForm("AddNoteBookingCalender", "House", FormMethod.Post))
         {
             <input type="hidden" name="HouseId" id="houseId" value="@Model.House.Id">

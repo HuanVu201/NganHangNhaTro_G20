@@ -17,8 +17,14 @@ $(document).ready(function () {
     });
     $("#Xacnhandatphong").click(function () {
         $("#bookingModal").modal('hide');
+        setTimeout(function () {
+        alert("Đã Đặt Phòng");
+        }, 1000);
     });
+
+    
     setInterval(function () {
         $('#houseDetail_login').toggleClass('color-changing');
     }, 1000); 
+
 });
