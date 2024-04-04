@@ -1,10 +1,8 @@
 ﻿
 $(document).ready(function () {
     $('#Email').focus();
-    $('form').submit(function (event) {
+    $('#register-form').submit(function (event) {
         event.preventDefault();
-        console.log('1')
-
         var name = $('#Name').val();
         var password = $('#Password').val();
         var confirmPassword = $('#password-two').val();
@@ -73,9 +71,7 @@ $(document).ready(function () {
         } else {
             $('.error_phone').hide();
         }
-
-        
-        $('form').unbind('submit').submit();
+        $('#register-form').unbind('submit').submit();
     });
 });
 $("#close-register").click(function () {
