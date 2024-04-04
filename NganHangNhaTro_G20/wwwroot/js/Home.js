@@ -57,7 +57,7 @@
                                         <div class="ct-kt text-bold">KT: <span>---</span></div>
                                         <div class="ct-direct text-bold">Hướng: <span>_</span></div>
                                     </div>
-                                    <div class="price-dis row">
+                                    <div class="price-dis ">
                                         <div class="ct-price">
                                             <p class="text-bold">
                                                 Giá: <span style="color: red">${house.price} triệu / tháng</span>
@@ -242,7 +242,7 @@
                                             <div class="ct-kt text-bold">KT: <span>---</span></div>
                                             <div class="ct-direct text-bold">Hướng: <span>_</span></div>
                                         </div>
-                                        <div class="price-dis row">
+                                        <div class="price-dis ">
                                             <div class="ct-price">
                                                 <p class="text-bold">
                                                     Giá: <span style="color: red">${house.price} triệu / tháng</span>

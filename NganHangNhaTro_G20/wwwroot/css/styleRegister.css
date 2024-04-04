@@ -1,3 +1,6 @@
+html {
+    font-size: 12px;
+}
 
 .register-form {
     width: 25rem;
@@ -6,7 +9,7 @@
     z-index: 100;
     background-color: white;
     display: block;
-    margin-left: 32%;
+    margin-left: 4%;
     margin-top: 2rem;
     padding-bottom: 3rem;
 }
@@ -108,8 +111,27 @@ input[type="password"] {
     display: none;
 }
 
-@media (min-width: 768px) {
+   
+@media (min-width: 1024px) {
     html {
-        font-size: 16px;
+        font-size: 18px
+    }
+    .register-form {
+        margin-left: 35%;
+       
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    html {
+        font-size: 16px
+    }
+    .register-form {
+        margin-left: 23%;
+        margin-bottom:5rem;
+    }
+    .login-form {
+        left: 27%;
+        top: 10%;
     }
 }
