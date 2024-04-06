@@ -43,16 +43,21 @@ p {
     font-size: 13px;
     text-align:center;
 }
+    .buttonStatus_new a{
+        text-decoration:none !important;
+        color:black;
 
-.buttonStatus {
-    padding: 5px;
-    display: inline-block;
-    gap: 10px;
-    border: 1px solid #1579A8;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: 0.2s
-}
+    }
+
+    .buttonStatus {
+        padding: 5px;
+        display: inline-block;
+        gap: 10px;
+        border: 1px solid #1579A8;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: 0.2s
+    }
     .buttonStatus:hover, .buttonStatus_new:hover {
         transform: scale(1.1);
         cursor:pointer;
