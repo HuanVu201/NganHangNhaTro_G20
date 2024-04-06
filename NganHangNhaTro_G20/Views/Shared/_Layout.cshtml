@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styleHouseDetail.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/userInfo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/UserInfoHouseBooking.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styleLogin.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styleRegister.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/NganHangNhaTro_G20.styles.css" asp-append-version="true" />
@@ -64,7 +66,11 @@
                         <img src="~/images/anhhalinh.jpg" />
                         <ul  class="statusLogin_ul_new" style="text-decoration:none">
                             <li class=" buttonStatus_new">Xin chào <b>@Context.Session.GetString("NameLogined")</b></li>
-                            <li class=" buttonStatus_new">Hồ sơ cá nhân</li>
+                            <li class=" buttonStatus_new">
+                                <a href="/User/UserInfo">
+                                    Hồ sơ cá nhân
+                                </a>
+                            </li>
                             <li id="logoutButton" class=" buttonStatus_new">Thoát</li>
                         </ul>
                     </div>
