@@ -2,12 +2,13 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    @model User
 }
 <div class="user-info col-lg-8 ">
     <div class="user-info-row-1 ">
         <div class="img-user">
             <img  src="~/images/anhhalinh.jpg" />
-            <p>Phạm Đỗ Duy</p>
+            <p>@Model.Name</p>
         </div>
        <div class="list-info-user">
            <ul>
@@ -30,7 +31,7 @@
                             Họ tên:
                         </td>
                         <td>
-                            Phạm Đỗ Duy
+                            @Model.Name
                         </td>
                     </tr>
                     <tr>
@@ -38,7 +39,7 @@
                             Email
                         </td>
                         <td>
-                            duydz@gmail.com
+                            @Model.Email
                         </td>
                     </tr>
                     <tr>
@@ -46,7 +47,7 @@
                             Số điện thoại
                         </td>
                         <td>
-                            0474638493
+                            @Model.PhoneNumber
                         </td>
                     </tr>
                     <tr>
@@ -54,7 +55,14 @@
                             Giới tính
                         </td>
                         <td>
-                            Nam
+                            @if (Model.Gender == 1)
+                            {
+                                <p>Nam</p>
+                            }
+                            else if (Model.Gender == 0)
+                            {
+                                <p>Nữ</p>
+                            }
                         </td>
                     </tr>
                 </tbody>
