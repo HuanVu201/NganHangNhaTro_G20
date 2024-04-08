@@ -24,9 +24,15 @@ namespace NganHangNhaTro_G20.Controllers
         }
         public JsonResult GetHouseData()
         {
-            List<House> houses = new List<House>();
-            houses = _context.Houses.ToList();
-            return Json(houses);
+            var images = _context.ImageCategories.ToList();
+            var houses = _context.Houses.ToList();
+            var viewHouseModel = new HouseViewModel
+            {
+                Houses = houses,
+                Images = images
+            };
+            
+            return Json(viewHouseModel);
         }
         public JsonResult Search(string keyword)
         {
@@ -45,29 +51,34 @@ namespace NganHangNhaTro_G20.Controllers
                 if (item.Contains("triệu"))
                 {
                     // Lấy giá trị giá từ chuỗi
-                    priceString = item.Replace(" triệu", "");
+                    priceString = item.Replace(" triệu", "").Trim();
                 }
-                // Kiểm tra nếu phần tử không chứa từ "triệu" và không phải là giá trị diện tích
-                else if (!item.All(char.IsDigit) && !item.Contains("m2"))
-                {
-                    // Lấy giá trị địa chỉ từ chuỗi
-                    address = item.Trim();
-                }
-                // Kiểm tra nếu phần tử là giá trị diện tích
+                // Kiểm tra nếu phần tử chứa từ "m2"
                 else if (item.Contains("m2"))
                 {
                     // Lấy giá trị diện tích từ chuỗi
                     acreage = item.Replace("m2", "").Trim();
                 }
+                // Nếu không phải là giá trị giá hoặc diện tích, giả sử là địa chỉ
+                else
+                {
+                    // Lấy giá trị địa chỉ từ chuỗi
+                    address += item.Trim() + " ";
+                }
             }
 
             // Tìm kiếm trong cơ sở dữ liệu
             var housesSearch = _context.Houses.Where(p =>
-                (string.IsNullOrEmpty(priceString) || p.Price.ToString().Contains(priceString)) &&
-                (string.IsNullOrEmpty(address) || p.Address.Contains(address)) &&
+                (string.IsNullOrEmpty(priceString) || p.Price.Contains(priceString)) &&
+                (string.IsNullOrEmpty(address) || p.Address.Contains(address.Trim())) &&
                 (string.IsNullOrEmpty(acreage) || p.Acreage == int.Parse(acreage))
             ).ToList();
-
+            var images = _context.ImageCategories.ToList();
+            var viewHouseModel = new HouseViewModel
+            {
+                Houses = housesSearch,
+                Images = images
+            };
             // Trả về kết quả
             if (housesSearch.Count == 0)
             {
@@ -75,9 +86,10 @@ namespace NganHangNhaTro_G20.Controllers
             }
             else
             {
-                return Json(housesSearch);
+                return Json(viewHouseModel);
             }
         }
+
 
 
         public JsonResult GetLocations()

@@ -1,8 +1,8 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
     $('#Email').focus();
-    $('form').submit(function (event) {
+    $('#register-form').submit(function (event) {
         event.preventDefault();
-
         var name = $('#Name').val();
         var password = $('#Password').val();
         var confirmPassword = $('#password-two').val();
@@ -71,9 +71,7 @@
         } else {
             $('.error_phone').hide();
         }
-
-        
-        $('form').unbind('submit').submit();
+        $('#register-form').unbind('submit').submit();
     });
 });
 $("#close-register").click(function () {

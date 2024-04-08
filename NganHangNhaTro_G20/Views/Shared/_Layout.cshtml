@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styleHouseDetail.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/userInfo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/UserInfoHouseBooking.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styleLogin.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/styleRegister.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/NganHangNhaTro_G20.styles.css" asp-append-version="true" />
@@ -46,7 +48,7 @@
     <header>
         <div id="headerLayout" class="container">
             <div id="logoBlock">
-                <a href="#"><img id="logoWeb" src="~/images/Ngân hàng nhà trọ.png" alt=""></a>
+                <a href="@Url.Action("Index", "Home")"><img id="logoWeb" src="~/images/Ngân hàng nhà trọ.png" alt=""></a>
             </div>
             <div id="statusLogin">
                 @if (Context.Session.GetString("Username") == null)
@@ -62,10 +64,14 @@
                 {
                     <div id="loginedStatus">
                         <img src="~/images/anhhalinh.jpg" />
-                        <ul class="statusLogin_ul">
-                            <li class="buttonStatus">Xin chào <b>@Context.Session.GetString("NameLogined")</b></li>
-                            <li class="buttonStatus">Hồ sơ cá nhân</li>
-                            <li id="logoutButton" class="buttonStatus">Thoát</li>
+                        <ul  class="statusLogin_ul_new" style="text-decoration:none">
+                            <li class=" buttonStatus_new">Xin chào <b>@Context.Session.GetString("NameLogined")</b></li>
+                            <li class=" buttonStatus_new">
+                                <a href="/User/UserInfo">
+                                    Hồ sơ cá nhân
+                                </a>
+                            </li>
+                            <li id="logoutButton" class=" buttonStatus_new">Thoát</li>
                         </ul>
                     </div>
                 }
@@ -137,7 +143,7 @@
             // Gửi yêu cầu POST đến action "Logout"
             $.post('/Access/Logout', function () {
                 // Chuyển hướng đến trang đăng nhập sau khi logout thành công
-                window.location.href = '/Access/Login';
+                window.location.href = '/Home/Index';
             });
         });
     });

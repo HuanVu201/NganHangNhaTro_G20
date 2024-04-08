@@ -10,35 +10,67 @@ namespace NganHangNhaTro_G20.Controllers
         {
             _dbContext = dbContext;
         }
- 
+
         public IActionResult HouseDetail(Guid id)
         {
-            if (HttpContext.Session.GetString("Username") == null)
-            {
-                return RedirectToAction("Login", "Access"); 
-            }
-            //var ids = new List<Guid>
-            //    {
-            //        new Guid("06C7A0DA-856A-4D3D-8531-771E11225EFF"),
-            //        new Guid("8CD40FBF-04A2-4F89-B4B1-D26821F3F54F")
-            //    };
-            //var house = _dbContext.Houses.FirstOrDefault(h => h.Id == id);
-            //var images = _dbContext.ImageCategories
-            //    .Where(ic => ids.Contains(ic.Id))
-            //    .ToList();
-            //Console.WriteLine(images.Count);
-            //if (house == null)
+            // if (HttpContext.Session.GetString("Username") == null)
             //{
-            //    return NotFound();
+            //   return RedirectToAction("Login", "Access");
             //}
-            //var viewModel = new HouseDetailViewModel
-            //{
-            //    House = house,
-            //    Images = images
-            //};
-            //return View(viewModel);
-            return null;
 
+            var house = _dbContext.Houses.FirstOrDefault(h => h.Id == id);
+            if (house == null)
+            {
+                return NotFound();
+            }
+            string houseIdString = id.ToString();
+            var images = _dbContext.ImageCategories
+                             .Where(ic => ic.HouseId == houseIdString)
+                             .ToList();
+
+            var viewModel = new HouseDetailViewModel
+            {
+                House = house,
+                Images = images,
+                BookingCalender = new BookingCalender() // Khởi tạo BookingCalender mới
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddNoteBookingCalender(Guid HouseId, string note)
+        {
+            Console.WriteLine("Guid HouseId: " + HouseId);
+
+            if (HttpContext.Session.GetString("Username") != null)
+            {
+                var email = HttpContext.Session.GetString("Username");
+                var user = _dbContext.Users.FirstOrDefault(u => u.Email == email);
+
+                if (user != null)
+                {
+                    var customerId = user.Id;
+
+                    var bookingCalender = new BookingCalender
+                    {
+                        HouseId = HouseId,
+                        Note = note,
+                        CreatedAt = DateTime.Now,
+                        CustomerId = customerId
+                    };
+
+                    _dbContext.BookingCalenders.Add(bookingCalender);
+                    _dbContext.SaveChanges();
+
+                    return RedirectToAction("HouseDetail", "House", new { id = HouseId });
+                }
+                else
+                {
+                    return RedirectToAction("HouseDetail", "House", new { id = HouseId });
+                }
+            }
+            return RedirectToAction("HouseDetail", "House", new { id = HouseId });
         }
     }
 }

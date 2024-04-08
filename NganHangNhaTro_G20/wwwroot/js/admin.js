@@ -494,7 +494,21 @@
     });
 
 
+    $(document).on('click', '.btnThemMoi', function (e) {
+        e.preventDefault();
+        $('#myModalBookingCalender').modal('show');
 
+        $('.modal-title').html('Đặt lịch xem phòng');
+        $('.modal-footer').html(
+            "<button type='button' class='btn btn-primary' id='btnAdd'>Book lịch ngay</button>"
+            + "<button type = 'button' class='btn btn-default' data-dismiss='modal' > Đóng</button >"
+        )
+
+        $('#HouseTitle').val("");
+
+        $('#HouseTitle').attr("readonly", false);
+
+    });
 
 
 

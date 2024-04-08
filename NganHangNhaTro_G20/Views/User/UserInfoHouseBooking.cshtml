@@ -1,0 +1,63 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model UserInfoHouseBookingViewModel
+}
+<div class="user-info-booking col-lg-12 ">
+    <div class=" user-info-booking-row-1 ">
+        <div class="img-user">
+            <img src="~/images/anhhalinh.jpg" />
+            <p>@Model.user.Name</p>
+        </div>
+        <div class="list-info-user">
+            <ul>
+                <li><i class="far fa-user"></i>  <a href="/User/UserInfo"> Thông tin tài khoản</a></li>
+                <li><i class="fas fa-home"></i>Danh sách phòng đã thuê</li>
+            </ul>
+        </div>
+    </div>
+    <div class="user-info-booking-row-2  ">
+        <div class="title-user">
+            <h1>Danh sách phòng đã thuê</h1>
+        </div>
+        <div class="text-info-user-booking">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Tên phòng</th>
+                        <th>Địa chỉ</th>
+                        <th>Giá</th>
+                        <th>Ngày đặt</th>
+                        <th>Mô tả</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var booking in @Model.bookingList)
+                    {
+                        <tr>
+                            <td>@booking.houseName</td>
+                            <td>@booking.houseAddress</td>
+                            <td>@booking.housePrice</td>
+                            <td>@booking.houseCreatedAt</td>
+                            <td>@booking.houseTittle</td>
+                            <td>
+                                <i id="edit-house-booking" class="far fa-edit"></i>
+                                <i id="delete-house-booking" class="fas fa-trash-alt" data-booking-id="@booking.bookingId"></i>
+                                <button onclick="DeleteBooking('@booking.bookingId.ToString("D")')">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    function DeleteBooking(bookingId) {
+        if (confirm("Are u sure about delete this booking?")) {
+            window.location.href = "/User/DeleteBooking?bookingId=" + bookingId;
+        }
+    }
+</script>
