@@ -25,7 +25,7 @@ namespace NganHangNhaTro_G20.Controllers
             }
             string houseIdString = id.ToString();
             var images = _dbContext.ImageCategories
-                             .Where(ic => ic.HouseId == houseIdString)
+                             .Where(ic => ic.HouseId.ToString() == houseIdString)
                              .ToList();
 
             var viewModel = new HouseDetailViewModel
