@@ -20,14 +20,10 @@ h3 {
 }
 
 .containerProject {
-    margin-top:1.5rem;
+    margin-top: 1.5rem;
     background-color: rgb(193, 224, 225);
     padding: 15px;
-    grid-template-columns: 1fr 3fr;
-    grid-template-areas:
-        "navbar contentBlock";
-    display: grid;
-    grid-column-gap: 15px;
+    display: flex;
     min-height: 100vh;
 }
 
@@ -35,6 +31,7 @@ h3 {
     grid-area: navbar;
     background-color: aliceblue;
     padding: 20px;
+    flex: 1;
 }
 
 .navbar__heading {
@@ -62,6 +59,7 @@ h3 {
     background-color: aliceblue;
     padding: 20px;
     font-size: 16px;
+    flex: 3;
 }
 
 .contentBlock__heading {
@@ -74,11 +72,6 @@ h3 {
         margin-right: 30px;
     }
 
-        .contentBlock__heading a:first-child {
-            color: #049363;
-            font-weight: 600;
-            border-bottom: 3px solid #049363;
-        }
 
 .contentBlock__container {
     padding: 20px;

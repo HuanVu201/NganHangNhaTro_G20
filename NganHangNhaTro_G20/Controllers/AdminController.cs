@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using NganHangNhaTro_G20.Models;
@@ -12,10 +13,6 @@ namespace NganHangNhaTro_G20.Controllers
         public AdminController(ProjectDbContext context)
         {
             _context = context;
-        }
-        public IActionResult Index()
-        {
-            return View();
         }
 
         public IActionResult Index2()
@@ -46,13 +43,8 @@ namespace NganHangNhaTro_G20.Controllers
 
 
         //DataTable=====================================================================================
-        public IActionResult listDataTable()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public string getDataTables(string locationId)
+        public string getDataTables(string locationId) 
         {
             List<House> listHouse = _context.Houses.Where(a => a.OfLocationId.Contains(locationId)).ToList();
             var value = JsonConvert.SerializeObject(new { data = listHouse });
@@ -63,18 +55,18 @@ namespace NganHangNhaTro_G20.Controllers
         //Thêm mới=======================================================================================
         public class HouseAndImageCategory
         {
-            public House HouseObject { get; set; }
-            public ImageCategory ImageCategoryObject { get; set; }
+            public House houseObject { get; set; }
+            public ImageCategory imageCategoryObject { get; set; }
         }
 
         [HttpPost]
-        public async Task<int> ThemMoi([FromBody] HouseAndImageCategory HouseAndImageCategory)
+        public async Task<int> ThemMoi([FromBody] HouseAndImageCategory houseAndImageCategory)
         {
             var result = -1;
             try
             {
-                _context.Houses.Add(HouseAndImageCategory.HouseObject);
-                _context.ImageCategories.Add(HouseAndImageCategory.ImageCategoryObject);
+                _context.Houses.Add(houseAndImageCategory.houseObject);
+                _context.ImageCategories.Add(houseAndImageCategory.imageCategoryObject);
                 await _context.SaveChangesAsync();
                 result = 1;
             }
@@ -86,5 +78,82 @@ namespace NganHangNhaTro_G20.Controllers
             return result;
 
         }
+
+
+        // Chi tiết======================================================================================
+        public class ListHouseAndImageCategory
+        {
+            public List<House> Houses { get; set; }
+            public List<ImageCategory> ImageCategories { get; set; }
+        }
+        [HttpGet]
+        public JsonResult ChiTiet(Guid houseId)
+        {
+            var data = new ListHouseAndImageCategory();
+
+            data.Houses = _context.Houses.
+                Where(a => a.Id.Equals(houseId)).ToList();
+            data.ImageCategories = _context.ImageCategories.
+                Where(a => a.HouseId.Equals(houseId)).ToList();
+
+            return Json(data);
+        }
+
+
+
+        // Cập nhật========================================================================================
+        [HttpPost]
+        public async Task<int> CapNhat([FromBody] HouseAndImageCategory houseAndImageCategory)
+        {
+            var result = -1;
+
+            try
+            {
+                _context.Houses.Update(houseAndImageCategory.houseObject);
+                _context.ImageCategories.Update(houseAndImageCategory.imageCategoryObject);
+                await _context.SaveChangesAsync();
+                result = 1;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!HouseExists(houseAndImageCategory.houseObject.Id))
+                {
+                    result = 0;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return result;
+        }
+
+        // Xóa=====================================================================================================
+        [HttpPost]
+
+        public async Task<int> DeleteConfirmed(Guid houseId)
+        {
+            var result = -1;
+            var house = await _context.Houses.FindAsync(houseId);
+            if (house != null)
+            {
+                _context.Houses.Remove(house);
+                await _context.SaveChangesAsync();
+                result = 1;
+            }
+            else
+            {
+                result = 0;
+            }
+
+            return result;
+        }
+
+
+        private bool HouseExists(Guid houseId)
+        {
+            return (_context.Houses?.Any(e => e.Id == houseId)).GetValueOrDefault();
+        }
+
     }
 }

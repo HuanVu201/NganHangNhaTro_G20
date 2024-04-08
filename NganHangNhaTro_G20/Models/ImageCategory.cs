@@ -10,7 +10,7 @@ namespace NganHangNhaTro_G20.Models
         [Column(TypeName = "nvarchar(MAX)")]
         public string? Url { get; set; }
         [Column(TypeName = "varchar(50)")]
-        public string HouseId { get; set; }
+        public Guid HouseId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
     }

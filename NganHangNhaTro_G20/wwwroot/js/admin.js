@@ -150,25 +150,25 @@
                 },
                 {
                     data: null, render: function (data, type, row, meta) {
-                        return "<span data-toggle='modal' TypeId='" + data.OwnerId + "' class='dataRow'>" + data.HouseType + "</span>";
+                        return "<span data-toggle='modal'  class='dataRow'>" + data.HouseType + "</span>";
                     }
                 },
 
                 {
                     data: null, render: function (data, type, row, meta) {
-                        return "<span data-toggle='modal' price='" + data.Price + "' class='dataRow'>" + data.Price + "</span>";
+                        return "<span data-toggle='modal' class='dataRow'>" + data.Price + "</span>";
                     }
 
                 },
                 {
                     data: null, render: function (data, type, row, meta) {
-                        return "<span data-toggle='modal' des='" + data.Desciption + "' class='dataRow'>" + data.Desciption + "</span>";
+                        return "<span data-toggle='modal'  class='dataRow'>" + data.Desciption + "</span>";
                     }
 
                 },
                 {
                     data: null, render: function (data, type, row, meta) {
-                        return "<span data-toggle='modal' status='" + data.HouseStatusId + "' class='dataRow'>" + data.HouseStatus + "</span>";
+                        return "<span data-toggle='modal'  class='dataRow'>" + data.HouseStatus + "</span>";
                     }
 
                 },
@@ -176,7 +176,7 @@
                     data: null, render: function (data, type, row, meta) {
                         return "<a href='' id='btnDetail' idHouse='" + data.Id + "'  style='margin: 10px;cursor: pointer;'><i class='fas fa-info-circle'></i></a>"
                             + "<a href='' id='btnEdit' idHouse='" + data.Id + "' style='margin: 10px;cursor: pointer;'><i class='fas fa-edit'></i></a>"
-                            + "<a href='' id='btnDelete' idHouse='" + data.Id + "' style='margin: 10px;cursor: pointer;'><i class='fas fa-trash'></i></a>";
+                            + "<a href='' id='btnDelete' idHouse='" + data.Id + "' ownerName='" + data.OwnerName + "' ownerPhone='" + data.OwnerPhone + "' style='margin: 10px;cursor: pointer;'><i class='fas fa-trash'></i></a>";
                     }
                 },
 
@@ -216,8 +216,8 @@
         $('#Acreage').attr("readonly", false);
         $('#Price').attr("readonly", false);
         $('#Desciption').attr("readonly", false);
-        $('#HouseType option:not(:selected)').attr("disabled", false);
-        $('#HouseStatus option:not(:selected)').attr("disabled", false);
+        $('#HouseType').attr("disabled", false);
+        $('#HouseStatus').attr("disabled", false);
         $('#OwnerName').attr("readonly", false);
         $('#OwnerPhone').attr("readonly", false);
         $('#ImageCategory').attr("readonly", false);
@@ -279,6 +279,219 @@
         });
     });
 
+
+    //=====================================================================================================
+    //MODAL EDIT
+    $(document).on('click', '#btnEdit', function (e) {
+
+        e.preventDefault();
+
+        var requestID = $(this).attr('idHouse');
+
+
+        const callAPIDetail = async () => {
+            try {
+
+                $.ajax({
+                    url: '/Admin/ChiTiet',
+                    type: 'GET',
+                    data: { houseId: requestID },
+                    success: function (data) {
+                        console.log('zo')
+                        $('#myModalCRUD').modal('show');
+                        $('.modal-title').html('Cập nhật thông tin phòng');
+                        $('.modal-footer').html(
+                            "<button type='button' class='btn btn-primary' id='btnUpdate'>Cập nhật</button>"
+                            + "<button type = 'button' class='btn btn-default' data-dismiss='modal'>Đóng</button >"
+                        );
+
+                        $('#HouseTitle').val(data.houses[0].houseTitle);
+                        $('#OfLocationId').val(data.houses[0].ofLocationId);
+                        $('#Address').val(data.houses[0].address);
+                        $('#Acreage').val(data.houses[0].acreage);
+                        $('#Price').val(data.houses[0].price);
+                        $('#Desciption').val(data.houses[0].desciption);
+                        $('#HouseType').val(data.houses[0].houseType);
+                        $('#HouseStatus').val(data.houses[0].houseStatus);
+                        $('#OwnerName').val(data.houses[0].ownerName);
+                        $('#OwnerPhone').val(data.houses[0].ownerPhone);
+                        $('#ImageCategory').val(data.imageCategories[0].url);
+
+                        $('#HouseTitle').attr("readonly", false);
+                        $('#OfLocationId').attr("readonly", true);
+                        $('#Address').attr("readonly", false);
+                        $('#Acreage').attr("readonly", false);
+                        $('#Price').attr("readonly", false);
+                        $('#Desciption').attr("readonly", false);
+                        $('#HouseType').attr("disabled", false);
+                        $('#HouseStatus').attr("disabled", false);
+                        $('#OwnerName').attr("readonly", false);
+                        $('#OwnerPhone').attr("readonly", false);
+                        $('#ImageCategory').attr("readonly", false);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi khi lấy chi tiết: " + error);
+                    }
+                });
+            }
+            catch (error) {
+                console.log("Error detail: " + error);
+            }
+        }
+        callAPIDetail();
+
+
+
+        $(document).on('click', '#btnUpdate', function (e) {
+            var check = formValidate();
+            if (check == false) {
+                return false;
+            }
+
+            var houseObject = {
+                id: requestID,
+                houseTitle: $('#HouseTitle').val(),
+                ofLocationId: $('#OfLocationId').val(),
+                address: $('#Address').val(),
+                acreage: $('#Acreage').val(),
+                price: $('#Price').val(),
+                desciption: $('#Desciption').val(),
+                houseType: $('#HouseType').val(),
+                houseStatus: $('#HouseStatus').val(),
+                ownerName: $('#OwnerName').val(),
+                ownerPhone: $('#OwnerPhone').val(),
+
+            };
+
+            var imageCategoryObject = {
+                url: $('#ImageCategory').val(),
+                houseId: requestID
+            }
+
+            $.ajax({
+                url: '/Admin/CapNhat',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    HouseObject: houseObject,
+                    ImageCategoryObject: imageCategoryObject
+                }),
+
+                success: function (data) {
+                    if (data != 1) {
+                        console.log(data.description);
+                        alert("Cập nhật thất bại!");
+                        return;
+                    }
+
+                    $('#myModalCRUD').modal('hide');
+                    alert('Cập nhật thành công!');
+                    //location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Lỗi khi cập nhật: " + error);
+                    alert("Cập nhật thất bại!");
+                }
+            });
+
+
+        });
+    });
+
+    //=====================================================================================================
+    //MODAL DETAIL
+    $(document).on('click', '#btnDetail', function (e) {
+        e.preventDefault();
+
+        var requestID = $(this).attr('idHouse');
+
+        const callAPIDetail = async () => {
+            try {
+
+                $.ajax({
+                    url: '/Admin/ChiTiet',
+                    type: 'GET',
+                    data: { houseId: requestID },
+                    success: function (data) {
+                        console.log('zo')
+                        $('#myModalCRUD').modal('show');
+                        $('.modal-title').html('Chi tiết thông tin phòng');
+                        $('.modal-footer').html("<button type = 'button' class='btn btn-default' data-dismiss='modal'>Đóng</button >");
+
+                        $('#HouseTitle').val(data.houses[0].houseTitle);
+                        $('#OfLocationId').val(data.houses[0].ofLocationId);
+                        $('#Address').val(data.houses[0].address);
+                        $('#Acreage').val(data.houses[0].acreage);
+                        $('#Price').val(data.houses[0].price);
+                        $('#Desciption').val(data.houses[0].desciption);
+                        $('#HouseType').val(data.houses[0].houseType);
+                        $('#HouseStatus').val(data.houses[0].houseStatus);
+                        $('#OwnerName').val(data.houses[0].ownerName);
+                        $('#OwnerPhone').val(data.houses[0].ownerPhone);
+                        $('#ImageCategory').val(data.imageCategories[0].url);
+
+                        $('#HouseTitle').attr("readonly", true);
+                        $('#OfLocationId').attr("readonly", true);
+                        $('#Address').attr("readonly", true);
+                        $('#Acreage').attr("readonly", true);
+                        $('#Price').attr("readonly", true);
+                        $('#Desciption').attr("readonly", true);
+                        $('#HouseType').attr("disabled", true);
+                        $('#HouseStatus').attr("disabled", true);
+                        $('#OwnerName').attr("readonly", true);
+                        $('#OwnerPhone').attr("readonly", true);
+                        $('#ImageCategory').attr("readonly", true);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi khi lấy chi tiết: " + error);
+                    }
+                });
+            }
+            catch (error) {
+                console.log("Error detail: " + error);
+            }
+        }
+        callAPIDetail();
+
+
+    });
+
+
+    //=====================================================================================================
+    //DELETE FUNCTION
+    $(document).on('click', '#btnDelete', function (e) {
+        e.preventDefault();
+        var requestID = $(this).attr('idHouse');
+
+        const url = "/Admin/DeleteConfirmed?houseId=" + requestID;
+
+
+        var ownerName = $(this).attr('ownerName');
+        var ownerPhone = $(this).attr('ownerPhone');
+        var answer = confirm("Bạn có chắc muốn xóa phòng của " + ownerName + " (" + ownerPhone + ") này không?");
+        if (answer) {
+            const callAPIDelete = async () => {
+                try {
+                    const response = await fetch(url, { method: "POST" });
+                    const data = await response.text();
+
+                    if (data != 1) {
+                        console.log(data.description)
+                        alert("Xóa thất bại!");
+                        return;
+                    }
+
+                    alert('Xóa thành công!');
+                } catch (error) {
+                    console.log("Xóa thất bại!" + error);
+                    alert("Xóa thất bại!");
+
+                }
+            }
+            callAPIDelete();
+
+        }
+    });
 
 
     $(document).on('click', '.btnThemMoi', function (e) {
