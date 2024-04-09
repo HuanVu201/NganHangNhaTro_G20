@@ -20,8 +20,6 @@ namespace NganHangNhaTro_G20.Models
         public string Price { get; set; }
         [Column(TypeName = "nvarchar(MAX)")]
         public string Desciption { get; set; }
-        //[Column(TypeName = "varchar(1000")]
-        //public string? Rate { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string HouseStatus { get; set; }
         [Column(TypeName = "nvarchar(100)")]
@@ -32,11 +30,6 @@ namespace NganHangNhaTro_G20.Models
         public string OwnerPhone { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
-        //public virtual HouseStatus HouseStatus { get; set; }
-        //public virtual HouseType HouseType { get; set; }
-        //public virtual User Owner { get; set; }
-        //public virtual User Poster { get; set; }
-        //public virtual ImageCategory ImageCategory { get; set; }
 
     }
 }

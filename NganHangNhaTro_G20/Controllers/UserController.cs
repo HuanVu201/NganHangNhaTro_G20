@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using NganHangNhaTro_G20.Models;
 using NganHangNhaTro_G20.ViewModels;
 
@@ -7,13 +8,13 @@ namespace NganHangNhaTro_G20.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ProjectDbContext _dbContext;
-        public UserController(ProjectDbContext dbContext)
+        private readonly ProjectDbContext _context;
+        public UserController(ProjectDbContext context)
         {
-            _dbContext = dbContext;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult UserManage()
         {
             return View();
         }
@@ -23,7 +24,7 @@ namespace NganHangNhaTro_G20.Controllers
             {
                 var email = HttpContext.Session.GetString("Username");
                 User user = new User();
-                user = _dbContext.Users.FirstOrDefault(u => u.Email == email);
+                user = _context.Users.FirstOrDefault(u => u.Email == email);
                 if (user != null)
                 {
                     return View(user);
@@ -40,13 +41,13 @@ namespace NganHangNhaTro_G20.Controllers
                 List<BookingCalender> bookingCalenders = new List<BookingCalender>();
                 List<BookingViewModel> bookingViewModels = new List<BookingViewModel>();
                 var email = HttpContext.Session.GetString("Username");
-                user = _dbContext.Users.FirstOrDefault(u => u.Email == email);
+                user = _context.Users.FirstOrDefault(u => u.Email == email);
                 if (user != null)
                 {
-                    bookingCalenders = _dbContext.BookingCalenders.Where(b => b.CustomerId == user.Id).ToList();
+                    bookingCalenders = _context.BookingCalenders.Where(b => b.CustomerId == user.Id).ToList();
                     foreach (var bookingCalender in bookingCalenders)
                     {
-                        House house = _dbContext.Houses.FirstOrDefault(h => h.Id == bookingCalender.HouseId);
+                        House house = _context.Houses.FirstOrDefault(h => h.Id == bookingCalender.HouseId);
                         if (house != null)
                         {
                             BookingViewModel bookingViewModel = new BookingViewModel();
@@ -74,19 +75,39 @@ namespace NganHangNhaTro_G20.Controllers
             if (HttpContext.Session.GetString("Username") != null)
             {
                 var email = HttpContext.Session.GetString("Username");
-                var user = _dbContext.Users.FirstOrDefault(u => u.Email == email);
+                var user = _context.Users.FirstOrDefault(u => u.Email == email);
                 if (user != null)
                 {
-                    var booking = _dbContext.BookingCalenders.FirstOrDefault(b => b.Id == bookingId && b.CustomerId == user.Id);
+                    var booking = _context.BookingCalenders.FirstOrDefault(b => b.Id == bookingId && b.CustomerId == user.Id);
                     if (booking != null)
                     {
-                        _dbContext.BookingCalenders.Remove(booking);
-                        _dbContext.SaveChanges();
+                        _context.BookingCalenders.Remove(booking);
+                        _context.SaveChanges();
                         return RedirectToAction("UserInfoHouseBooking");
                     }
                 }
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        //DataTable=====================================================================================
+        [HttpGet]
+        public string GetListUser()
+        {
+            List<User> users = _context.Users.ToList();
+            var value = JsonConvert.SerializeObject(new { data = users });
+
+            return value;
+        }
+
+
+        //Chi tiết=====================================================================================
+        [HttpGet]
+        public JsonResult ChiTiet(Guid userId)
+        {
+            List<User> users = _context.Users.Where(a => a.Id.Equals(userId)).ToList();
+
+            return Json(users);
         }
     }
 }
