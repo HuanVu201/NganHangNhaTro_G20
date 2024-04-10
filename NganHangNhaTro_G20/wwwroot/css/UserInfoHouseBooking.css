@@ -5,6 +5,7 @@
 }
 
 .user-info-booking-row-2 {
+    overflow-y:scroll;
     border: 1px solid #d2d4d2;
 }
 
