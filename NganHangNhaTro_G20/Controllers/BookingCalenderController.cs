@@ -23,7 +23,7 @@ namespace NganHangNhaTro_G20.Controllers
 
         //DataTable=====================================================================================
         [HttpGet]
-        public string GetBookings()
+        public JsonResult GetBookings()
         {
             var bookingDetails = (from bc in _context.BookingCalenders
                                   join u in _context.Users on bc.CustomerId equals u.Id
@@ -37,8 +37,8 @@ namespace NganHangNhaTro_G20.Controllers
                                       customerName = u.Name,
                                       customerPhone = u.PhoneNumber,
                                   }).ToList();
-            var value = JsonConvert.SerializeObject(new { data = bookingDetails });
-            return value;
+            //var value = JsonConvert.SerializeObject(new { data = bookingDetails });
+            return Json(new { data = bookingDetails });
         }
 
 

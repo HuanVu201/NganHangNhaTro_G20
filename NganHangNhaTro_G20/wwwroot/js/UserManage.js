@@ -56,39 +56,41 @@
             },
             {
                 data: null, render: function (data, type, row, meta) {
-                    return "<span data-toggle='modal'  class='dataRow'>" + data.houseType + "</span>";
+                    return "<span data-toggle='modal'  class='dataRow'>" + data.Name + "</span>";
                 }
             },
 
             {
                 data: null, render: function (data, type, row, meta) {
-                    return "<span data-toggle='modal' class='dataRow'>" + data.housePrice + "</span>";
+                    return "<span data-toggle='modal' class='dataRow'>" + data.PhoneNumber + "</span>";
                 }
 
             },
             {
                 data: null, render: function (data, type, row, meta) {
-                    return "<span data-toggle='modal'  class='dataRow'>" + data.customerName + "</span>";
+                    return "<span data-toggle='modal'  class='dataRow'>" + data.Gender + "</span>";
                 }
 
             },
             {
                 data: null, render: function (data, type, row, meta) {
-                    return "<span data-toggle='modal'  class='dataRow'>" + data.customerPhone + "</span>";
+                    return "<span data-toggle='modal'  class='dataRow'>" + data.RoleId + "</span>";
                 }
 
             },
             {
                 data: null, render: function (data, type, row, meta) {
                     console.log(data.customerId)
-                    return "<a href='' id='btnDetail' idHouse='" + data.Id + "'  style='margin: 10px;cursor: pointer;'><i class='fas fa-info-circle'></i></a>"
-                        + "<a href='' id='btnEdit' idHouse='" + data.Id + "' style='margin: 10px;cursor: pointer;'><i class='fas fa-edit'></i></a>"
-                        + "<a href='' id='btnDelete' idHouse='" + data.Id + "' ownerName='" + data.OwnerName + "' ownerPhone='" + data.OwnerPhone + "' style='margin: 10px;cursor: pointer;'><i class='fas fa-trash'></i></a>";
+                    return "<a href='' id='btnListBooking' idUser='" + data.Id + "' style='margin: 10px; cursor: pointer;'><i class='fas fa-clinic-medical'></i></a>"
+                        + "<a href='' id='btnDetail' idUser='" + data.Id + "' style='margin: 10px; cursor: pointer;'><i class='fas fa-info-circle'></i></a>"
+                        + "<a href='' id='btnEdit' idUser='" + data.Id + "' style='margin: 10px;cursor: pointer;'><i class='fas fa-edit'></i></a>"
+                        + "<a href='' id='btnDelete' idUser='" + data.Id + "' userName='"+ data.Name +"' style='margin: 10px;cursor: pointer;'><i class='fas fa-trash'></i></a>";
                 }
             },
 
         ]
     });
+
 
     //=====================================================================================================
     //MODAL EDIT
@@ -96,52 +98,37 @@
 
         e.preventDefault();
 
-        var requestIdBooking = $(this).attr('idBookingCalender');
-        var requestIdCustomer = $(this).attr('idCustomer');
+        var requestID = $(this).attr('idUser');
 
 
         const callAPIDetail = async () => {
             try {
 
                 $.ajax({
-                    url: '/BookingCalender/ChiTiet',
+                    url: '/User/ChiTiet',
                     type: 'GET',
-                    data: { bookingCalendersId: requestIdBooking },
+                    data: { userId: requestID },
                     success: function (data) {
                         $('#myModalCRUD').modal('show');
-                        $('.modal-title').html('Cập nhật đặt phòng');
+                        $('.modal-title').html('Cập nhật thông tin người dùng');
                         $('.modal-footer').html(
-                            "<button type='button' class='btn btn-primary' id='btnUpdate'>Đã xử lý</button>"
+                            "<button type='button' class='btn btn-primary' id='btnUpdate'>Cập nhật</button>"
                             + "<button type = 'button' class='btn btn-default' data-dismiss='modal'>Đóng</button >"
                         );
 
-                        $('#CustomerName').val(data[0].customerName);
-                        $('#CustomerPhone').val(data[0].customerPhone);
-                        $('#CustomerEmail').val(data[0].customerEmail);
-                        $('#Note').val(data[0].bookingNote);
-                        $('#OwnerName').val(data[0].ownerName);
-                        $('#OwnerPhone').val(data[0].ownerPhone);
-                        $('#HouseTitle').val(data[0].houseTitle);
-                        $('#LocationName').val(data[0].locationName);
-                        $('#Address').val(data[0].address);
-                        $('#Acreage').val(data[0].acreage);
-                        $('#Price').val(data[0].price);
-                        $('#Desciption').val(data[0].description);
-                        $('#HouseType').val(data[0].houseType);
+                        $('#Name').val(data[0].name);
+                        $('#PhoneNumber').val(data[0].phoneNumber);
+                        $('#Email').val(data[0].email);
+                        $('#Password').val(data[0].password);
+                        $('#Gender').val(data[0].gender);
+                        $('#Role').val(data[0].roleId);
 
-                        $('#CustomerName').attr("readonly", true);
-                        $('#CustomerPhone').attr("readonly", true);
-                        $('#CustomerEmail').attr("readonly", true);
-                        $('#Note').attr("readonly", true);
-                        $('#OwnerName').attr("readonly", true);
-                        $('#OwnerPhone').attr("readonly", true);
-                        $('#HouseTitle').attr("readonly", true);
-                        $('#LocationName').attr("readonly", true);
-                        $('#Address').attr("readonly", true);
-                        $('#Acreage').attr("readonly", true);
-                        $('#Price').attr("readonly", true);
-                        $('#Desciption').attr("readonly", true);
-                        $('#HouseType').attr("disabled", true);
+                        $('#Name').attr("readonly", true);
+                        $('#PhoneNumber').attr("readonly", true);
+                        $('#Email').attr("readonly", false);
+                        $('#Password').attr("readonly", false);
+                        $('#Gender').attr("disabled", false);
+                        $('#Role').attr("disabled", false);
                     },
                     error: function (xhr, status, error) {
                         console.error("Lỗi khi lấy chi tiết: " + error);
@@ -157,47 +144,180 @@
 
 
         $(document).on('click', '#btnUpdate', function (e) {
-            let checkAction = 1;
-            var answer = confirm("Bạn đã xử lý xong lịch đặt phòng này?");
-            if (answer) {
+            var check = formValidate();
+            if (check == false) {
+                alert("Vui lòng điền đầy đủ thông tin!");
+                return false;
+            }
 
-                const callAPIDelete = async () => {
-                    try {
-                        const response = await fetch(`/BookingCalender/RemoveBookingHouse?bookingCalendersId=${requestIdBooking}&customerId=${requestIdCustomer}`, { method: "POST" });
-                        const data = await response.text();
-                        if (checkAction == 1) {
-                            checkAction = data;
-                        }
-                    } catch (error) {
-                        console.log("(RemoveBookingHouse) Lỗi khi cập nhật: " + error);
-                        alert("Xóa thất bại!");
+            var userObject = {
+                id: requestID,
+                name: $('#Name').val(),
+                phoneNumber: $('#PhoneNumber').val(),
+                email: $('#Email').val(),
+                password: $('#Password').val(),
+                gender: $('#Gender').val(),
+                roleId: $('#Role').val()
 
+            };
+
+            $.ajax({
+                url: '/User/CapNhat',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(userObject),
+
+                success: function (data) {
+                    if (data != 1) {
+                        console.log(data.description);
+                        alert("Cập nhật thất bại!");
+                        return;
                     }
 
-
-                    try {
-                        const response = await fetch(`/BookingCalender/DeleteConfirmed?bookingCalendersId=${requestIdBooking}`, { method: "POST" });
-                        const data = await response.text();
-                        if (checkAction == 1) {
-                            checkAction = data;
-                        }
-                    } catch (error) {
-                        console.log("(DeleteConfirmed) Lỗi khi cập nhật: " + error);
-
-                    }
-                };
-                callAPIDelete();
-
-
-                if (checkAction == 1) {
                     $('#myModalCRUD').modal('hide');
-                    alert('Xác nhận xử lý thành công!');
-                }
-                else {
+                    alert('Cập nhật thành công!');
+                    //location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Lỗi khi cập nhật: " + error);
                     alert("Cập nhật thất bại!");
                 }
-            };
+            });
+
+
         });
     });
 
+
+    //=====================================================================================================
+    //MODAL DETAIL
+    $(document).on('click', '#btnDetail', function (e) {
+        e.preventDefault();
+
+        var requestID = $(this).attr('idUser');
+
+        const callAPIDetail = async () => {
+            try {
+
+                $.ajax({
+                    url: '/User/ChiTiet',
+                    type: 'GET',
+                    data: { userId: requestID },
+                    success: function (data) {
+                        console.log('zo')
+                        $('#myModalCRUD').modal('show');
+                        $('.modal-title').html('Thông tin người dùng');
+                        $('.modal-footer').html("<button type = 'button' class='btn btn-default' data-dismiss='modal'>Đóng</button >");
+
+                        $('#Name').val(data[0].name);
+                        $('#PhoneNumber').val(data[0].phoneNumber);
+                        $('#Email').val(data[0].email);
+                        $('#Password').val(data[0].password);
+                        $('#Gender').val(data[0].gender);
+                        $('#Role').val(data[0].roleId);
+
+                        $('#Name').attr("readonly", true);
+                        $('#PhoneNumber').attr("readonly", true);
+                        $('#Email').attr("readonly", true);
+                        $('#Password').attr("readonly", true);
+                        $('#Gender').attr("disabled", true);
+                        $('#Role').attr("disabled", true);
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi khi lấy chi tiết: " + error);
+                    }
+                });
+            }
+            catch (error) {
+                console.log("Error detail: " + error);
+            }
+        }
+        callAPIDetail();
+
+
+    });
+
+
+    //=====================================================================================================
+    //DELETE FUNCTION
+    $(document).on('click', '#btnDelete', function (e) {
+        e.preventDefault();
+        var requestID = $(this).attr('idUser');
+
+        const url = "/User/DeleteConfirmed?userId=" + requestID;
+
+
+        var userName = $(this).attr('userName');
+        var answer = confirm("Bạn có chắc muốn xóa người dùng " + userName + " không?");
+        if (answer) {
+            const callAPIDelete = async () => {
+                try {
+                    const response = await fetch(url, { method: "POST" });
+                    const data = await response.text();
+
+                    if (data != 1) {
+                        console.log(data.description)
+                        alert("Xóa thất bại!");
+                        return;
+                    }
+
+                    alert(`Xóa thành công ${userName}!`);
+                } catch (error) {
+                    console.log("Xóa thất bại!" + error);
+                    alert("Xóa thất bại!");
+
+                }
+            }
+            callAPIDelete();
+
+        }
+    });
+
+
+    //=====================================================================================================
+    //Valdidation  
+    function formValidate() {
+        var isValid = true;
+        if ($('#Name').val().trim() == "") {
+            $('#Name').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Name').css('border-color', 'lightgrey');
+        }
+
+        if ($('#PhoneNumber').val().trim() == "") {
+            $('#PhoneNumber').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#PhoneNumber').css('border-color', 'lightgrey');
+        }
+
+        if ($('#Email').val().trim() == "") {
+            $('#Email').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Email').css('border-color', 'lightgrey');
+        }
+        if ($('#Gender').val().trim() == "") {
+            $('#Gender').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Gender').css('border-color', 'lightgrey');
+        }
+
+        if ($('#Role').val().trim() == "") {
+            $('#Role').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Role').css('border-color', 'lightgrey');
+        }
+        
+        return isValid;
+    }
 });

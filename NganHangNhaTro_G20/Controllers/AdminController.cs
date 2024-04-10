@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NganHangNhaTro_G20.Models;
 
 namespace NganHangNhaTro_G20.Controllers

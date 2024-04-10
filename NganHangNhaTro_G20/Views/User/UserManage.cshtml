@@ -34,66 +34,39 @@
             <div class="modal-body">
                 <form id="form">
                     <div class="form-group inputBlock">
-                        <label for="CustomerName">Tên khách</label>
-                        <input type="text" class="form-control inputContent" id="CustomerName" name="Customer" placeholder="" />
+                        <label for="Name">Họ và tên</label>
+                        <input type="text" class="form-control inputContent" id="Name" name="Name" placeholder="" />
                     </div>
                     <div class="form-group inputBlock">
-                        <label for="CustomerPhone">Số điện thoại khách</label>
-                        <input type="text" class="form-control inputContent" id="CustomerPhone" name="CustomerPhone" placeholder="" />
+                        <label for="PhoneNumber">Số điện thoại</label>
+                        <input type="text" class="form-control inputContent" id="PhoneNumber" name="PhoneNumber" placeholder="" />
                     </div>
                     <div class="form-group inputBlock">
-                        <label for="CustomerEmail">Email khách</label>
-                        <input type="text" class="form-control inputContent" id="CustomerEmail" name="CustomerEmail" placeholder="" />
+                        <label for="Email">Email</label>
+                        <input type="text" class="form-control inputContent" id="Email" name="Email" placeholder="" />
                     </div>
                     <div class="form-group inputBlock">
-                        <label for="Note">Ghi chú</label>
-                        <input type="text" class="form-control inputContent" id="Note" name="Note" placeholder="" />
+                        <label for="Password">Mật khẩu</label>
+                        <input type="text" class="form-control inputContent" id="Password" name="Password" placeholder="" />
                     </div>
                     <div class="form-group inputBlock">
-                        <label for="OwnerName">Tên chủ sở hữu</label>
-                        <input type="text" class="form-control inputContent" id="OwnerName" name="OwnerName" placeholder="" />
+                        <label for="Gender">Giới tính</label>
+                        <select name="Gender" id="Gender" class="form-control selectContent">
+                            <option value="Nam" selected>Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
                     </div>
                     <div class="form-group inputBlock">
-                        <label for="OwnerPhone">Số điện thoại</label>
-                        <input type="text" class="form-control inputContent" id="OwnerPhone" name="OwnerPhone" placeholder="" />
-                    </div>
-                    <div class="form-group inputBlock">
-                        <label for="HouseTitle">Tiêu đề</label>
-                        <input type="text" class="form-control inputContent" id="HouseTitle" name="HouseTitle" placeholder="" />
-                    </div>
-                    <div class="form-group inputBlock">
-                        <label for="LocationName">Nhóm địa bàn</label>
-                        <input type="text" class="form-control inputContent" id="LocationName" name="LocationName" placeholder="" />
-                    </div>
-                    <div class="form-group inputBlock">
-                        <label for="Address">Địa chỉ chi tiết:</label>
-                        <input type="text" class="form-control inputContent" id="Address" name="Address" placeholder="" />
-                    </div>
-                    <div class="form-group inputBlock">
-                        <label for="Acreage">Diện ích</label>
-                        <input type="number" class="form-control inputContent" id="Acreage" name="Acreage" placeholder="" />
-                    </div>
-                    <div class="form-group inputBlock">
-                        <label for="Price">Giá</label>
-                        <input type="text" class="form-control inputContent" id="Price" name="Price" placeholder="" />
-                    </div>
-                    <div class="form-group inputBlock">
-                        <label for="Desciption">Mô tả</label>
-                        <input type="text" class="form-control inputContent" id="Desciption" name="Desciption" placeholder="" />
-                    </div>
-                    <div class="form-group inputBlock">
-                        <label for="HouseType">Loại phòng</label>
-                        <select name="HouseType" id="HouseType" class="form-control selectContent">
-                            <option value="Nhà dân sinh" selected>Nhà dân sinh</option>
-                            <option value="CCMN">CCMN</option>
-                            <option value="Nhà khu tập thể">Nhà khu tập thể</option>
-                            <option value="Ký túc xá">Ký túc xá</option>
+                        <label for="Role">Quyền</label>
+                        <select name="Role" id="Role" class="form-control selectContent">
+                            <option value="role1">Admin</option>
+                            <option value="role2" selected>Customer</option>
                         </select>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btnUpdate" style="display: none">Đã xử lý</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display: none">Cập nhật</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
             </div>
         </div>
