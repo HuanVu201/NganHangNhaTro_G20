@@ -21,7 +21,7 @@
         <div class="title-user">
             <h1>Danh sách phòng đã thuê</h1>
         </div>
-        <div class="text-info-user-booking">
+        <div  class="text-info-user-booking">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -44,8 +44,7 @@
                             <td>@booking.houseTittle</td>
                             <td>
                                 <i id="edit-house-booking" class="far fa-edit"></i>
-                                <i id="delete-house-booking" class="fas fa-trash-alt" data-booking-id="@booking.bookingId"></i>
-                                <button onclick="DeleteBooking('@booking.bookingId.ToString("D")')">Delete</button>
+                                <i onclick="DeleteBooking('@booking.bookingId.ToString("D")')" id="delete-house-booking" class="fas fa-trash-alt" data-booking-id="@booking.bookingId"></i>
                             </td>
                         </tr>
                     }

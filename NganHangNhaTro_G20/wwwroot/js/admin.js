@@ -498,9 +498,9 @@
         e.preventDefault();
         $('#myModalBookingCalender').modal('show');
 
-        $('.modal-title').html('Đặt lịch xem phòng');
+        $('.modal-title').html('Thêm Phòng');
         $('.modal-footer').html(
-            "<button type='button' class='btn btn-primary' id='btnAdd'>Book lịch ngay</button>"
+            "<button type='button' class='btn btn-primary' id='btnAdd'>Thêm Ngay</button>"
             + "<button type = 'button' class='btn btn-default' data-dismiss='modal' > Đóng</button >"
         )
 

@@ -110,6 +110,13 @@
                 </div>
             </div>
         }
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div style="margin-top:1rem" class="alert alert-success" role="alert">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+      
         <div id="note">
             <h4>Lưu ý:</h4>
             <p>

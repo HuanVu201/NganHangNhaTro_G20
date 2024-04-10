@@ -13,15 +13,8 @@ imgSmalls.forEach((item, index) => {
 
 $(document).ready(function () {
     $("#book_room").click(function () {
-        $("#bookingModal").modal('show');
-    });
-    $("#Xacnhandatphong").click(function () {
         $("#bookingModal").modal('hide');
-        setTimeout(function () {
-        alert("Đã Đặt Phòng");
-        }, 1000);
     });
-
     
     setInterval(function () {
         $('#houseDetail_login').toggleClass('color-changing');
