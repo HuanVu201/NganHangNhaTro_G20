@@ -13,7 +13,7 @@ imgSmalls.forEach((item, index) => {
 
 $(document).ready(function () {
     $("#book_room").click(function () {
-        $("#bookingModal").modal('hide');
+        $("#bookingModal").modal('show');
     });
     
     setInterval(function () {
