@@ -51,16 +51,25 @@
         </div>
        
         <!-- <div class="id">Google Map</div> -->
-        @if (Context.Session.GetString("Username") == null)
+        @if (Context.Session.GetString("Username") != null)
         {
-            <div >
-                <div id="book_login" ><a id="houseDetail_login" class="" asp-area="" asp-controller="Access" asp-action="Login">Đăng nhập ngay để đặt phòng</a></div>
-            </div>
+            @if (Model.IsScheduled == true)
+            {
+                <div>
+                    <div style="text-align:center">Phòng đã được đặt</div>
+                </div>
+            } else
+            {
+                <div>
+                    <div style="text-align:center" id="book_room">Đặt Phòng</div>
+                </div>
+            }
+
         }
         else
         {
             <div>
-                <div style="text-align:center" id="book_room">Đặt Phòng</div>
+                <div id="book_login"><a id="houseDetail_login" class="" asp-area="" asp-controller="Access" asp-action="Login">Đăng nhập ngay để đặt phòng</a></div>
             </div>
         }
 

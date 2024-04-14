@@ -19,6 +19,8 @@ namespace NganHangNhaTro_G20.Controllers
             {
                 HttpContext.Session.SetString("Username", model.Email.ToString());
                 HttpContext.Session.SetString("NameLogined", user.Name);
+                HttpContext.Session.SetString("Role", user.RoleId);
+                HttpContext.Session.SetString("UserId", user.Id.ToString());
                 Console.WriteLine("Session Username: " + HttpContext.Session.GetString("Username"));
                 Console.WriteLine("Name: " +  user.Name);
                 return RedirectToAction("Index", "Home");
@@ -56,6 +58,7 @@ namespace NganHangNhaTro_G20.Controllers
                 ModelState.AddModelError("Email", "Địa chỉ Email đã tồn tại");
                 return View(model);
             }
+            model.RoleId = "role2";
             _dbContext.Users.Add(model);
             _dbContext.SaveChanges();
             LoginUser(model.Email, model.Password);
@@ -70,6 +73,8 @@ namespace NganHangNhaTro_G20.Controllers
             {
                 HttpContext.Session.SetString("Username", email);
                 HttpContext.Session.SetString("NameLogined", user.Name);
+                HttpContext.Session.SetString("Role", user.RoleId);
+                HttpContext.Session.SetString("UserId", user.Id.ToString());
                 Console.WriteLine("Session Username: " + HttpContext.Session.GetString("Username"));
                 Console.WriteLine("Name: " + user.Name);
             }
