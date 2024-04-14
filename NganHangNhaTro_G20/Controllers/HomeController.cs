@@ -24,8 +24,9 @@ namespace NganHangNhaTro_G20.Controllers
         }
         public JsonResult GetHouseData()
         {
-            var images = _context.ImageCategories.ToList();
-            var houses = _context.Houses.ToList();
+            var houses = _context.Houses.Where(h => h.HouseStatus == "Còn phòng").ToList();
+            var houseIds = houses.Select(h => h.Id).ToList();
+            var images = _context.ImageCategories.Where(ic => houseIds.Contains(ic.HouseId)).ToList();
             var viewHouseModel = new HouseViewModel
             {
                 Houses = houses,
