@@ -24,6 +24,23 @@
             </ul>
         </div>
     </div>
+    @using (Html.BeginForm("", "", FormMethod.Post))
+    {
+        <div id="ModifiedModal" style="font-size:1.5rem" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h6 style="color:#0481A0">Ghi Chú:</h6>
+                        <textarea id="node" name="note" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        <button type="submit" id="editUser" class="btn btn-primary">Sửa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
     <div class="user-info-booking-row-2  ">
         <div class="title-user">
             <h1>Danh sách phòng đã thuê</h1>
@@ -50,7 +67,7 @@
                             <td>@booking.houseCreatedAt</td>
                             <td>@booking.houseTittle</td>
                             <td>
-                                <i id="edit-house-booking" class="far fa-edit"></i>
+                                <i id="edit-house-booking" class="far fa-edit modifile"></i>
                                 <i onclick="DeleteBooking('@booking.bookingId.ToString("D")')" id="delete-house-booking" class="fas fa-trash-alt" data-booking-id="@booking.bookingId"></i>
                             </td>
                         </tr>
@@ -67,3 +84,4 @@
         }
     }
 </script>
+<script src="~/js/UserModifile.js"></script>
