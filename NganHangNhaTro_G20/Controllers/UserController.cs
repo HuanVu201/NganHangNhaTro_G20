@@ -98,10 +98,7 @@ namespace NganHangNhaTro_G20.Controllers
             List<User> users = _context.Users.ToList();
             foreach (var user in users)
             {
-                // Lấy RoleName từ RoleId của người dùng hiện tại
                 var roleName = _context.Roles.FirstOrDefault(r => r.Id == user.RoleId)?.Name;
-
-                // Gán RoleName cho người dùng
                 user.RoleId = roleName ?? "Không xác định";
             }
             var value = JsonConvert.SerializeObject(new { data = users });
@@ -142,7 +139,6 @@ namespace NganHangNhaTro_G20.Controllers
                             email = u.Email,
                             password = u.Password,
                             gender = u.Gender,
-                            bookingHouse = u.BookingHouse,
 
                             roleId = r.Id
 
@@ -176,20 +172,20 @@ namespace NganHangNhaTro_G20.Controllers
         [HttpPost]
         public JsonResult getDataTablesWithUserId(Guid userId)
         {
-            var listBooking = _context.Users.Where(u => u.Id == userId).FirstOrDefault().BookingHouse;
-            string[] houseIds = listBooking.Split(';');
+            var listBooking = _context.BookingCalenders.Where(bc => bc.CustomerId == userId).ToList();
+
             List<object> objectArray = new List<object>();
-            foreach (var bookingId in houseIds)
+            foreach (var booking in listBooking)
             {
-                if (!string.IsNullOrEmpty(bookingId))
+                if (!string.IsNullOrEmpty(booking.HouseId.ToString()))
                 {
                     var houseQuery = (from h in _context.Houses
                                       join l in _context.Locations on h.OfLocationId equals l.Id
-                                      where h.Id.ToString() == bookingId
-                                      select new 
+                                      where h.Id == booking.HouseId
+                                      select new
                                       {
                                           id = h.Id,
-                                          idBooking = bookingId,
+                                          idBooking = booking.Id,
                                           houseType = h.HouseType,
                                           houseStatus = h.HouseStatus,
                                           price = h.Price,

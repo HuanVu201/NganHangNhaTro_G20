@@ -18,8 +18,6 @@ namespace NganHangNhaTro_G20.Models
         public string? Gender { get; set; }
         [Column(TypeName = "varchar(1000)")]
         public string Password { get; set; }
-        [Column(TypeName = "varchar(MAX)")]
-        public string? BookingHouse { get; set; }
         [Column(TypeName = "varchar(20)")]
         public string RoleId { get; set; }
         public DateTime? CreatedAt { get; set; }
