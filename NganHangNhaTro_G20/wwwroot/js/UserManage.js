@@ -399,45 +399,25 @@
 
             const callAPIDelete = async () => {
                 try {
-                    const response = await fetch(`/BookingCalender/RemoveBookingHouse?bookingCalendersId=${requestIdBooking}&customerId=${requestIdUser}`, { method: "POST" });
+                    const response = await fetch(`/BookingCalender/DeleteConfirmed?bookingCalendersId=${requestIdBooking}`, { method: "POST" });
                     const data = await response.text();
-                    const response2 = await fetch(`/BookingCalender/DeleteConfirmed?bookingCalendersId=${requestIdBooking}`, { method: "POST" });
-                    const data2 = await response.text();
                     if (data != 1) {
                         checkAction = data;
                     }
-                    if (data2 != 1) {
-                        checkAction = data2;
-                    }
                 } catch (error) {
                     console.log("(RemoveBookingHouse) Lỗi khi cập nhật: " + error);
-                    alert("Xóa thất bại!");
+                    alert("Xóa thất bại1!");
 
                 }
-                if (checkAction == 1) {
-                    $('#myModalCRUD').modal('hide');
-                    alert('Xác nhận xóa thành công!');
-                }
-                else {
-                    alert("Xóa thất bại!");
-                }
-
-
-                //try {
-                //    const response = await fetch(`/BookingCalender/DeleteConfirmed?bookingCalendersId=${requestIdBooking}`, { method: "POST" });
-                //    const data = await response.text();
-                //    if (checkAction == 1) {
-                //        checkAction = data;
-                //    }
-                //} catch (error) {
-                //    console.log("(DeleteConfirmed) Lỗi khi cập nhật: " + error);
-
-                //}
             };
             callAPIDelete();
-
-
-            
+            if (checkAction == 1) {
+                $('#myModalCRUD').modal('hide');
+                alert('Xác nhận xóa thành công!');
+            }
+            else {
+                alert("Xóa thất bại2!");
+            }
         };
     });
 

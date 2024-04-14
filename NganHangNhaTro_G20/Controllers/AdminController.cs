@@ -21,11 +21,12 @@ namespace NganHangNhaTro_G20.Controllers
             if (HttpContext.Session.GetString("Role") == "role1")
             {
                 return View();
-            } else
+            }
+            else
             {
                 return RedirectToAction("UserInfo", "User");
             }
-            
+
         }
 
         //TreeView=======================================================================================

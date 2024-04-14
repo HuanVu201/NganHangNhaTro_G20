@@ -178,7 +178,7 @@
                     console.log(houseObject)
                     try {
 
-                        $.ajax({
+                        await $.ajax({
                             url: '/BookingCalender/UpdateHouseStatus',
                             type: 'POST',
                             contentType: 'application/json',
@@ -196,19 +196,7 @@
                     catch (error) {
                         console.log("Error detail: " + error);
                     }
-                    try {
-                        const response = await fetch(`/BookingCalender/RemoveBookingHouse?bookingCalendersId=${requestIdBooking}&customerId=${requestIdCustomer}`, { method: "POST" });
-                        const data = await response.text();
-                        if (checkAction == 1) {
-                            checkAction = data;
-                        }
-                    } catch (error) {
-                        console.log("(RemoveBookingHouse) Lỗi khi cập nhật: " + error);
-                        alert("Xóa thất bại!");
-
-                    }
-
-
+                    
                     try {
                         const response = await fetch(`/BookingCalender/DeleteConfirmed?bookingCalendersId=${requestIdBooking}`, { method: "POST" });
                         const data = await response.text();

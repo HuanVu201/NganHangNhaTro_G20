@@ -84,29 +84,6 @@ namespace NganHangNhaTro_G20.Controllers
             return Json(bookingDetails);
         }
 
-        // Xóa các phòng đang chờ xem (Hồ sơ cá nhân)=====================================================================================================
-        [HttpPost]
-        public async Task<int> RemoveBookingHouse(Guid bookingCalendersId, Guid customerId)
-        {
-            var result = -1;
-            var user = await _context.Users.FindAsync(customerId);
-            if (user != null)
-            {
-                string listBooking = user.BookingHouse;
-                listBooking = listBooking.Replace($"{bookingCalendersId};", "");
-                user.BookingHouse = listBooking;
-                _context.Update(user);
-                await _context.SaveChangesAsync();
-                result = 1;
-            }
-            else
-            {
-                result = 0;
-            }
-
-            return result;
-        }
-
         // Cập nhật HouseStatus=====================================================================================================
         [HttpPost]
         public async Task<int> UpdateHouseStatus([FromBody] House houseObject)
