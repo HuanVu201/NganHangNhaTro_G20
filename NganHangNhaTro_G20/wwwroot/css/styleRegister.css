@@ -71,6 +71,14 @@ input[type="password"] {
     padding-left: 0.5rem;
     border: 1px solid black;
 }
+.form-control-gender {
+    width: 15.7rem;
+    height: 29px;
+    margin-left:-12px;
+    border-radius: 2px;
+    padding-left: 0.5rem;
+    border: 1px solid black;
+}
 
 .register-form .notices {
     color: red;

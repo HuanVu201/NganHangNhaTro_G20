@@ -89,8 +89,8 @@
                             <p><strong>Loại:</strong> @Model.House.HouseType</p>
                             <p><strong>Mô Tả:</strong> @Model.House.Desciption</p>
 
-                            <h6 style="font-size:1.5rem">Ngày & Giờ:</h6>
-                            <p><strong>Time:</strong> @Model.House.CreatedAt</p>
+                            <h6 style="font-size:1.5rem">Ngày:</h6>
+                            <p><strong>Thời gian:</strong> @DateTime.Now.Date.ToString("dd/MM/yyyy")</p>
 
 
                             <h6 style="font-size:2rem ;font-weight:bold">Thông Tin Khách Hàng:</h6>
@@ -103,13 +103,8 @@
                                 <input disabled type="email" value="@Context.Session.GetString("Username")" class="form-control" id="email">
                             </div>
 
-                            <h6 style="color:#0481A0">Note:</h6>
+                            <h6 style="color:#0481A0">Ghi Chú:</h6>
                             <textarea id="node" name="note" class="form-control" rows="3"></textarea>
-                            <div style="color:red">
-                                <h6>Tổng Chi Phí:</h6>
-                                <p><strong>@string.Format("{0:#,#} triệu đồng / tháng", @Model.House.Price) </strong></p>
-                            </div>
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
