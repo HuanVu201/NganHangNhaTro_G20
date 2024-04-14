@@ -27,7 +27,7 @@ namespace NganHangNhaTro_G20.Controllers
         {
 
             List<Location> roots = new List<Location>();
-            roots = _context.Locations.Where(a => a.ParentId.Equals("#")).OrderBy(a=> a.Name).ToList();
+            roots = _context.Locations.Where(a => a.ParentId.Equals("#")).OrderBy(a => a.Name).ToList();
             return Json(roots);
         }
 
@@ -45,7 +45,7 @@ namespace NganHangNhaTro_G20.Controllers
 
         //DataTable=====================================================================================
         [HttpPost]
-        public string getDataTables(string locationId) 
+        public string getDataTables(string locationId)
         {
             List<House> listHouse = _context.Houses.Where(a => a.OfLocationId.Contains(locationId)).ToList();
             var value = JsonConvert.SerializeObject(new { data = listHouse });

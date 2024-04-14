@@ -170,5 +170,41 @@ namespace NganHangNhaTro_G20.Controllers
 
             return result;
         }
+
+
+        //DataTable=====================================================================================
+        [HttpPost]
+        public JsonResult getDataTablesWithUserId(Guid userId)
+        {
+            var listBooking = _context.Users.Where(u => u.Id == userId).FirstOrDefault().BookingHouse;
+            string[] houseIds = listBooking.Split(';');
+            List<object> objectArray = new List<object>();
+            foreach (var bookingId in houseIds)
+            {
+                if (!string.IsNullOrEmpty(bookingId))
+                {
+                    var houseQuery = (from h in _context.Houses
+                                      join l in _context.Locations on h.OfLocationId equals l.Id
+                                      where h.Id.ToString() == bookingId
+                                      select new 
+                                      {
+                                          id = h.Id,
+                                          idBooking = bookingId,
+                                          houseType = h.HouseType,
+                                          houseStatus = h.HouseStatus,
+                                          price = h.Price,
+                                          address = h.Address,
+                                          locationName = l.Name
+                                      }).FirstOrDefault();
+
+                    if (houseQuery != null)
+                    {
+                        objectArray.Add(houseQuery);
+                    }
+                }
+            }
+            return Json(new { data = objectArray });
+        }
+
     }
 }

@@ -31,13 +31,14 @@ namespace NganHangNhaTro_G20.Controllers
                                   select new
                                   {
                                       bookingId = bc.Id,
+                                      houseId = h.Id,
                                       houseType = h.HouseType,
                                       housePrice = h.Price,
+                                      houseStatus = h.HouseStatus,
                                       customerId = u.Id,
                                       customerName = u.Name,
                                       customerPhone = u.PhoneNumber,
                                   }).ToList();
-            //var value = JsonConvert.SerializeObject(new { data = bookingDetails });
             return Json(new { data = bookingDetails });
         }
 
@@ -88,6 +89,28 @@ namespace NganHangNhaTro_G20.Controllers
                 listBooking = listBooking.Replace($"{bookingCalendersId};", "");
                 user.BookingHouse = listBooking;
                 _context.Update(user);
+                await _context.SaveChangesAsync();
+                result = 1;
+            }
+            else
+            {
+                result = 0;
+            }
+
+            return result;
+        }
+
+        // Cập nhật HouseStatus=====================================================================================================
+        [HttpPost]
+        public async Task<int> UpdateHouseStatus([FromBody] House houseObject)
+        {
+            var result = -1;
+            var house = await _context.Houses.FindAsync(houseObject.Id);
+            if (house != null)
+            {
+                
+                house.HouseStatus = houseObject.HouseStatus;
+                _context.Update(house);
                 await _context.SaveChangesAsync();
                 result = 1;
             }

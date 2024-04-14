@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-    console.log('BookingCalenderView')
 
     //=====================================================================================================
     //LOAD DATATABLES
@@ -80,11 +79,10 @@
             },
             {
                 data: null, render: function (data, type, row, meta) {
-                    console.log(data.customerId)
                     return "<a href='' id='btnListBooking' idUser='" + data.Id + "' style='margin: 10px; cursor: pointer;'><i class='fas fa-clinic-medical'></i></a>"
                         + "<a href='' id='btnDetail' idUser='" + data.Id + "' style='margin: 10px; cursor: pointer;'><i class='fas fa-info-circle'></i></a>"
                         + "<a href='' id='btnEdit' idUser='" + data.Id + "' style='margin: 10px;cursor: pointer;'><i class='fas fa-edit'></i></a>"
-                        + "<a href='' id='btnDelete' idUser='" + data.Id + "' userName='"+ data.Name +"' style='margin: 10px;cursor: pointer;'><i class='fas fa-trash'></i></a>";
+                        + "<a href='' id='btnDelete' idUser='" + data.Id + "' userName='" + data.Name + "' style='margin: 10px;cursor: pointer;'><i class='fas fa-trash'></i></a>";
                 }
             },
 
@@ -176,7 +174,6 @@
 
                     $('#myModalCRUD').modal('hide');
                     alert('Cập nhật thành công!');
-                    //location.reload();
                 },
                 error: function (xhr, status, error) {
                     console.error("Lỗi khi cập nhật: " + error);
@@ -204,7 +201,6 @@
                     type: 'GET',
                     data: { userId: requestID },
                     success: function (data) {
-                        console.log('zo')
                         $('#myModalCRUD').modal('show');
                         $('.modal-title').html('Thông tin người dùng');
                         $('.modal-footer').html("<button type = 'button' class='btn btn-default' data-dismiss='modal'>Đóng</button >");
@@ -222,7 +218,7 @@
                         $('#Password').attr("readonly", true);
                         $('#Gender').attr("disabled", true);
                         $('#Role').attr("disabled", true);
-                        
+
                     },
                     error: function (xhr, status, error) {
                         console.error("Lỗi khi lấy chi tiết: " + error);
@@ -272,8 +268,178 @@
             callAPIDelete();
 
         }
+
     });
 
+
+    //=====================================================================================================
+    //MODAL DETAIL List Booking
+    $(document).on('click', '#btnListBooking', function (e) {
+        console.log('click');
+        e.preventDefault();
+        var requestID = {
+            userId: $(this).attr('idUser')
+        };
+
+        $('#myModalListBooking').modal('show');
+        $('.modal-title').html('Thông tin phòng chờ xem');
+        $('.modal-footer').html("<button type = 'button' class='btn btn-default' data-dismiss='modal'>Đóng</button >");
+
+        $('.bodyModalView').html('');
+        var html = '';
+        html +=
+            "<table id='tableModal' class='display' style='width: 100%;' >"
+            + "<thead>"
+            + "<tr>"
+            + "<th class='stt'>STT</th>"
+            + "<th class='houseType'>Loại phòng</th>"
+            + "<th class='price''>Giá</th>"
+            + "<th class='customerName'>Khu vực</th>"
+            + "<th class='customerPhone'>Địa chỉ chi tiết</th>"
+            + "<th class='customerPhone'>Trạng thái</th>"
+            + "<th class='action'>Xem chi tiết</th>"
+            + "<th class='action'>Thao tác</th>"
+            + "</tr>"
+            + "</thead>"
+            + "<tbody>"
+
+            + "</tbody>"
+            + "</table>";
+        $('.bodyModalView').append(html);
+
+        $("#tableModal").dataTable({
+            processing: true,
+            serverSide: false,
+            filter: true,
+            orderMulti: true,
+            language: {
+                info: "",
+                emptyTable: "Không có dữ liệu!",
+                paginate: {
+                    previous: "Trang trước",
+                    next: "Trang sau",
+                    first: "Trang đầu",
+                    last: "Trang cuối",
+                    search: "Tìm kiếm:"
+                },
+            },
+
+            ajax: {
+                url: "/User/getDataTablesWithUserId",
+                type: "POST",
+                data: requestID,
+                datatype: "json"
+            },
+
+            columns: [
+                {
+                    data: null, render: function (data, type, row, meta) {
+                        return meta.row + 1;
+                    }
+                },
+                {
+                    data: null, render: function (data, type, row, meta) {
+                        return "<span data-toggle='modal'  class='dataRow'>" + data.houseType + "</span>";
+                    }
+                },
+
+                {
+                    data: null, render: function (data, type, row, meta) {
+                        return "<span data-toggle='modal' class='dataRow'>" + data.price + "</span>";
+                    }
+
+                },
+                {
+                    data: null, render: function (data, type, row, meta) {
+                        return "<span data-toggle='modal'  class='dataRow'>" + data.locationName + "</span>";
+                    }
+
+                },
+
+                {
+                    data: null, render: function (data, type, row, meta) {
+                        return "<span data-toggle='modal'  class='dataRow'>" + data.address + "</span>";
+                    }
+
+                },
+                {
+                    data: null, render: function (data, type, row, meta) {
+                        return "<span data-toggle='modal'  class='dataRow'>" + data.houseStatus + "</span>";
+                    }
+
+                },
+                {
+                    data: null, render: function (data, type, row, meta) {
+                        return "<a href='/House/HouseDetail?id=" + data.id + "' target='_blank'  style='margin: 10px;cursor: pointer;'><i class='fas fa-external-link-alt'></i></a>";
+                    }
+                },
+                {
+                    data: null, render: function (data, type, row, meta) {
+                        return "<a href='' id='btnDeleteOfModal' idUser='" + requestID.userId + "' idBooking='" + data.idBooking + "'   style='margin: 10px; cursor: pointer;'><i class='fas fa-trash'></i></a>";
+                    }
+                },
+
+            ]
+        });
+
+
+    });
+
+
+    //=====================================================================================================
+    //DELETE Booking of User FUNCTION
+    $(document).on('click', '#btnDeleteOfModal', function (e) {
+        e.preventDefault();
+        var requestIdUser = $(this).attr('idUser');
+        var requestIdBooking = $(this).attr('idBooking');
+
+        let checkAction = 1;
+        var answer = confirm("Bạn muốn xóa lịch đặt phòng này?");
+        if (answer) {
+
+            const callAPIDelete = async () => {
+                try {
+                    const response = await fetch(`/BookingCalender/RemoveBookingHouse?bookingCalendersId=${requestIdBooking}&customerId=${requestIdUser}`, { method: "POST" });
+                    const data = await response.text();
+                    const response2 = await fetch(`/BookingCalender/DeleteConfirmed?bookingCalendersId=${requestIdBooking}`, { method: "POST" });
+                    const data2 = await response.text();
+                    if (data != 1) {
+                        checkAction = data;
+                    }
+                    if (data2 != 1) {
+                        checkAction = data2;
+                    }
+                } catch (error) {
+                    console.log("(RemoveBookingHouse) Lỗi khi cập nhật: " + error);
+                    alert("Xóa thất bại!");
+
+                }
+                if (checkAction == 1) {
+                    $('#myModalCRUD').modal('hide');
+                    alert('Xác nhận xóa thành công!');
+                }
+                else {
+                    alert("Xóa thất bại!");
+                }
+
+
+                //try {
+                //    const response = await fetch(`/BookingCalender/DeleteConfirmed?bookingCalendersId=${requestIdBooking}`, { method: "POST" });
+                //    const data = await response.text();
+                //    if (checkAction == 1) {
+                //        checkAction = data;
+                //    }
+                //} catch (error) {
+                //    console.log("(DeleteConfirmed) Lỗi khi cập nhật: " + error);
+
+                //}
+            };
+            callAPIDelete();
+
+
+            
+        };
+    });
 
     //=====================================================================================================
     //Valdidation  
@@ -317,7 +483,7 @@
         else {
             $('#Role').css('border-color', 'lightgrey');
         }
-        
+
         return isValid;
     }
 });
