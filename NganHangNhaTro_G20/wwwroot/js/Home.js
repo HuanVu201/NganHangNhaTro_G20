@@ -146,7 +146,6 @@
         const view_districts = document.querySelectorAll(".district li");
         const view_prices = document.querySelectorAll(".price li");
         const view_squares = document.querySelectorAll(".square li");
-        const view_directs = document.querySelectorAll(".direct li");
         const views = document.querySelectorAll(".multicolumns .view");
         const texts = document.querySelectorAll(".text-name .text");
         const icloses = document.querySelectorAll(".multicolumns .fa-times");
@@ -154,7 +153,6 @@
             view_districts,
             view_prices,
             view_squares,
-            view_directs,
         ];
         text_names.forEach((item, index) => {
             item.onclick = function () {

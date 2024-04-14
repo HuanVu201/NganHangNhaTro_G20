@@ -18,7 +18,14 @@ namespace NganHangNhaTro_G20.Controllers
 
         public IActionResult Index2()
         {
-            return View();
+            if (HttpContext.Session.GetString("Role") == "role1")
+            {
+                return View();
+            } else
+            {
+                return RedirectToAction("UserInfo", "User");
+            }
+            
         }
 
         //TreeView=======================================================================================

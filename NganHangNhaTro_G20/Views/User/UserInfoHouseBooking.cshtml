@@ -7,7 +7,14 @@
 <div class="user-info-booking col-lg-12 ">
     <div class=" user-info-booking-row-1 ">
         <div class="img-user">
-            <img src="~/images/anhhalinh.jpg" />
+            @if (Context.Session.GetString("Role") == "role1")
+            {
+                <img src="~/images/image_admin.jpg" />
+            }
+            else
+            {
+                <img src="~/images/image_user.jpg" />
+            }
             <p>@Model.user.Name</p>
         </div>
         <div class="list-info-user">
@@ -21,7 +28,7 @@
         <div class="title-user">
             <h1>Danh sách phòng đã thuê</h1>
         </div>
-        <div class="text-info-user-booking">
+        <div  class="text-info-user-booking">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -44,8 +51,7 @@
                             <td>@booking.houseTittle</td>
                             <td>
                                 <i id="edit-house-booking" class="far fa-edit"></i>
-                                <i id="delete-house-booking" class="fas fa-trash-alt" data-booking-id="@booking.bookingId"></i>
-                                <button onclick="DeleteBooking('@booking.bookingId.ToString("D")')">Delete</button>
+                                <i onclick="DeleteBooking('@booking.bookingId.ToString("D")')" id="delete-house-booking" class="fas fa-trash-alt" data-booking-id="@booking.bookingId"></i>
                             </td>
                         </tr>
                     }

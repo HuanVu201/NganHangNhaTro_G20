@@ -27,12 +27,32 @@ namespace NganHangNhaTro_G20.Controllers
             var images = _dbContext.ImageCategories
                              .Where(ic => ic.HouseId.ToString() == houseIdString)
                              .ToList();
+            var userIdString = HttpContext.Session.GetString("UserId");
+            Guid userId;
+            bool hasBookings = false;
+            if (Guid.TryParse(userIdString, out userId))
+            {
+                var listBookings = _dbContext.BookingCalenders.Where(ui => ui.CustomerId == userId && ui.HouseId == house.Id);
+                var countListBookings = listBookings.Count();
+                Console.WriteLine("Guid HouseId Booking: " + house.Id);
+                Console.WriteLine("Guid CustomerId" + userIdString);
+                Console.WriteLine("Count " + countListBookings);
+                if (countListBookings > 0)
+                {
+                    hasBookings = true;
 
+                }
+                else
+                {
+                    hasBookings = false;
+                }
+            }
             var viewModel = new HouseDetailViewModel
             {
                 House = house,
                 Images = images,
-                BookingCalender = new BookingCalender() // Khởi tạo BookingCalender mới
+                BookingCalender = new BookingCalender(),
+                IsScheduled = hasBookings
             };
 
             return View(viewModel);
@@ -62,11 +82,12 @@ namespace NganHangNhaTro_G20.Controllers
 
                     _dbContext.BookingCalenders.Add(bookingCalender);
                     _dbContext.SaveChanges();
-
+                    TempData["SuccessMessage"] = "Đặt Phòng thành công!";
                     return RedirectToAction("HouseDetail", "House", new { id = HouseId });
                 }
                 else
                 {
+                   
                     return RedirectToAction("HouseDetail", "House", new { id = HouseId });
                 }
             }

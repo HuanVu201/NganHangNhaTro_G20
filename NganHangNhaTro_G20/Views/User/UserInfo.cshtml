@@ -7,7 +7,14 @@
 <div class="user-info col-lg-8 ">
     <div class="user-info-row-1 ">
         <div class="img-user">
-            <img  src="~/images/anhhalinh.jpg" />
+            @if (Context.Session.GetString("Role") == "role1")
+            {
+                <img src="~/images/image_admin.jpg" />
+            }
+            else
+            {
+                <img src="~/images/image_user.jpg" />
+            }
             <p>@Model.Name</p>
         </div>
        <div class="list-info-user">
@@ -55,14 +62,7 @@
                             Giới tính
                         </td>
                         <td>
-                            @* @if (Model.Gender == 1)
-                            {
-                                <p>Nam</p>
-                            }
-                            else if (Model.Gender == 0)
-                            {
-                                <p>Nữ</p>
-                            } *@
+                            <p>@Model.Gender</p>
                         </td>
                     </tr>
                 </tbody>
