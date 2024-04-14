@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function () {
     $('#Name').focus();
-    $('#register-form').submit(function (event) {
+    $('#register-forms').submit(function (event) {
         event.preventDefault();
         var name = $('#Name').val();
         var password = $('#Password').val();
@@ -73,10 +73,10 @@ $(document).ready(function () {
         }
 
         
-        $('#register-form').unbind('submit').submit();
+        $('#register-forms').unbind('submit').submit();
     });
 });
 $("#close-register").click(function () {
     $(".fly").hide();
-    $(".register-form").hide();
+    $(".register-forms").hide();
 });
