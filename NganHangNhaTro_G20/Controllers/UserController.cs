@@ -17,7 +17,14 @@ namespace NganHangNhaTro_G20.Controllers
 
         public IActionResult UserManage()
         {
-            return View();
+            if (HttpContext.Session.GetString("Role") == "role1")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("UserInfo", "User");
+            }
         }
         public IActionResult UserInfo()
         {
