@@ -100,7 +100,7 @@
             + "<th class='stt'>STT</th>"
             + "<th class='owner''>Loại phòng</th>"
             + "<th class='price''>Giá</th>"
-            + "<th class='description'>Mô tả</th>"
+            + "<th class='description'>Diện tích</th>"
             + "<th class='status'>Trạng thái</th>"
             + "<th class='action'>Thao tác</th>"
             + "</tr>"
@@ -162,7 +162,7 @@
                 },
                 {
                     data: null, render: function (data, type, row, meta) {
-                        return "<span data-toggle='modal'  class='dataRow'>" + data.Desciption + "</span>";
+                        return "<span data-toggle='modal'  class='dataRow'>" + data.Acreage + "</span>";
                     }
 
                 },
@@ -247,7 +247,6 @@
             };
 
             var imageCategoryObject = {
-
                 url: $('#ImageCategory').val(),
                 houseId: newGuid
             }
@@ -287,6 +286,7 @@
         e.preventDefault();
 
         var requestID = $(this).attr('idHouse');
+        var idImageCategory = "";
 
 
         const callAPIDetail = async () => {
@@ -297,7 +297,7 @@
                     type: 'GET',
                     data: { houseId: requestID },
                     success: function (data) {
-                        console.log('zo')
+                        idImageCategory = data.imageCategories[0].id;
                         $('#myModalCRUD').modal('show');
                         $('.modal-title').html('Cập nhật thông tin phòng');
                         $('.modal-footer').html(
@@ -345,6 +345,7 @@
         $(document).on('click', '#btnUpdate', function (e) {
             var check = formValidate();
             if (check == false) {
+                alert("Vui lòng điền đầy đủ thông tin!");
                 return false;
             }
 
@@ -364,6 +365,7 @@
             };
 
             var imageCategoryObject = {
+                id: idImageCategory,
                 url: $('#ImageCategory').val(),
                 houseId: requestID
             }
@@ -492,25 +494,6 @@
 
         }
     });
-
-
-    $(document).on('click', '.btnThemMoi', function (e) {
-        e.preventDefault();
-        $('#myModalBookingCalender').modal('show');
-
-        $('.modal-title').html('Thêm Phòng');
-        $('.modal-footer').html(
-            "<button type='button' class='btn btn-primary' id='btnAdd'>Thêm Ngay</button>"
-            + "<button type = 'button' class='btn btn-default' data-dismiss='modal' > Đóng</button >"
-        )
-
-        $('#HouseTitle').val("");
-
-        $('#HouseTitle').attr("readonly", false);
-
-    });
-
-
 
 
     //=====================================================================================================

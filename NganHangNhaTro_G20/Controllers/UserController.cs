@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using NganHangNhaTro_G20.Models;
 using NganHangNhaTro_G20.ViewModels;
+using static NganHangNhaTro_G20.Controllers.AdminController;
 
 namespace NganHangNhaTro_G20.Controllers
 {
@@ -95,19 +96,115 @@ namespace NganHangNhaTro_G20.Controllers
         public string GetListUser()
         {
             List<User> users = _context.Users.ToList();
+            foreach (var user in users)
+            {
+                // Lấy RoleName từ RoleId của người dùng hiện tại
+                var roleName = _context.Roles.FirstOrDefault(r => r.Id == user.RoleId)?.Name;
+
+                // Gán RoleName cho người dùng
+                user.RoleId = roleName ?? "Không xác định";
+            }
             var value = JsonConvert.SerializeObject(new { data = users });
 
             return value;
         }
 
+        // Cập nhật========================================================================================
+        [HttpPost]
+        public async Task<int> CapNhat([FromBody] User userObject)
+        {
+            var result = -1;
+
+            try
+            {
+                _context.Users.Update(userObject);
+                await _context.SaveChangesAsync();
+                result = 1;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                result = 0;
+            }
+            return result;
+        }
 
         //Chi tiết=====================================================================================
         [HttpGet]
         public JsonResult ChiTiet(Guid userId)
         {
-            List<User> users = _context.Users.Where(a => a.Id.Equals(userId)).ToList();
+            var user = (from u in _context.Users
+                        join r in _context.Roles on u.RoleId equals r.Id
+                        where u.Id == userId
+                        select new
+                        {
+                            name = u.Name,
+                            phoneNumber = u.PhoneNumber,
+                            email = u.Email,
+                            password = u.Password,
+                            gender = u.Gender,
+                            bookingHouse = u.BookingHouse,
 
-            return Json(users);
+                            roleId = r.Id
+
+                        }).ToList();
+            return Json(user);
         }
+
+        // Xóa=====================================================================================================
+        [HttpPost]
+
+        public async Task<int> DeleteConfirmed(Guid userId)
+        {
+            var result = -1;
+            var user = await _context.Users.FindAsync(userId);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+                result = 1;
+            }
+            else
+            {
+                result = 0;
+            }
+
+            return result;
+        }
+
+
+        //DataTable=====================================================================================
+        [HttpPost]
+        public JsonResult getDataTablesWithUserId(Guid userId)
+        {
+            var listBooking = _context.Users.Where(u => u.Id == userId).FirstOrDefault().BookingHouse;
+            string[] houseIds = listBooking.Split(';');
+            List<object> objectArray = new List<object>();
+            foreach (var bookingId in houseIds)
+            {
+                if (!string.IsNullOrEmpty(bookingId))
+                {
+                    var houseQuery = (from h in _context.Houses
+                                      join l in _context.Locations on h.OfLocationId equals l.Id
+                                      where h.Id.ToString() == bookingId
+                                      select new 
+                                      {
+                                          id = h.Id,
+                                          idBooking = bookingId,
+                                          houseType = h.HouseType,
+                                          houseStatus = h.HouseStatus,
+                                          price = h.Price,
+                                          address = h.Address,
+                                          locationName = l.Name
+                                      }).FirstOrDefault();
+
+                    if (houseQuery != null)
+                    {
+                        objectArray.Add(houseQuery);
+                    }
+                }
+            }
+            return Json(new { data = objectArray });
+        }
+
     }
 }
