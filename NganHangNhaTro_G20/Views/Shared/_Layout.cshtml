@@ -51,7 +51,7 @@
                 <a href="@Url.Action("Index", "Home")"><img id="logoWeb" src="~/images/Ngân hàng nhà trọ.png" alt=""></a>
             </div>
             <div id="statusLogin">
-                @if (Context.Session.GetString("Username") == null)
+                @if (Context.Session.GetString("Role") == null)
                 {
                     <div id="unLoginedtatus">
                         <ul class="statusLogin_ul">
@@ -63,7 +63,13 @@
                 else
                 {
                     <div id="loginedStatus">
-                        <img src="~/images/image_user.jpg" />
+                        @if (Context.Session.GetString("Role") == "role1")
+                        {
+                            <img src="~/images/image_admin.jpg" />
+                        } else
+                        {
+                            <img src="~/images/image_user.jpg" />
+                        }
                         <ul  class="statusLogin_ul_new" style="text-decoration:none">
                             <li class=" buttonStatus_new">Xin chào <b>@Context.Session.GetString("NameLogined")</b></li>
                             <li class=" buttonStatus_new">
