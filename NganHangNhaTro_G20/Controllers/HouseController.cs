@@ -77,7 +77,7 @@ namespace NganHangNhaTro_G20.Controllers
 
                     _dbContext.BookingCalenders.Add(bookingCalender);
                     _dbContext.SaveChanges();
-                    TempData["SuccessMessage"] = "Đặt Phòng thành công!";
+                    TempData["SuccessMessage"] = "Đặt phòng thành công!";
                     return RedirectToAction("HouseDetail", "House", new { id = HouseId });
                 }
                 else

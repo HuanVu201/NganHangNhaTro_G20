@@ -91,7 +91,7 @@
             </div>
         </div>
     </header>
-    <div class="container">
+    <div class="container" style="min-height: 80vh">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -112,40 +112,8 @@
             </p>
         </div>
     </div>
-    @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
-    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
     <script src="~/js/register.js" asp-append-version="true"></script>
-    @* <script>
-    $(document).ready(function () {
-    $("#login").click(function () {
-    $.get("/Home/Login", function (data) {
-    $("#loginFormContainer").html(data);
-    $(".fly").show();
-    $(".login-form").show();
-    });
-    return false;
-    });
-
-    $("#register").click(function () {
-    $.get("/Home/Register", function (data) {
-    $("#registerFormContainer").html(data);
-    $(".fly").show();
-    $(".register-form").show();
-    });
-    return false;
-    });
-
-    $("#close-login").click(function () {
-    $(".fly").hide();
-    $(".login-form").hide();
-    });
-
-    $("#close-register").click(function () {
-    $(".fly").hide();
-    $(".register-form").hide();
-    });
-    });
-    </script> *@
+   
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
