@@ -7,21 +7,46 @@
 }
 @model User
 <div id="register-form" class="register-form">
-    @using (Html.BeginForm("Register", "Access", FormMethod.Post))
+    @using (Html.BeginForm("Register", "Access", FormMethod.Post, new { @id = "register-forms" }))
     {
         <div class="loading"></div>
         <div class="title">
             <span class="exit"></span>
             Đăng ký thành viên
         </div>
-        <div class="notices">
-            <ul>
-                <li>
-                    Lưu ý: Giả mạo thông tin cá nhân có thể bị phạt tới 30 triệu đồng.
-                </li>
-            </ul>
-        </div>
+        
         <div class="input-form-register">
+            @*name*@
+            <div class="row">
+                <div class="col1">Họ tên.(<span class="note">*</span>)</div>
+                <div class="col2">
+                    @Html.TextBoxFor(x => x.Name)
+                </div>
+            </div>
+            @*
+        <div class="suggesstion">
+        <p class="error_email_name">Email không đúng định dạng !!!</p>
+        </div>
+        <div class="suggesstion">
+        <p class="error_name_lenght">Yêu cầu độ dài lớn hơn 8 kí tự !!!</p>
+        </div>*@
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !</p>
+            </div>
+
+            @*phone*@
+            <div class="row">
+                <div class="col1">Di động (<span class="note">*</span>)</div>
+                <div class="col2">
+                    @Html.TextBoxFor(x => x.PhoneNumber)
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !</p>
+            </div>
+            <div class="suggesstion">
+                <p class="error_phone">Số điện thoại không đúng định dạng !</p>
+            </div>
 
             @*email*@
             <div class="row">
@@ -35,10 +60,24 @@
             <p style="color:red"> @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })</p>
 
             <div class="suggesstion">
-                <p class="error_null">Không được để trống !!!</p>
+                <p class="error_null">Không được để trống !</p>
             </div>
             <div class="suggesstion">
                 <p class="error_email">Email không đúng định dạng !!!</p>
+            </div>
+            @*Gender*@
+            <div class="row">
+                <div class="col1">Giới Tính.(<span class="note">*</span>)</div>
+                <div class="col2">
+                    @Html.DropDownListFor(x => x.Gender, new SelectList(new[]
+                             {
+                    new { Value = "Nam", Text = "Nam" },
+                    new { Value = "Nữ", Text = "Nữ" }
+                }, "Value", "Text"), "Chọn giới tính", new { @class = "form-control-gender" })
+                </div>
+            </div>
+            <div class="suggesstion">
+                <p class="error_null">Không được để trống !</p>
             </div>
 
             @*pass*@
@@ -49,10 +88,10 @@
                 </div>
             </div>
             <div class="suggesstion">
-                <p class="error_pass_one">Mật khẩu tối thiểu trên 8 kí tự !!!</p>
+                <p class="error_pass_one">Mật khẩu tối thiểu trên 8 kí tự !</p>
             </div>
             <div class="suggesstion">
-                <p class="error_null">Không được để trống !!!</p>
+                <p class="error_null">Không được để trống !</p>
             </div>
 
             @*pass again*@
@@ -63,55 +102,11 @@
                 </div>
             </div>
             <div class="suggesstion">
-                <p class="error_null">Không được để trống !!!</p>
+                <p class="error_null">Không được để trống !</p>
             </div>
             <div class="suggesstion">
-                <p class="error_pass_two">Nhập lại mật khẩu không trùng khớp !!!</p>
+                <p class="error_pass_two">Nhập lại mật khẩu không trùng khớp !</p>
             </div>
-
-            @*name*@
-            <div class="row">
-                <div class="col1">Họ tên.(<span class="note">*</span>)</div>
-                <div class="col2">
-                    @Html.TextBoxFor(x => x.Name)
-                </div>
-            </div>
-            @*
-            <div class="suggesstion">
-            <p class="error_email_name">Email không đúng định dạng !!!</p>
-            </div>
-            <div class="suggesstion">
-            <p class="error_name_lenght">Yêu cầu độ dài lớn hơn 8 kí tự !!!</p>
-            </div>*@
-            <div class="suggesstion">
-                <p class="error_null">Không được để trống !!!</p>
-            </div>
-            @*name*@
-            <div class="row">
-                <div class="col1">Giới Tính.(<span class="note">*</span>)</div>
-                <div class="col2">
-                    @Html.TextBoxFor(x => x.Gender)
-                </div>
-            </div>
-            <div class="suggesstion">
-                <p class="error_null">Không được để trống !!!</p>
-            </div>
-            @*
-            @*phone*@
-            <div class="row">
-                <div class="col1">Di động (<span class="note">*</span>)</div>
-                <div class="col2">
-                    @Html.TextBoxFor(x => x.PhoneNumber)
-                </div>
-            </div>
-            <div class="suggesstion">
-                <p class="error_null">Không được để trống !!!</p>
-            </div>
-            <div class="suggesstion">
-                <p class="error_phone">Số điện thoại không đúng định dạng !!!</p>
-            </div>
-
-
 
             <div class="row">
                 <div class="row button-register">

@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function () {
-    $('#Email').focus();
-    $('#register-form').submit(function (event) {
+    $('#Name').focus();
+    $('#register-forms').submit(function (event) {
         event.preventDefault();
         var name = $('#Name').val();
         var password = $('#Password').val();
@@ -9,14 +9,24 @@ $(document).ready(function () {
         var phoneNumber = $('#PhoneNumber').val();
         var email = $('#Email').val();
         var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var dropdown = document.getElementById("Gender");
+        var selectedValue = dropdown.options[dropdown.selectedIndex].value;
 
         // Check if any field is empty
-        if (name.trim() === '' && password.trim() === '' && confirmPassword.trim() === '' && phoneNumber.trim() === '' && email.trim() === '') {
+        if (name.trim() === '' && password.trim() === '' && confirmPassword.trim() === '' && phoneNumber.trim() === '' && email.trim() === '' && selectedValue === "") {
             $('#Name').focus();
             $('.error_null').show();
             return;
         } else {
             $('.error_null').hide();
+        }
+        // Check phone number format
+        if (!/^\d{10,12}$/.test(phoneNumber)) {
+            $('.error_phone').show();
+            $('#PhoneNumber').focus();
+            return;
+        } else {
+            $('.error_phone').hide();
         }
         // Check email format
         if (!emailPattern.test(email)) {
@@ -26,7 +36,6 @@ $(document).ready(function () {
         } else {
             $('.error_email').hide();
         }
-
 
        // if (name.length < 8 && !name.includes('@')) {
          //   $('.error_name_lenght').show();
@@ -63,18 +72,11 @@ $(document).ready(function () {
             $('.error_pass_two').hide();
         }
 
-        // Check phone number format
-        if (!/^\d{10,12}$/.test(phoneNumber)) {
-            $('.error_phone').show();
-            $('#PhoneNumber').focus();
-            return;
-        } else {
-            $('.error_phone').hide();
-        }
-        $('#register-form').unbind('submit').submit();
+        
+        $('#register-forms').unbind('submit').submit();
     });
 });
 $("#close-register").click(function () {
     $(".fly").hide();
-    $(".register-form").hide();
+    $(".register-forms").hide();
 });

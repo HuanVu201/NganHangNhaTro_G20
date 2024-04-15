@@ -63,7 +63,7 @@ namespace NganHangNhaTro_G20.Controllers
                             bookingViewModel.housePrice = house.Price;
                             bookingViewModel.houseName = house.HouseTitle;
                             bookingViewModel.houseTittle = bookingCalender.Note;
-                            bookingViewModel.houseCreatedAt = house.CreatedAt ?? DateTime.MinValue;
+                            bookingViewModel.houseCreatedAt = (DateTime)bookingCalender.CreatedAt;
                             bookingViewModel.houseAddress = house.Address;
                             bookingViewModels.Add(bookingViewModel);
                         }

@@ -13,11 +13,6 @@ namespace NganHangNhaTro_G20.Controllers
 
         public IActionResult HouseDetail(Guid id)
         {
-            // if (HttpContext.Session.GetString("Username") == null)
-            //{
-            //   return RedirectToAction("Login", "Access");
-            //}
-
             var house = _dbContext.Houses.FirstOrDefault(h => h.Id == id);
             if (house == null)
             {
