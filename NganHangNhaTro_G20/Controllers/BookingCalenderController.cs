@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using NganHangNhaTro_G20.Models;
+using NganHangNhaTro_G20.ViewModels;
 using static NganHangNhaTro_G20.Controllers.AdminController;
 
 namespace NganHangNhaTro_G20.Controllers
@@ -28,6 +29,43 @@ namespace NganHangNhaTro_G20.Controllers
         }
 
 
+        /*
+        public ActionResult ModifyNoteBookingCalender(Guid bookingId, string note)
+        {
+            var bookingCalender = _context.BookingCalenders.FirstOrDefault(b => b.Id == bookingId);
+            if (bookingCalender != null)
+            {
+                bookingCalender.Note = note;
+                _context.SaveChanges();
+                return RedirectToAction("UserInfoHouseBooking", "User");
+            }
+            else
+            {
+                return RedirectToAction("UserInfoHouseBooking", "User");
+            }
+        }
+        */
+        [HttpPost]
+        public async Task<int> ModifyNoteBookingCalender([FromBody] BookingUpdateModel model)
+        {
+            var result = -1;
+            try
+            {
+                var booking = await _context.BookingCalenders.FindAsync(model.BookingId);
+                if (booking != null)
+                {
+                    booking.Note = model.Note;
+                    await _context.SaveChangesAsync();
+                }
+
+                result = 1;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                result = 0;
+            }
+            return result;
+        }
         //DataTable=====================================================================================
         [HttpGet]
         public JsonResult GetBookings()
@@ -48,6 +86,7 @@ namespace NganHangNhaTro_G20.Controllers
                                   }).ToList();
             return Json(new { data = bookingDetails });
         }
+
 
 
         //Chi tiết=====================================================================================
@@ -92,7 +131,7 @@ namespace NganHangNhaTro_G20.Controllers
             var house = await _context.Houses.FindAsync(houseObject.Id);
             if (house != null)
             {
-                
+
                 house.HouseStatus = houseObject.HouseStatus;
                 _context.Update(house);
                 await _context.SaveChangesAsync();
