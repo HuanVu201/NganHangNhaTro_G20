@@ -136,7 +136,7 @@
                         $('#Acreage').val(data[0].acreage);
                         $('#Price').val(data[0].price);
                         $('#Desciption').val(data[0].description);
-                        $('#HouseType').val(data[0].houseType);
+                        $('#HouseType').val(data[0].houseType.trim());
 
                         $('#CustomerName').attr("readonly", true);
                         $('#CustomerPhone').attr("readonly", true);

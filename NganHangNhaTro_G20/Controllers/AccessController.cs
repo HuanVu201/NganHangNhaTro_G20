@@ -27,7 +27,7 @@ namespace NganHangNhaTro_G20.Controllers
             }
             else
             {
-                var error = "Tên Đăng Nhập or Mật Khẩu không chính xác !!!";
+                var error = "Tên đăng nhập hoặc mật khẩu không chính xác!";
                 ViewBag.error = error;
             }
             return View();
