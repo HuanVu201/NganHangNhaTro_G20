@@ -3,6 +3,7 @@
 *@
 @{
     @model UserInfoHouseBookingViewModel
+
 }
 <div class="user-info-booking col-lg-12 ">
     <div class=" user-info-booking-row-1 ">
@@ -24,28 +25,28 @@
             </ul>
         </div>
     </div>
-    @using (Html.BeginForm("", "", FormMethod.Post))
-    {
-        <div id="ModifiedModal" style="font-size:1.5rem" class="modal fade" tabindex="-1">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+    <div id="ModifiedModal" style="font-size:1.5rem" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="form">
                     <div class="modal-body">
                         <h6 style="color:#0481A0">Ghi Chú:</h6>
-                        <textarea id="node" name="note" class="form-control" rows="3"></textarea>
+                        <textarea id="note" name="note" class="form-control" rows="3"></textarea>
+                        <input type="hidden" id="bookingIdInput" name="bookingId" />
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                        <button type="submit" id="editUser" class="btn btn-primary">Sửa</button>
-                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" id="editNoteBooking" class="btn btn-primary">Sửa</button>
                 </div>
             </div>
         </div>
-    }
+    </div>
     <div class="user-info-booking-row-2  ">
         <div class="title-user">
             <h1>Danh sách phòng đã thuê</h1>
         </div>
-        <div  class="text-info-user-booking">
+        <div class="text-info-user-booking">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -67,7 +68,7 @@
                             <td>@booking.houseCreatedAt</td>
                             <td>@booking.houseTittle</td>
                             <td>
-                                <i id="edit-house-booking" class="far fa-edit modifile"></i>
+                                <i id="edit-house-booking" class="far fa-edit modifile" data-booking-id="@booking.bookingId"></i>
                                 <i onclick="DeleteBooking('@booking.bookingId.ToString("D")')" id="delete-house-booking" class="fas fa-trash-alt" data-booking-id="@booking.bookingId"></i>
                             </td>
                         </tr>
@@ -83,5 +84,47 @@
             window.location.href = "/User/DeleteBooking?bookingId=" + bookingId;
         }
     }
+    $(document).ready(function () {
+        $('.modifile').click(function () {
+            var bookingId = $(this).data('booking-id');
+            $('#bookingIdInput').val(bookingId);
+            $('#ModifiedModal').modal('show');
+        });
+
+        $('#editNoteBooking').click(function (e) {
+            e.preventDefault();
+            var bookingId = $('#bookingIdInput').val();
+            var note = $('#note').val().trim();
+
+            if (!note) {
+                alert("Vui lòng điền ghi chú!");
+                return;
+            }
+           
+            var data = JSON.stringify({
+                BookingId: bookingId,
+                Note: note
+            });
+
+            $.ajax({
+                url: '/BookingCalender/ModifyNoteBookingCalender',
+                type: 'POST',
+                contentType: 'application/json',
+                data: data,
+                success: function (result) {
+                    if (result === 1) {
+                        alert('Cập nhật thành công!');
+                        $('#ModifiedModal').modal('hide');
+                    } else {
+                        alert('Cập nhật thất bại!');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                    console.log(xhr.responseText)
+                }
+            });
+        });
+    });
+
 </script>
-<script src="~/js/UserModifile.js"></script>
