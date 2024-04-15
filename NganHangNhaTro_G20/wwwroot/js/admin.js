@@ -311,8 +311,8 @@
                         $('#Acreage').val(data.houses[0].acreage);
                         $('#Price').val(data.houses[0].price);
                         $('#Desciption').val(data.houses[0].desciption);
-                        $('#HouseType').val(data.houses[0].houseType);
-                        $('#HouseStatus').val(data.houses[0].houseStatus);
+                        $('#HouseType').val(data.houses[0].houseType.trim());
+                        $('#HouseStatus').val(data.houses[0].houseStatus.trim());
                         $('#OwnerName').val(data.houses[0].ownerName);
                         $('#OwnerPhone').val(data.houses[0].ownerPhone);
                         $('#ImageCategory').val(data.imageCategories[0].url);
@@ -426,8 +426,8 @@
                         $('#Acreage').val(data.houses[0].acreage);
                         $('#Price').val(data.houses[0].price);
                         $('#Desciption').val(data.houses[0].desciption);
-                        $('#HouseType').val(data.houses[0].houseType);
-                        $('#HouseStatus').val(data.houses[0].houseStatus);
+                        $('#HouseType').val(data.houses[0].houseType.trim());
+                        $('#HouseStatus').val(data.houses[0].houseStatus.trim());
                         $('#OwnerName').val(data.houses[0].ownerName);
                         $('#OwnerPhone').val(data.houses[0].ownerPhone);
                         $('#ImageCategory').val(data.imageCategories[0].url);
