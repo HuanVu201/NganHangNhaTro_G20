@@ -119,6 +119,11 @@ ul {
 }
 
     .ct-title a {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        -webkit-line-clamp: 1;
+        line-height: 1.2;
         font-weight: bold;
         color: var(--main-color);
     }
@@ -143,7 +148,12 @@ ul {
 
 .ct-brief {
     padding: 0.5rem;
-    height:4rem;
+    height: 4.2rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    line-height: 1.2;
     border-radius: 5px;
 }
 
