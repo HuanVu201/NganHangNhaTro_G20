@@ -75,7 +75,22 @@ namespace NganHangNhaTro_G20.Controllers
             try
             {
                 _context.Houses.Add(houseAndImageCategory.houseObject);
-                _context.ImageCategories.Add(houseAndImageCategory.imageCategoryObject);
+                await _context.SaveChangesAsync();
+                var houseId = houseAndImageCategory.houseObject.Id;
+                // Tách các URL từ imageCategoryObject.Url
+                var urls = houseAndImageCategory.imageCategoryObject.Url.Split(';');
+
+                // Lưu từng URL thành một bản ghi trong cơ sở dữ liệu
+                foreach (var url in urls)
+                {
+                    var imageCategory = new ImageCategory
+                    {
+                        HouseId = houseId,
+                        Url = url
+                    };
+                    _context.ImageCategories.Add(imageCategory);
+                }
+
                 await _context.SaveChangesAsync();
                 result = 1;
             }
@@ -85,8 +100,8 @@ namespace NganHangNhaTro_G20.Controllers
                 result = 0;
             }
             return result;
-
         }
+
 
 
         // Chi tiết======================================================================================
