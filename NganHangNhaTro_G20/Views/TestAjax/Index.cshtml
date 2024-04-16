@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div id="roleList"></div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "@Url.Action("GetRoles")",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data && data.length > 0) {
+                    var html = "<h1>List role:</h1>"
+                        + "<table>"
+                        + "<thead>"
+                        + "<tr>"
+                        + "<th>ID:</th>"
+                        + "<th>Name:</th>"
+                        + "</tr>"
+                        + "</thead>"
+                        + "<tbody>";
+                    $.each(data, function (index, role) {
+                        html += "<tr><td>" + role.id + "</td><td>" + role.name + "</td>"
+                            + "<td>"
+                            + "<a href = '#' class='edit-role' data-id='" + role.id + "' >Edit</a>"
+                            + "</td>"
+                        "</tr>";
+                    });
+                    html += "</tbody></table>";
+                    $("#roleList").html(html);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    });
+</script>
