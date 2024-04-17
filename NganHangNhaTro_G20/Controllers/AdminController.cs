@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NganHangNhaTro_G20.Models;
+using static NganHangNhaTro_G20.Controllers.AdminController;
 
 namespace NganHangNhaTro_G20.Controllers
 {
@@ -16,16 +17,16 @@ namespace NganHangNhaTro_G20.Controllers
             _context = context;
         }
 
-        public IActionResult Index2()
+        public IActionResult HouseManage()
         {
-            if (HttpContext.Session.GetString("Role") == "role1")
-            {
+            //if (HttpContext.Session.GetString("Role") == "role1")
+            //{
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("UserInfo", "User");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("UserInfo", "User");
+            //}
 
         }
 
@@ -75,13 +76,15 @@ namespace NganHangNhaTro_G20.Controllers
             try
             {
                 _context.Houses.Add(houseAndImageCategory.houseObject);
-                await _context.SaveChangesAsync();
+             
                 var houseId = houseAndImageCategory.houseObject.Id;
-                // Tách các URL từ imageCategoryObject.Url
-                var urls = houseAndImageCategory.imageCategoryObject.Url.Split(';');
 
-                // Lưu từng URL thành một bản ghi trong cơ sở dữ liệu
-                foreach (var url in urls)
+                var urls = houseAndImageCategory.imageCategoryObject.Url;
+                if(urls.EndsWith(";")){
+                    urls = urls.Remove(urls.Length -1);
+                }
+
+                foreach (var url in urls.Split(';'))
                 {
                     var imageCategory = new ImageCategory
                     {
@@ -134,7 +137,28 @@ namespace NganHangNhaTro_G20.Controllers
             try
             {
                 _context.Houses.Update(houseAndImageCategory.houseObject);
-                _context.ImageCategories.Update(houseAndImageCategory.imageCategoryObject);
+                var imageCategoriesToDelete = _context.ImageCategories.Where(ic => ic.HouseId == houseAndImageCategory.houseObject.Id);
+                _context.ImageCategories.RemoveRange(imageCategoriesToDelete);
+
+                var houseId = houseAndImageCategory.houseObject.Id;
+
+                var urls = houseAndImageCategory.imageCategoryObject.Url;
+                if (urls.EndsWith(";"))
+                {
+                    urls = urls.Remove(urls.Length - 1);
+                }
+
+                foreach (var url in urls.Split(';'))
+                {
+                    var imageCategory = new ImageCategory
+                    {
+                        HouseId = houseId,
+                        Url = url
+                    };
+                    _context.ImageCategories.Add(imageCategory);
+                }
+
+                //_context.ImageCategories.Update(houseAndImageCategory.imageCategoryObject);
                 await _context.SaveChangesAsync();
                 result = 1;
             }
@@ -162,6 +186,8 @@ namespace NganHangNhaTro_G20.Controllers
             if (house != null)
             {
                 _context.Houses.Remove(house);
+                var imageCategoriesToDelete = _context.ImageCategories.Where(ic => ic.HouseId == houseId);
+                _context.ImageCategories.RemoveRange(imageCategoriesToDelete);
                 await _context.SaveChangesAsync();
                 result = 1;
             }

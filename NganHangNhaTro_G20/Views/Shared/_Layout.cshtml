@@ -72,7 +72,7 @@
                         <ul  class="statusLogin_ul_new" style="text-decoration:none">
                             @if (Context.Session.GetString("Role") == "role1")
                             {
-                                <li class=" buttonStatus_new"><a href="@Url.Action("Index2", "Admin")">Xin chào Admin <b>@Context.Session.GetString("NameLogined")</b></li>
+                                <li class=" buttonStatus_new"><a href="@Url.Action("HouseManage", "Admin")">Xin chào Admin <b>@Context.Session.GetString("NameLogined")</b></li>
                             }
                             else
                             {

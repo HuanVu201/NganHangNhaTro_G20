@@ -10,7 +10,7 @@
 <div id="detailProduct" class="container">
     <div id="titleDetail">
         <div id="title"> @Model.House.HouseTitle</div>
-        <div id="ngayDang"><i> Ngày đăng: @Model.House.CreatedAt </i></div>
+        <div id="ngayDang"><i> Ngày đăng:  @Model.House.CreatedAt?.ToString("dd/MM/yyyy") </i></div>
     </div>
     <div id="description">
         <div>

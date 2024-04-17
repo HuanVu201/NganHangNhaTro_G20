@@ -70,9 +70,6 @@
                                             <a href=""> Hà Nội</a>
                                         </div>
                                     </div>
-                                    <div class="distance">
-                                        <i>Cách Học viện Ngân Hàng khoảng 594m</i>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -253,9 +250,7 @@
                                                 <a href=""> Hà Nội</a>
                                             </div>
                                         </div>
-                                        <div class="distance">
-                                            <i>Cách Học viện Ngân Hàng khoảng 594m</i>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
