@@ -243,7 +243,7 @@
                 houseStatus: $('#HouseStatus').val(),
                 ownerName: $('#OwnerName').val(),
                 ownerPhone: $('#OwnerPhone').val(),
-
+                createdAt: new Date().toISOString()
             };
 
             var imageCategoryObject = {
@@ -288,6 +288,7 @@
         var requestID = $(this).attr('idHouse');
         var idImageCategory = "";
 
+        let createdAt
 
         const callAPIDetail = async () => {
             try {
@@ -315,7 +316,13 @@
                         $('#HouseStatus').val(data.houses[0].houseStatus.trim());
                         $('#OwnerName').val(data.houses[0].ownerName);
                         $('#OwnerPhone').val(data.houses[0].ownerPhone);
-                        $('#ImageCategory').val(data.imageCategories[0].url);
+                        $('#CreatedAt').val(data.houses[0].createdAt);
+                        createdAt = data.houses[0].createdAt;
+                        let stringUrl = "";
+                        var imageUrls = data.imageCategories.map(function (category) {
+                            stringUrl += `${category.url};`;
+                        });
+                        $('#ImageCategory').val(stringUrl);
 
                         $('#HouseTitle').attr("readonly", false);
                         $('#OfLocationId').attr("readonly", true);
@@ -328,6 +335,7 @@
                         $('#OwnerName').attr("readonly", false);
                         $('#OwnerPhone').attr("readonly", false);
                         $('#ImageCategory').attr("readonly", false);
+                        $('#CreatedAt').attr("readonly", true);
                     },
                     error: function (xhr, status, error) {
                         console.error("Lỗi khi lấy chi tiết: " + error);
@@ -361,7 +369,8 @@
                 houseStatus: $('#HouseStatus').val(),
                 ownerName: $('#OwnerName').val(),
                 ownerPhone: $('#OwnerPhone').val(),
-
+                modifiedAt: new Date().toISOString(),
+                createdAt: createdAt,
             };
 
             var imageCategoryObject = {
@@ -406,7 +415,7 @@
         e.preventDefault();
 
         var requestID = $(this).attr('idHouse');
-
+        let createdAt
         const callAPIDetail = async () => {
             try {
 
@@ -419,7 +428,6 @@
                         $('#myModalCRUD').modal('show');
                         $('.modal-title').html('Chi tiết thông tin phòng');
                         $('.modal-footer').html("<button type = 'button' class='btn btn-default' data-dismiss='modal'>Đóng</button >");
-
                         $('#HouseTitle').val(data.houses[0].houseTitle);
                         $('#OfLocationId').val(data.houses[0].ofLocationId);
                         $('#Address').val(data.houses[0].address);
@@ -430,7 +438,12 @@
                         $('#HouseStatus').val(data.houses[0].houseStatus.trim());
                         $('#OwnerName').val(data.houses[0].ownerName);
                         $('#OwnerPhone').val(data.houses[0].ownerPhone);
-                        $('#ImageCategory').val(data.imageCategories[0].url);
+
+                        let stringUrl = "";
+                        var imageUrls = data.imageCategories.map(function (category) {
+                            stringUrl += `${category.url};`;
+                        });
+                        $('#ImageCategory').val(stringUrl);
 
                         $('#HouseTitle').attr("readonly", true);
                         $('#OfLocationId').attr("readonly", true);
