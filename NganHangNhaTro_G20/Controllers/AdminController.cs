@@ -207,3 +207,11 @@ namespace NganHangNhaTro_G20.Controllers
 
     }
 }
+
+// Câu hỏi thi
+// 1. Chọn một bảng của một sản phẩm/dịch vụ/người dùng mà bạn phụ trách. Tạo một view mới hiển thị tất cả các trường thông tin của các bản ghi: 
+//      + Đối với desktop thì hiển thị 3 bản ghi trên một hàng
+//      + Mobile thì 1 bản ghi trên 1 hàng
+// 2. Thêm trường VerifyKey cho bảng vừa chọn có kiểu dữ liệu string, yêu cầu phải có 10 kí tự và bắt đầu bằng chữ số trong Model
+// 3. Thêm/Thay đổi một chức năng để có thể thêm dữ liệu cho trường VerifyKey này. Hiển thị dữ liệu VerifyKey trên các bản ghi của view vừa tạo
+// 4. Đánh giá công tác làm việc nhóm     
