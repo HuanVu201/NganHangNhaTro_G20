@@ -22,6 +22,10 @@ namespace NganHangNhaTro_G20.Controllers
         {
             return View();
         }
+        public IActionResult Dssp()
+        {
+            return View();
+        }
         public JsonResult GetHouseData()
         {
             var houses = _context.Houses.Where(h => h.HouseStatus == "Còn phòng").ToList();
